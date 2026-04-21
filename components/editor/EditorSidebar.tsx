@@ -236,6 +236,7 @@ export default function EditorSidebar({ diagrams }: { diagrams: Diagram[] }) {
   const [, startNavTransition] = useTransition()
   const [optimisticId, setOptimisticId] = useState<string | null>(null)
   const [creating, setCreating] = useState(false)
+  const [pendingNewId, setPendingNewId] = useState<string | null>(null)
   const [landingHref, setLandingHref] = useState('/')
 
   useEffect(() => {
@@ -249,8 +250,17 @@ export default function EditorSidebar({ diagrams }: { diagrams: Diagram[] }) {
     if (match && optimisticId === match[1]) setOptimisticId(null)
   }, [pathname, optimisticId])
 
+  useEffect(() => {
+    if (!creating || !pendingNewId) return
+    const match = pathname.match(UUID_IN_PATH)
+    if (match?.[1] === pendingNewId && diagrams.some((d) => d.id === pendingNewId)) {
+      setCreating(false)
+      setPendingNewId(null)
+    }
+  }, [creating, pendingNewId, pathname, diagrams])
+
   const activePathId = pathname.match(UUID_IN_PATH)?.[1] ?? null
-  const selectedId = optimisticId ?? activePathId
+  const selectedId = creating ? null : (optimisticId ?? activePathId)
 
   const goTo = (id: string) => {
     if (selectedId === id) return
@@ -263,110 +273,114 @@ export default function EditorSidebar({ diagrams }: { diagrams: Diagram[] }) {
   const onCreate = () => {
     if (creating) return
     setCreating(true)
+    setPendingNewId(null)
     startNavTransition(async () => {
-      try {
-        const id = await createDiagram()
-        setOptimisticId(id)
-        router.push(editorPath(id))
-        router.refresh()
-      } finally {
-        setCreating(false)
-      }
+      const id = await createDiagram()
+      setPendingNewId(id)
+      router.push(editorPath(id))
+      router.refresh()
     })
   }
 
   return (
     <>
       <aside
-        className="relative flex h-full flex-col border-r backdrop-blur-[3px] transition-[width] duration-200"
+        className="absolute inset-y-0 left-0 z-10 overflow-hidden border-r backdrop-blur-[3px] transition-[width] duration-200"
         style={{
           width: open ? 240 : 0,
           background: 'var(--color-glass-panel-bg)',
           borderColor: 'var(--color-glass-border)',
         }}
       >
-        <Link
-          href={landingHref}
-          className="flex items-center gap-[10px] px-4 py-[14px] transition-colors hover:bg-white/5"
-          style={{ borderBottom: `1px solid var(--color-glass-border)`, textDecoration: 'none' }}
-          title="Back to landing"
-        >
-          <LogoMark />
-          <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--color-text-primary)', letterSpacing: '-0.3px' }}>
-            Semiotics.NeSyCat
-          </span>
-        </Link>
-
-        <div className="px-3 pt-3">
-          <button
-            type="button"
-            onClick={onCreate}
-            disabled={creating}
-            className="flex w-full items-center justify-center gap-2 rounded-md border px-3 py-2 text-[13px] font-semibold transition-colors hover:bg-white/5 disabled:opacity-70"
-            style={{
-              borderColor: 'var(--color-glass-border)',
-              background: 'var(--color-glass-button-bg)',
-              color: 'var(--color-text-primary)',
-            }}
+        <div className="flex h-full flex-col" style={{ width: 240 }}>
+          <Link
+            href={landingHref}
+            className="flex items-center gap-[10px] px-4 py-[14px] transition-colors hover:bg-white/5"
+            style={{ borderBottom: `1px solid var(--color-glass-border)`, textDecoration: 'none' }}
+            title="Back to landing"
           >
-            {creating ? <Spinner /> : null}
-            <span>{creating ? 'Creating…' : '+ New diagram'}</span>
-          </button>
-        </div>
+            <LogoMark />
+            <span
+              className="whitespace-nowrap"
+              style={{ fontSize: 15, fontWeight: 600, color: 'var(--color-text-primary)', letterSpacing: '-0.3px' }}
+            >
+              Semiotics.NeSyCat
+            </span>
+          </Link>
 
-        <div className="t-caption px-4 pt-4 pb-1">Diagrams</div>
+          <div className="px-3 pt-3">
+            <button
+              type="button"
+              onClick={onCreate}
+              disabled={creating}
+              className="flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-md border px-3 py-2 text-[13px] font-semibold transition-colors hover:bg-white/5 disabled:opacity-70"
+              style={{
+                borderColor: 'var(--color-glass-border)',
+                background: 'var(--color-glass-button-bg)',
+                color: 'var(--color-text-primary)',
+              }}
+            >
+              {creating ? <Spinner /> : null}
+              <span>{creating ? 'Creating…' : '+ New diagram'}</span>
+            </button>
+          </div>
 
-        <div className="flex-1 overflow-auto">
-          {diagrams.length === 0 && !creating ? (
-            <div className="t-small px-4 py-4" style={{ color: 'var(--color-text-dimmed)' }}>
-              No diagrams yet.
-            </div>
-          ) : (
-            <>
-              {creating && (
-                <div
-                  style={{
-                    borderLeft: `3px solid var(--color-accent-blue)`,
-                    background: 'rgba(59, 130, 246, 0.12)',
-                  }}
-                  className="block px-4 py-[10px]"
-                >
-                  <div
-                    className="truncate"
-                    style={{
-                      fontSize: 13,
-                      fontWeight: 500,
-                      color: 'var(--color-text-primary)',
-                    }}
-                  >
-                    Untitled
-                  </div>
+          <div className="t-caption px-4 pt-4 pb-1">Diagrams</div>
+
+          <div className="flex-1 overflow-auto">
+            {diagrams.length === 0 && !creating ? (
+              <div className="t-small px-4 py-4" style={{ color: 'var(--color-text-dimmed)' }}>
+                No diagrams yet.
+              </div>
+            ) : (
+              <>
+                {creating && (
                   <div
                     style={{
-                      fontSize: 11,
-                      marginTop: 3,
-                      color: 'var(--color-accent-blue)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 6,
+                      borderLeft: `3px solid var(--color-accent-blue)`,
+                      background: 'rgba(59, 130, 246, 0.12)',
                     }}
+                    className="block px-4 py-[10px]"
                   >
-                    <Spinner />
-                    <span>Creating…</span>
+                    <div
+                      className="truncate"
+                      style={{
+                        fontSize: 13,
+                        fontWeight: 500,
+                        color: 'var(--color-text-primary)',
+                      }}
+                    >
+                      Untitled
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 11,
+                        marginTop: 3,
+                        color: 'var(--color-accent-blue)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 6,
+                      }}
+                    >
+                      <Spinner />
+                      <span>Creating…</span>
+                    </div>
                   </div>
-                </div>
-              )}
-              {diagrams.map((d) => (
-                <DiagramItem
-                  key={d.id}
-                  d={d}
-                  active={selectedId === d.id}
-                  pending={optimisticId === d.id}
-                  onSelect={() => goTo(d.id)}
-                />
-              ))}
-            </>
-          )}
+                )}
+                {diagrams
+                  .filter((d) => !(creating && d.id === pendingNewId))
+                  .map((d) => (
+                    <DiagramItem
+                      key={d.id}
+                      d={d}
+                      active={selectedId === d.id}
+                      pending={optimisticId === d.id}
+                      onSelect={() => goTo(d.id)}
+                    />
+                  ))}
+              </>
+            )}
+          </div>
         </div>
       </aside>
 

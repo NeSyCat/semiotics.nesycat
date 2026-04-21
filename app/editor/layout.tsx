@@ -12,9 +12,9 @@ export default async function EditorLayout({ children }: { children: React.React
   const diagrams = await listDiagrams()
 
   return (
-    <div className="flex h-screen w-screen">
+    <div className="relative h-screen w-screen overflow-hidden">
+      <main className="absolute inset-0">{children}</main>
       <EditorSidebar diagrams={diagrams} />
-      <main className="relative flex-1">{children}</main>
     </div>
   )
 }
