@@ -23,7 +23,7 @@ export async function listDiagrams(): Promise<Diagram[]> {
   )
 }
 
-export async function createDiagram(title?: string): Promise<string> {
+export async function createDiagram(title?: string): Promise<Diagram> {
   const { jwt, userId } = await session()
   const rows = await withRLS(jwt, (tx) =>
     tx
@@ -33,11 +33,11 @@ export async function createDiagram(title?: string): Promise<string> {
         title: title ?? 'Untitled',
         data: emptyData,
       })
-      .returning({ id: diagrams.id }),
+      .returning(),
   )
   revalidatePath('/editor', 'layout')
   revalidatePath('/', 'layout')
-  return rows[0].id
+  return rows[0]
 }
 
 export async function loadDiagram(id: string): Promise<Diagram | null> {

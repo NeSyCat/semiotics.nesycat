@@ -236,7 +236,7 @@ export default function EditorSidebar({ diagrams }: { diagrams: Diagram[] }) {
   const [, startNavTransition] = useTransition()
   const [optimisticId, setOptimisticId] = useState<string | null>(null)
   const [creating, setCreating] = useState(false)
-  const [pendingNewId, setPendingNewId] = useState<string | null>(null)
+  const [optimisticNew, setOptimisticNew] = useState<Diagram | null>(null)
   const [landingHref, setLandingHref] = useState('/')
 
   useEffect(() => {
@@ -250,17 +250,14 @@ export default function EditorSidebar({ diagrams }: { diagrams: Diagram[] }) {
     if (match && optimisticId === match[1]) setOptimisticId(null)
   }, [pathname, optimisticId])
 
+  // Server prop caught up — drop the optimistic row so it's not rendered twice.
   useEffect(() => {
-    if (!creating || !pendingNewId) return
-    const match = pathname.match(UUID_IN_PATH)
-    if (match?.[1] === pendingNewId && diagrams.some((d) => d.id === pendingNewId)) {
-      setCreating(false)
-      setPendingNewId(null)
-    }
-  }, [creating, pendingNewId, pathname, diagrams])
+    if (!optimisticNew) return
+    if (diagrams.some((d) => d.id === optimisticNew.id)) setOptimisticNew(null)
+  }, [diagrams, optimisticNew])
 
   const activePathId = pathname.match(UUID_IN_PATH)?.[1] ?? null
-  const selectedId = creating ? null : (optimisticId ?? activePathId)
+  const selectedId = optimisticId ?? activePathId
 
   const goTo = (id: string) => {
     if (selectedId === id) return
@@ -273,14 +270,24 @@ export default function EditorSidebar({ diagrams }: { diagrams: Diagram[] }) {
   const onCreate = () => {
     if (creating) return
     setCreating(true)
-    setPendingNewId(null)
     startNavTransition(async () => {
-      const id = await createDiagram()
-      setPendingNewId(id)
-      router.push(editorPath(id))
-      router.refresh()
+      try {
+        const row = await createDiagram()
+        setOptimisticNew(row)
+        setOptimisticId(row.id)
+        router.push(editorPath(row.id))
+        router.refresh()
+      } catch (err) {
+        console.error('createDiagram failed', err)
+      } finally {
+        setCreating(false)
+      }
     })
   }
+
+  const renderedDiagrams = optimisticNew
+    ? [optimisticNew, ...diagrams.filter((d) => d.id !== optimisticNew.id)]
+    : diagrams
 
   return (
     <>
@@ -328,57 +335,20 @@ export default function EditorSidebar({ diagrams }: { diagrams: Diagram[] }) {
           <div className="t-caption px-4 pt-4 pb-1">Diagrams</div>
 
           <div className="flex-1 overflow-auto">
-            {diagrams.length === 0 && !creating ? (
+            {renderedDiagrams.length === 0 ? (
               <div className="t-small px-4 py-4" style={{ color: 'var(--color-text-dimmed)' }}>
-                No diagrams yet.
+                {creating ? 'Creating…' : 'No diagrams yet.'}
               </div>
             ) : (
-              <>
-                {creating && (
-                  <div
-                    style={{
-                      borderLeft: `3px solid var(--color-accent-blue)`,
-                      background: 'rgba(59, 130, 246, 0.12)',
-                    }}
-                    className="block px-4 py-[10px]"
-                  >
-                    <div
-                      className="truncate"
-                      style={{
-                        fontSize: 13,
-                        fontWeight: 500,
-                        color: 'var(--color-text-primary)',
-                      }}
-                    >
-                      Untitled
-                    </div>
-                    <div
-                      style={{
-                        fontSize: 11,
-                        marginTop: 3,
-                        color: 'var(--color-accent-blue)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 6,
-                      }}
-                    >
-                      <Spinner />
-                      <span>Creating…</span>
-                    </div>
-                  </div>
-                )}
-                {diagrams
-                  .filter((d) => !(creating && d.id === pendingNewId))
-                  .map((d) => (
-                    <DiagramItem
-                      key={d.id}
-                      d={d}
-                      active={selectedId === d.id}
-                      pending={optimisticId === d.id}
-                      onSelect={() => goTo(d.id)}
-                    />
-                  ))}
-              </>
+              renderedDiagrams.map((d) => (
+                <DiagramItem
+                  key={d.id}
+                  d={d}
+                  active={selectedId === d.id}
+                  pending={optimisticId === d.id || optimisticNew?.id === d.id}
+                  onSelect={() => goTo(d.id)}
+                />
+              ))
             )}
           </div>
         </div>

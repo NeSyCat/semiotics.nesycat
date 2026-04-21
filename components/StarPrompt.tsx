@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Star } from 'lucide-react'
 import Button from '@/components/ui/button'
+import { selectionGlow } from '@/components/editor/style/theme'
 
 // localStorage is the state store — no DB column needed, and a signed-in user
 // who nukes their browser storage will just see the prompt again, which is fine.
@@ -26,6 +26,34 @@ function write(s: State) {
   } catch {}
 }
 
+const STAR_POINTS =
+  '12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26'
+
+const ACCENT = 'var(--color-accent-rgb)'
+
+function DiagramStar({ size }: { size: number }) {
+  return (
+    <div
+      style={{
+        width: size,
+        height: size,
+        display: 'inline-block',
+        ...selectionGlow(ACCENT, true),
+      }}
+    >
+      <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
+        <polygon
+          points={STAR_POINTS}
+          fill={`rgba(${ACCENT}, 0.35)`}
+          stroke={`rgb(${ACCENT})`}
+          strokeWidth={1.2}
+          strokeLinejoin="round"
+        />
+      </svg>
+    </div>
+  )
+}
+
 export default function StarPrompt({ repoUrl }: { repoUrl: string }) {
   const [open, setOpen] = useState(false)
 
@@ -38,15 +66,6 @@ export default function StarPrompt({ repoUrl }: { repoUrl: string }) {
     const t = window.setTimeout(() => setOpen(true), wait)
     return () => window.clearTimeout(t)
   }, [])
-
-  useEffect(() => {
-    if (!open) return
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') dismiss()
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [open])
 
   function star() {
     write({ clicked: Date.now() })
@@ -62,43 +81,31 @@ export default function StarPrompt({ repoUrl }: { repoUrl: string }) {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/50" onClick={dismiss} aria-hidden />
+      <div className="absolute inset-0 bg-black/50" aria-hidden />
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="star-prompt-title"
-        className="relative flex w-[min(92vw,420px)] flex-col gap-5 border p-7 backdrop-blur-[3px]"
+        className="relative flex w-[min(92vw,420px)] flex-col items-center gap-5 border px-8 py-9 text-center backdrop-blur-[3px]"
         style={{
           background: 'var(--color-glass-panel-bg)',
           borderColor: 'var(--color-glass-border)',
           borderRadius: 'var(--size-radius-md)',
         }}
       >
-        <div className="flex items-center gap-3">
-          <div
-            className="flex h-10 w-10 items-center justify-center rounded-full"
-            style={{ background: 'rgba(var(--color-accent-rgb), 0.15)' }}
-          >
-            <Star
-              size={20}
-              className="text-[color:var(--color-accent-blue)]"
-              fill="currentColor"
-            />
-          </div>
-          <h2 id="star-prompt-title" className="t-h2">
-            Enjoying NeSyCat?
-          </h2>
-        </div>
+        <DiagramStar size={72} />
+        <h2 id="star-prompt-title" className="t-h2">
+          Enjoying NeSyCat?
+        </h2>
         <p className="t-body">
           If the editor is useful to you, a GitHub star would mean a lot — it helps others
           discover the project.
         </p>
-        <div className="flex justify-end gap-2">
+        <div className="flex w-full justify-end gap-2">
           <Button variant="ghost" onClick={dismiss}>
             Not now
           </Button>
           <Button variant="primary" onClick={star}>
-            <Star size={14} fill="currentColor" style={{ marginRight: 6 }} />
             Star on GitHub
           </Button>
         </div>
