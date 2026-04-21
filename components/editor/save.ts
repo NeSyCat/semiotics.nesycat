@@ -10,9 +10,19 @@ const DEBOUNCE_MS = 300
 export function useAutosave(diagramId: string | null) {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const pendingRef = useRef<DiagramData | null>(null)
+  // Serialized payload of the last successful save. Guards against redundant
+  // server-action calls when two distinct diagram references happen to encode
+  // the same content (e.g. an edit followed by an undo that restores the
+  // previous state).
+  const lastSavedJsonRef = useRef<string | null>(null)
 
   useEffect(() => {
     if (!diagramId) return
+
+    // Cross-diagram navigation is handled by the isHydrating() guard below;
+    // the ref lives across effects so we don't re-save the just-hydrated
+    // content either.
+    lastSavedJsonRef.current = JSON.stringify(useStore.getState().diagram)
 
     const flush = () => {
       if (timerRef.current) {
@@ -22,6 +32,9 @@ export function useAutosave(diagramId: string | null) {
       const snapshot = pendingRef.current
       if (!snapshot) return
       pendingRef.current = null
+      const json = JSON.stringify(snapshot)
+      if (json === lastSavedJsonRef.current) return
+      lastSavedJsonRef.current = json
       saveDiagram(diagramId, snapshot).catch((err) => {
         console.error('saveDiagram failed', err)
       })

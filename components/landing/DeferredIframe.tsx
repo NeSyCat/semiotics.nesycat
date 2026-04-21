@@ -1,37 +1,89 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface Props {
   src: string
   title: string
   style?: React.CSSProperties
   className?: string
+  // When true, wait until the placeholder is scrolled near the viewport
+  // before mounting the iframe. Without this, four same-origin iframes
+  // mount in parallel on page load and race for the editor's JS chunks —
+  // each fetches its own copy before the browser cache is warm.
+  observe?: boolean
 }
 
-// Holds off on loading the iframe until the host page has painted and the
-// main thread is idle. Landing-page hero preview is ~500KB of JS that would
-// otherwise block the Load event for >1s.
-export default function DeferredIframe({ src, title, style, className }: Props) {
+// Module-level queue: serializes iframe mounts so that same-origin chunks get
+// a chance to populate the HTTP cache before the next iframe requests them.
+const queue: Array<() => void> = []
+let pumping = false
+const SETTLE_MS = 600
+
+function enqueue(run: () => void) {
+  queue.push(run)
+  if (pumping) return
+  pumping = true
+  const pump = () => {
+    const next = queue.shift()
+    if (!next) {
+      pumping = false
+      return
+    }
+    next()
+    setTimeout(pump, SETTLE_MS)
+  }
+  pump()
+}
+
+export default function DeferredIframe({ src, title, style, className, observe }: Props) {
   const [load, setLoad] = useState(false)
+  const hostRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    type RIC = (cb: () => void, opts?: { timeout?: number }) => number
-    const w = window as unknown as { requestIdleCallback?: RIC }
-    if (w.requestIdleCallback) {
-      const handle = w.requestIdleCallback(() => setLoad(true), { timeout: 800 })
-      return () => {
-        const cancel = (window as unknown as { cancelIdleCallback?: (h: number) => void }).cancelIdleCallback
-        if (cancel) cancel(handle)
+    if (load) return
+
+    const triggerViaIdle = () => {
+      type RIC = (cb: () => void, opts?: { timeout?: number }) => number
+      const w = window as unknown as { requestIdleCallback?: RIC }
+      if (w.requestIdleCallback) {
+        const handle = w.requestIdleCallback(() => enqueue(() => setLoad(true)), { timeout: 800 })
+        return () => {
+          const cancel = (window as unknown as { cancelIdleCallback?: (h: number) => void }).cancelIdleCallback
+          if (cancel) cancel(handle)
+        }
       }
+      const t = setTimeout(() => enqueue(() => setLoad(true)), 400)
+      return () => clearTimeout(t)
     }
-    const t = setTimeout(() => setLoad(true), 400)
-    return () => clearTimeout(t)
-  }, [])
+
+    if (!observe || typeof IntersectionObserver === 'undefined') {
+      return triggerViaIdle()
+    }
+
+    const host = hostRef.current
+    if (!host) return
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            obs.disconnect()
+            enqueue(() => setLoad(true))
+            return
+          }
+        }
+      },
+      { rootMargin: '200px 0px', threshold: 0.01 },
+    )
+    obs.observe(host)
+    return () => obs.disconnect()
+  }, [load, observe])
 
   if (!load) {
     return (
       <div
+        ref={hostRef}
         className={className}
         style={{
           ...style,

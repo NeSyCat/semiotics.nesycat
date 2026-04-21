@@ -1,3 +1,5 @@
+import DeferredIframe from '../DeferredIframe'
+
 const ACC = '59, 130, 246'
 
 const SAMPLES = [
@@ -78,11 +80,11 @@ export default function Examples() {
             }}
           >
             <div style={{ height: 220, borderBottom: '1px solid var(--color-glass-border)' }}>
-              <iframe
+              <DeferredIframe
                 src={`/embed/sample/${slug}`}
                 title={`${title} preview`}
                 style={{ width: '100%', height: '100%', border: 0, display: 'block' }}
-                loading="lazy"
+                observe
               />
             </div>
             <div style={{ padding: '14px 18px' }}>
