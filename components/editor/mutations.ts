@@ -1,31 +1,39 @@
-// Generic, kind-agnostic mutations on a Diagram. Lines now reference points by
-// stable id (no positional addressing); a "point" IS a Shape (typically a leaf
-// of kind 'empty') nested inside another shape's `points` slots. All shape ids
-// across the diagram (nodes, edges, nested points) live in one universal
-// namespace and must be unique.
+// Generic, kind-agnostic mutations on a Diagram. Lines reference points by
+// stable internal `id` (no positional addressing); a "point" IS a Shape
+// (typically a leaf of kind 'empty') nested inside another shape's `points`
+// slots. All `id`s across the diagram (nodes, edges, nested points) live in
+// one universal namespace and must be unique. The user-visible `name` is
+// independent — multiple shapes may share a name (e.g. line endpoints both
+// labeled "x" to read as the same referent in two visual occurrences).
 
 import type { AnyLine, AnyShape, Diagram, ShapeKind, Slot, Subslot } from './types'
 import {
   addPointAt, emptyShapePoints, findShape, getPointAt, modifyAtPath,
   replaceEdge, replaceNode, walkShape,
 } from './points'
-import { allShapeIds, newLineId, newNodeId, newPointId } from './ids'
+import { newLineId, newNodeId, newPointId } from './ids'
 import { defaultSpaceTime, withTranslation } from './transform'
 import { DEFAULT_COLOR } from './color'
 import { restoreDiagram } from './migrations'
 
 // === Constructors ===
+// Field order matches Shape's declared order in types.ts so the in-memory
+// object's JSON.stringify lays out keys the same way the canonical-on-load
+// pass produces. `name` defaults to `id` so freshly-added shapes look the same
+// on first paint as before the id/name split.
 
 function makeShape<K extends ShapeKind>(
   kind: K,
   id: string,
   translation: [number, number] = [0, 0],
   order = 0,
+  name: string = id,
 ): AnyShape {
   return {
-    kind,
-    points: emptyShapePoints(kind),
     id,
+    name,
+    points: emptyShapePoints(kind),
+    kind,
     order,
     color: DEFAULT_COLOR,
     transform: defaultSpaceTime(translation),
@@ -34,11 +42,12 @@ function makeShape<K extends ShapeKind>(
   } as AnyShape
 }
 
-function makeLine(id: string, source: string, target: string): AnyLine {
+function makeLine(id: string, source: string, target: string, name: string = id): AnyLine {
   return {
-    kind: 'empty',
-    points: emptyShapePoints('empty'),
     id,
+    name,
+    points: emptyShapePoints('empty'),
+    kind: 'empty',
     order: 0,
     color: DEFAULT_COLOR,
     transform: defaultSpaceTime(),
@@ -72,15 +81,6 @@ function pruneLines(edges: AnyLine[], dropped: Set<string>): AnyLine[] {
   return out
 }
 
-// Rewrite line endpoints that refer to oldId.
-function renameLineRefs(edges: AnyLine[], oldId: string, newId: string): AnyLine[] {
-  return edges.map((l) => ({
-    ...l,
-    source: l.source === oldId ? newId : l.source,
-    targets: l.targets.map((t) => (t === oldId ? newId : t)),
-  } as AnyLine))
-}
-
 // === Top-level node mutations ===
 
 export function addNode(
@@ -106,41 +106,44 @@ export function deleteNode(d: Diagram, id: string): Diagram {
   return { ...d, nodes, edges }
 }
 
-export function renameNode(d: Diagram, oldId: string, newId: string): [Diagram, boolean] {
-  return renameShape(d, oldId, newId)
+export function renameNode(d: Diagram, id: string, newName: string): Diagram {
+  return renameShape(d, id, newName)
 }
 
 // === Generic shape rename — works on any shape (top-level or nested). ===
-function renameShape(d: Diagram, oldId: string, newId: string): [Diagram, boolean] {
-  if (oldId === newId) return [d, true]
-  if (!newId.trim()) return [d, false]
-  if (allShapeIds(d).has(newId)) return [d, false]
-  const loc = findShape(d, oldId)
-  if (!loc) return [d, false]
-  const replacer = (s: AnyShape): AnyShape => ({ ...s, id: newId } as AnyShape)
+// Edits the user-visible `name`; `id` is immutable so line refs stay valid.
+// Names may collide across shapes — that's the point (e.g. two endpoints both
+// called "x" share a referent). Empty names are rejected (label would vanish).
+function renameShape(d: Diagram, id: string, newName: string): Diagram {
+  if (!newName.trim()) return d
+  const loc = findShape(d, id)
+  if (!loc) return d
+  const replacer = (s: AnyShape): AnyShape => ({ ...s, name: newName } as AnyShape)
   const newTop = modifyAtPath(loc.topShape, loc.path, replacer)
-  if (newTop === undefined) return [d, false]
-  let nd: Diagram = loc.topContainer === 'nodes'
+  if (newTop === undefined) return d
+  return loc.topContainer === 'nodes'
     ? replaceNode(d, loc.topIndex, newTop)
     : replaceEdge(d, loc.topIndex, newTop as AnyLine)
-  nd = { ...nd, edges: renameLineRefs(nd.edges, oldId, newId) }
-  return [nd, true]
 }
 
 // === Point mutations ===
 
 // Append (or assign, for maybe slots) a new empty-leaf point at the given
 // slot/subslot of any shape in the tree (top-level or nested), identified by id.
+// `name` is optional — line-drop creators pass the source's `name` so the new
+// endpoint reads as the same referent; manual plus-button clicks omit it (the
+// new point gets `name = id` by default inside makeShape).
 export function addPoint(
   d: Diagram,
   parentId: string,
   slot: Slot,
   subslot?: Subslot,
+  name?: string,
 ): [Diagram, string] {
   const loc = findShape(d, parentId)
   if (!loc) return [d, '']
   const id = newPointId(d)
-  const newPt = makeShape('empty', id)
+  const newPt = makeShape('empty', id, [0, 0], 0, name ?? id)
   const replacer = (parent: AnyShape): AnyShape => {
     const { points } = addPointAt(parent.kind, parent.points, slot, subslot, newPt)
     return { ...parent, points } as AnyShape
@@ -183,8 +186,8 @@ function walkToPath(top: AnyShape, path: { slot: Slot; subslot?: Subslot; index:
   return cur
 }
 
-export function renamePoint(d: Diagram, oldId: string, newId: string): [Diagram, boolean] {
-  return renameShape(d, oldId, newId)
+export function renamePoint(d: Diagram, id: string, newName: string): Diagram {
+  return renameShape(d, id, newName)
 }
 
 // === Line mutations ===
@@ -220,27 +223,41 @@ export function deleteLineTarget(d: Diagram, lineId: string, idx: number): Diagr
   }
 }
 
-export function renameLine(d: Diagram, oldId: string, newId: string): [Diagram, boolean] {
-  return renameShape(d, oldId, newId)
+export function renameLine(d: Diagram, id: string, newName: string): Diagram {
+  return renameShape(d, id, newName)
 }
 
 // Create a free-floating empty carrier with one point and a line connecting it
 // to `anchorPtId`. `freeRole` says which end of the line the free point becomes.
+// The free endpoint inherits the anchor's `name` so both ends of the line
+// display the same label (semiotic intent: same name = same referent).
 export function addLineWithFreeEnd(
   d: Diagram,
   anchorPtId: string,
   freeRole: 'source' | 'target',
   emptyPosition: [number, number],
 ): [Diagram, { emptyId: string; lineId: string }] {
+  const anchorName = findShapeName(d, anchorPtId)
   const [d1, emptyId] = addEmpty(d, emptyPosition)
   // Side mirrors the OLD UX: source-end carrier sits to the right (input var),
   // target-end carrier sits to the left (output var).
   const slot: Slot = freeRole === 'source' ? 'right' : 'left'
-  const [d2, freePtId] = addPoint(d1, emptyId, slot)
+  const [d2, freePtId] = addPoint(d1, emptyId, slot, undefined, anchorName)
   if (!freePtId) return [d, { emptyId: '', lineId: '' }]
   const [source, target] = freeRole === 'source' ? [freePtId, anchorPtId] : [anchorPtId, freePtId]
   const [d3, lineId] = addLine(d2, source, target)
   return [d3, { emptyId, lineId }]
+}
+
+// Resolve a point id → its current `name` (used when a new endpoint should
+// inherit the source's label). Returns undefined if the id isn't found.
+function findShapeName(d: Diagram, id: string): string | undefined {
+  const loc = findShape(d, id)
+  if (!loc) return undefined
+  const s = loc.path.length === 0
+    ? loc.topShape
+    : walkToPath(loc.topShape, loc.path)
+  return s?.name
 }
 
 export type LineEnd = { kind: 'source' } | { kind: 'target'; index: number }

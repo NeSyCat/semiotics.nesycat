@@ -29,7 +29,7 @@ function migrate(raw: any): any {
 // Diagram literals. Re-canonicalize on read so the in-memory tree — and any
 // downstream JSON.stringify — matches the field order declared in types.ts.
 // Unknown fields (forward-compat from a newer schema) are preserved at the end.
-const SHAPE_FIELDS = ['kind', 'points', 'id', 'order', 'color', 'transform', 'equations', 'weight'] as const
+const SHAPE_FIELDS = ['id', 'name', 'points', 'kind', 'order', 'color', 'transform', 'equations', 'weight'] as const
 const LINE_FIELDS = [...SHAPE_FIELDS, 'source', 'targets'] as const
 
 function pickExtras(obj: object, known: ReadonlyArray<string>): Record<string, unknown> {
@@ -43,9 +43,10 @@ function pickExtras(obj: object, known: ReadonlyArray<string>): Record<string, u
 
 function canonicalShape<S extends AnyShape>(s: S): S {
   return {
-    kind: s.kind,
-    points: canonicalPoints(s.kind, s.points),
     id: s.id,
+    name: s.name,
+    points: canonicalPoints(s.kind, s.points),
+    kind: s.kind,
     order: s.order,
     color: s.color,
     transform: s.transform,
@@ -57,9 +58,10 @@ function canonicalShape<S extends AnyShape>(s: S): S {
 
 function canonicalLine(l: AnyLine): AnyLine {
   return {
-    kind: l.kind,
-    points: canonicalPoints(l.kind, l.points),
     id: l.id,
+    name: l.name,
+    points: canonicalPoints(l.kind, l.points),
+    kind: l.kind,
     order: l.order,
     color: l.color,
     transform: l.transform,

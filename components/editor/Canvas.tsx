@@ -21,7 +21,7 @@ import DiagramNode from './DiagramNode'
 import DiagramEdge from './DiagramEdge'
 import { useStore, initStore } from './store'
 import { useAutosave } from './save'
-import { enumeratePoints, findShape } from './points'
+import { enumeratePoints, findShape, getPointAt } from './points'
 import type { Diagram, ShapeKind, Slot, Subslot } from './types'
 import theme, { panelStyle, glassBlur } from './style/theme'
 
@@ -49,6 +49,19 @@ function lookupPointId(d: Diagram, nodeId: string, handleId: string): string | u
     if (e.slot === slot && e.subslot === subslot && e.index === index) return e.point.id
   }
   return undefined
+}
+
+// Resolve a point id → its current `name` for endpoint-name inheritance on drop.
+function lookupShapeName(d: Diagram, id: string): string | undefined {
+  const loc = findShape(d, id)
+  if (!loc) return undefined
+  let cur = loc.topShape
+  for (const step of loc.path) {
+    const next = getPointAt(cur.kind, cur.points, step)
+    if (!next) return undefined
+    cur = next
+  }
+  return cur.name
 }
 
 // Inverse: point id → (RF node id, handle id) for edge endpoint resolution.
@@ -284,6 +297,9 @@ function Canvas() {
       const attachedPtId = lookupPointId(d, nodeName, handleId)
       if (!attachedPtId) return
       const fromType = connectionState.fromHandle.type as string
+      // Inherit the source point's NAME (not id) for the auto-created endpoint
+      // so both ends of the line read as the same referent.
+      const attachedName = lookupShapeName(d, attachedPtId)
 
       const { clientX, clientY } = 'changedTouches' in event ? (event as TouchEvent).changedTouches[0] : (event as MouseEvent)
       const position = screenToFlowPosition({ x: clientX, y: clientY })
@@ -337,7 +353,7 @@ function Canvas() {
         const dropSide: EdgeSide = candidates[0].side
         const dropSubslot = resolveDropSubslot(dropShape.kind, dropSide, ry)
 
-        const newPtId = addPoint(dropTarget.id, dropSide, dropSubslot)
+        const newPtId = addPoint(dropTarget.id, dropSide, dropSubslot, attachedName)
         if (!newPtId) return
         if (existingLine) addLineTarget(existingLine.id, newPtId)
         else addLine(attachedPtId, newPtId)
@@ -345,12 +361,12 @@ function Canvas() {
       }
 
       // Dropped on empty space → either extend existing line or create a new
-      // line with a free-end empty carrier.
+      // line with a free-end empty carrier. Both paths inherit the source's name.
       if (existingLine) {
         // Extending a line: drop-spawn a single-point empty carrier and
         // attach a new target on its left side.
         const emptyId = addEmpty([position.x, position.y])
-        const newPtId = addPoint(emptyId, 'left')
+        const newPtId = addPoint(emptyId, 'left', undefined, attachedName)
         if (newPtId) addLineTarget(existingLine.id, newPtId)
       } else {
         const freeRole: 'source' | 'target' = fromType === 'target' ? 'source' : 'target'

@@ -1,8 +1,8 @@
 // Geometric primitives (Shape, Line) compose into a Diagram (nodes + edges).
 // `Point` is just `Shape` -- shapes nest recursively in their own `points` slots,
-// bottoming out where every slot is `undefined` / `[]`. Sections numbered (-1)..(6)
+// bottoming out where every slot is `undefined` / `[]`. Sections numbered (-2)..(6)
 // and Shape's field order match slot positions in the canonical Shape diagram.
-// Slot infrastructure precedes (0) since ShapePoints uses it.
+
 
 // === Slot vocabulary ===
 export const SLOTS = ['left', 'right', 'up', 'down', 'center', 'total'] as const
@@ -26,11 +26,15 @@ export type ThreePointSlot = Triad<MaybePoint, MaybePoint>
 export type PointedSlot    = Triad<MaybePoint, ListPoint>
 export type FlatSlot       = Triad<ListPoint,  MaybePoint>
 
+// (-2) id   -- built-in `string`. Auto-generated, unique, internal — never user-facing.
+// (-1) name -- built-in `string`. User-visible label, may collide across shapes.
+
 // === (0) ShapePoints ===
 // Per-kind slot cardinalities. Every slot is optional or list-shaped, so a leaf
 // (a shape with all slots empty) is a valid value of any kind. Even `total` is
-// `MaybePoint`: stable ids replace required names, so the user is never forced
-// to fill any slot -- and any leaf can later be expanded into a deeper subtree.
+// `MaybePoint`: every slot is optional so the user is never forced to fill any
+// -- any leaf can later be expanded into a deeper subtree. The recursive
+// total-Shape carries its own `name` (the user-visible self-label).
 export interface ShapePoints {
   empty: {
     left: MaybePoint;   right: MaybePoint
@@ -60,10 +64,10 @@ export interface ShapePoints {
   }
 }
 
-// === (-1) ShapeKind ===
+// === (1) ShapeKind ===
+// Discriminator. Was at slot `total` (position -1); now at `center.up` (position 1)
+// since `total` carries the recursive self-Shape (its `name` is the visible self-label).
 export type ShapeKind = keyof ShapePoints
-
-// (1) id -- built-in `string`, no declaration needed.
 
 // === (2) Order ===
 // Scalar alias for `number`; the name communicates intent.
@@ -100,18 +104,22 @@ export type Expression = string | number | { op: Op; args: [Expression, Expressi
 export type Mass = number
 
 // === Shape ===
-// Field order matches slot positions (-1)..(6) in the canonical Shape diagram;
+// Field order matches slot positions (-2)..(6) in the canonical Shape diagram;
 // trailing comments record each field's slot. `points` is recursive: each slot
 // holds another Shape (or `undefined` / `[]` at leaves), so the type bottoms
-// out cleanly without a separate Point declaration.
+// out cleanly without a separate Point declaration. `id` is the unique internal
+// identifier; `name` is the user-visible label and may collide (line endpoints
+// dragged from a point inherit the source's name, so the same name reads as
+// "the same referent" across multiple visual occurrences).
 export interface Shape<K extends ShapeKind = ShapeKind> {
-  kind:      K                // -1  (total)
+  id:        string           // -2  (left.up)
+  name:      string           // -1  (right.up)
   points:    ShapePoints[K]   //  0  (center.center)
-  id:        string           //  1  (center.up)
+  kind:      K                //  1  (center.up)
   order:     Order            //  2  (left.center)
   color:     Color            //  3  (right.center)
-  transform: SpaceTime        //  4  (down.center)
-  equations: Expression[]     //  5  (up.center)
+  transform: SpaceTime        //  4  (down)
+  equations: Expression[]     //  5  (up)
   weight:    Mass             //  6  (center.down)
 }
 
@@ -125,7 +133,7 @@ export type Point<K extends ShapeKind = ShapeKind> = Shape<K>
 export type AnyPoint = AnyShape
 
 // === Line ===
-// A `Line` is a `Shape` with connectivity -- inherits all (-1)..(6) fields, so
+// A `Line` is a `Shape` with connectivity -- inherits all (-2)..(6) fields, so
 // where a line's label was previously rendered as text, the line now renders
 // through the same `<ShapeView>` pipeline as nodes and points. `source` and
 // `targets` are stable id refs into the recursive Shape tree under

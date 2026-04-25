@@ -374,22 +374,24 @@ function ShapeView({ data, selected }: NodeProps) {
     }
   }, [editingId])
 
-  function startEdit(pid: string, current: string) {
+  function startEdit(pid: string, currentName: string) {
     setEditingId(pid)
-    setEditText(current)
+    setEditText(currentName)
   }
   function commitEdit(isSelf: boolean) {
     if (!editingId) return
     const next = editText.trim()
-    if (next && next !== editingId) {
+    if (next) {
       if (isSelf) renameNode(editingId, next)
       else renamePoint(editingId, next)
     }
     setEditingId(null)
   }
 
-  // Render a label for a point identifier (point id or shape id for self).
-  function renderLabel(pid: string, anchor: SlotAnchor, isSelf: boolean) {
+  // Render a label. `pid` is the stable internal id (drives selection state
+  // and edit-target identity); `name` is the user-visible text and may collide
+  // across shapes. Editing edits `name`; the id is immutable.
+  function renderLabel(pid: string, name: string, anchor: SlotAnchor, isSelf: boolean) {
     const editing = editingId === pid
     const sel = isSelected(pid)
     const baseStyle: React.CSSProperties = {
@@ -442,7 +444,7 @@ function ShapeView({ data, selected }: NodeProps) {
           }}
           onDoubleClick={(e) => {
             e.stopPropagation()
-            startEdit(pid, pid)
+            startEdit(pid, name)
           }}
           style={{
             ...baseStyle,
@@ -451,7 +453,7 @@ function ShapeView({ data, selected }: NodeProps) {
             transition: 'background 0.1s, border-color 0.1s',
           }}
         >
-          {pid}
+          {name}
         </span>
       </div>
     )
@@ -478,7 +480,7 @@ function ShapeView({ data, selected }: NodeProps) {
       const pid = e.point.id
       return (
         <span key={`pt-${pid}`}>
-          {renderLabel(pid, anchor, false)}
+          {renderLabel(pid, e.point.name, anchor, false)}
           <BiHandle
             position={anchor.position}
             id={handleId}
@@ -495,15 +497,16 @@ function ShapeView({ data, selected }: NodeProps) {
       )
     })
 
-  // Self / "total" anchor — always rendered. The shape's own id IS the label;
-  // the handle id is "total-0". When points are hidden the anchor collapses to
-  // body center so only one anchor remains visible per shape.
+  // Self / "total" anchor — always rendered. The shape's `name` is the visible
+  // self-label; selection identity uses the immutable `id`. The handle id is
+  // "total-0". When points are hidden the anchor collapses to body center so
+  // only one anchor remains visible per shape.
   const selfAnchor: SlotAnchor = pointsVisible
     ? frameNWAnchor(geom.body, n)
     : { x: n / 2, y: n / 2, position: Position.Top }
   const selfBlock = (
     <span key="self">
-      {renderLabel(shape.id, selfAnchor, true)}
+      {renderLabel(shape.id, shape.name, selfAnchor, true)}
       <BiHandle
         position={Position.Top}
         id="total-0"

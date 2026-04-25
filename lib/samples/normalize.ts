@@ -37,11 +37,12 @@ function makeCounter() {
   }
 }
 
-function leaf(id: string): AnyShape {
+function leaf(id: string, name: string): AnyShape {
   return {
-    kind: 'empty',
-    points: emptyShapePoints('empty'),
     id,
+    name,
+    points: emptyShapePoints('empty'),
+    kind: 'empty',
     order: 0,
     color: DEFAULT_COLOR,
     transform: defaultSpaceTime(),
@@ -53,14 +54,16 @@ function leaf(id: string): AnyShape {
 function shape<K extends ShapeKind>(
   kind: K,
   id: string,
+  name: string,
   position: [number, number],
   points: ShapePoints[K],
   order: number,
 ): AnyShape {
   return {
-    kind,
-    points,
     id,
+    name,
+    points,
+    kind,
     order,
     color: DEFAULT_COLOR,
     transform: defaultSpaceTime(position),
@@ -108,20 +111,22 @@ function addPt<K extends ShapeKind>(
 ): ShapePoints[K] {
   const id = ctx.nextId(oldName || 'P')
   ctx.refMap.set(refKey(ownerId, oldSide, oldSlot, oldIndex), id)
-  return addPointAt(kind, pts, newSlot, newSubslot, leaf(id)).points
+  return addPointAt(kind, pts, newSlot, newSubslot, leaf(id, oldName || id)).points
 }
 
 function convertEmpty(ctx: Ctx, raw: AnyObj, order: number): AnyShape {
+  const name = String(raw.name ?? raw.id ?? '')
   const id = ctx.nextId(String(raw.id ?? raw.name ?? 'E') || 'E')
   let pts = emptyShapePoints('empty')
   const rp = (raw.points as AnyObj) ?? {}
   if (rp.left)  pts = addPt(ctx, id, 'left',  undefined, 0, nm(rp.left  as AnyObj), 'empty', pts, 'left',  undefined)
   if (rp.right) pts = addPt(ctx, id, 'right', undefined, 0, nm(rp.right as AnyObj), 'empty', pts, 'right', undefined)
-  return shape('empty', id, position(raw), pts, order)
+  return shape('empty', id, name || id, position(raw), pts, order)
 }
 
 function convertTriangle(ctx: Ctx, raw: AnyObj, order: number): AnyShape {
-  const id = ctx.nextId(String(raw.id ?? 'T') || 'T')
+  const name = String(raw.name ?? raw.id ?? '')
+  const id = ctx.nextId(String(raw.id ?? raw.name ?? 'T') || 'T')
   let pts = emptyShapePoints('triangle')
   const rp = (raw.points as AnyObj) ?? {}
   const left  = Array.isArray(rp.left)  ? (rp.left  as AnyObj[]) : []
@@ -130,11 +135,12 @@ function convertTriangle(ctx: Ctx, raw: AnyObj, order: number): AnyShape {
   right.forEach((pt, i) => { pts = addPt(ctx, id, 'right', undefined, i, nm(pt), 'triangle', pts, 'right', undefined) })
   if (rp.center) pts = addPt(ctx, id, 'center', undefined, 0, nm(rp.center as AnyObj), 'triangle', pts, 'center', undefined)
   if (rp.total)  pts = addPt(ctx, id, 'total',  undefined, 0, nm(rp.total  as AnyObj), 'triangle', pts, 'total',  undefined)
-  return shape('triangle', id, position(raw), pts, order)
+  return shape('triangle', id, name || id, position(raw), pts, order)
 }
 
 function convertRectangle(ctx: Ctx, raw: AnyObj, order: number): AnyShape {
-  const id = ctx.nextId(String(raw.id ?? 'R') || 'R')
+  const name = String(raw.name ?? raw.id ?? '')
+  const id = ctx.nextId(String(raw.id ?? raw.name ?? 'R') || 'R')
   let pts = emptyShapePoints('rectangle')
   const rp = (raw.points as AnyObj) ?? {}
   for (const side of ['left', 'right'] as const) {
@@ -162,11 +168,12 @@ function convertRectangle(ctx: Ctx, raw: AnyObj, order: number): AnyShape {
     if (c[sub]) pts = addPt(ctx, id, 'center', sub, 0, nm(c[sub] as AnyObj), 'rectangle', pts, 'center', sub)
   }
   if (rp.total) pts = addPt(ctx, id, 'total', undefined, 0, nm(rp.total as AnyObj), 'rectangle', pts, 'total', undefined)
-  return shape('rectangle', id, position(raw), pts, order)
+  return shape('rectangle', id, name || id, position(raw), pts, order)
 }
 
 function convertCircle(ctx: Ctx, raw: AnyObj, order: number): AnyShape {
-  const id = ctx.nextId(String(raw.id ?? 'C') || 'C')
+  const name = String(raw.name ?? raw.id ?? '')
+  const id = ctx.nextId(String(raw.id ?? raw.name ?? 'C') || 'C')
   let pts = emptyShapePoints('circle')
   const rp = (raw.points as AnyObj) ?? {}
   for (const side of ['left', 'right', 'up', 'down'] as const) {
@@ -181,11 +188,12 @@ function convertCircle(ctx: Ctx, raw: AnyObj, order: number): AnyShape {
     if (c[sub]) pts = addPt(ctx, id, 'center', sub, 0, nm(c[sub] as AnyObj), 'circle', pts, 'center', sub)
   }
   if (rp.total) pts = addPt(ctx, id, 'total', undefined, 0, nm(rp.total as AnyObj), 'circle', pts, 'total', undefined)
-  return shape('circle', id, position(raw), pts, order)
+  return shape('circle', id, name || id, position(raw), pts, order)
 }
 
 function convertRhombus(ctx: Ctx, raw: AnyObj, order: number): AnyShape {
-  const id = ctx.nextId(String(raw.id ?? 'D') || 'D')
+  const name = String(raw.name ?? raw.id ?? '')
+  const id = ctx.nextId(String(raw.id ?? raw.name ?? 'D') || 'D')
   let pts = emptyShapePoints('rhombus')
   const rp = (raw.points as AnyObj) ?? {}
   for (const side of ['left', 'right'] as const) {
@@ -209,11 +217,12 @@ function convertRhombus(ctx: Ctx, raw: AnyObj, order: number): AnyShape {
     if (c[sub]) pts = addPt(ctx, id, 'center', sub, 0, nm(c[sub] as AnyObj), 'rhombus', pts, 'center', sub)
   }
   if (rp.total) pts = addPt(ctx, id, 'total', undefined, 0, nm(rp.total as AnyObj), 'rhombus', pts, 'total', undefined)
-  return shape('rhombus', id, position(raw), pts, order)
+  return shape('rhombus', id, name || id, position(raw), pts, order)
 }
 
 function convertLine(ctx: Ctx, raw: AnyObj): AnyLine | undefined {
-  const id = ctx.nextId(String(raw.id ?? 'L') || 'L')
+  const name = String(raw.name ?? raw.id ?? '')
+  const id = ctx.nextId(String(raw.id ?? raw.name ?? 'L') || 'L')
   const rp = (raw.points as AnyObj) ?? {}
   const lookup = (p: AnyObj | undefined): string | undefined => {
     if (!p) return undefined
@@ -234,9 +243,10 @@ function convertLine(ctx: Ctx, raw: AnyObj): AnyLine | undefined {
   }
   if (targets.length === 0) return undefined
   return {
-    kind: 'empty',
-    points: emptyShapePoints('empty'),
     id,
+    name: name || id,
+    points: emptyShapePoints('empty'),
+    kind: 'empty',
     order: 0,
     color: DEFAULT_COLOR,
     transform: defaultSpaceTime(),

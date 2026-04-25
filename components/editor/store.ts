@@ -44,11 +44,11 @@ interface State {
   addNode: (kind: ShapeKind, position: [number, number]) => string
   addEmpty: (position: [number, number]) => string
   deleteNode: (id: string) => void
-  renameNode: (oldId: string, newId: string) => boolean
+  renameNode: (id: string, newName: string) => void
 
-  addPoint: (parentId: string, slot: Slot, subslot?: Subslot) => string
+  addPoint: (parentId: string, slot: Slot, subslot?: Subslot, name?: string) => string
   removePoint: (pointId: string) => void
-  renamePoint: (oldId: string, newId: string) => boolean
+  renamePoint: (id: string, newName: string) => void
 
   addLine: (sourcePtId: string, targetPtId: string) => string
   addLineTarget: (lineId: string, targetPtId: string) => void
@@ -59,7 +59,7 @@ interface State {
   ) => { emptyId: string; lineId: string }
   deleteLine: (lineId: string) => void
   deleteLineTarget: (lineId: string, idx: number) => void
-  renameLine: (oldId: string, newId: string) => boolean
+  renameLine: (id: string, newName: string) => void
   attachLine: (
     lineId: string,
     end: M.LineEnd,
@@ -149,23 +149,15 @@ export const useStore = create<State>((set, get) => {
       return id
     },
     deleteNode: (id) => setCur(M.deleteNode(get().diagram, id)),
-    renameNode: (oldId, newId) => {
-      const [d, ok] = M.renameNode(get().diagram, oldId, newId)
-      if (ok) setCur(d)
-      return ok
-    },
+    renameNode: (id, newName) => setCur(M.renameNode(get().diagram, id, newName)),
 
-    addPoint: (parentId, slot, subslot) => {
-      const [d, id] = M.addPoint(get().diagram, parentId, slot, subslot)
+    addPoint: (parentId, slot, subslot, name) => {
+      const [d, id] = M.addPoint(get().diagram, parentId, slot, subslot, name)
       if (id) setCur(d)
       return id
     },
     removePoint: (pointId) => setCur(M.removePoint(get().diagram, pointId)),
-    renamePoint: (oldId, newId) => {
-      const [d, ok] = M.renamePoint(get().diagram, oldId, newId)
-      if (ok) setCur(d)
-      return ok
-    },
+    renamePoint: (id, newName) => setCur(M.renamePoint(get().diagram, id, newName)),
 
     addLine: (sourcePtId, targetPtId) => {
       const [d, id] = M.addLine(get().diagram, sourcePtId, targetPtId)
@@ -180,11 +172,7 @@ export const useStore = create<State>((set, get) => {
     },
     deleteLine: (lineId) => setCur(M.deleteLine(get().diagram, lineId)),
     deleteLineTarget: (lineId, idx) => setCur(M.deleteLineTarget(get().diagram, lineId, idx)),
-    renameLine: (oldId, newId) => {
-      const [d, ok] = M.renameLine(get().diagram, oldId, newId)
-      if (ok) setCur(d)
-      return ok
-    },
+    renameLine: (id, newName) => setCur(M.renameLine(get().diagram, id, newName)),
     attachLine: (lineId, end, parentId, slot, subslot) => {
       const [d, newPtId] = M.attachLine(get().diagram, lineId, end, parentId, slot, subslot)
       if (newPtId) setCur(d)
