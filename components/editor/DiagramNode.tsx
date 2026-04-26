@@ -232,6 +232,7 @@ function NodeBg({ body, frame, n, accent, fillOpacity, borderOpacity, selected }
   selected: boolean
 }) {
   const frameOffset = n / 2
+  // No pointerEvents:'none' — the frame-clipped container IS the drag surface; handles override via z-index.
   return (
     <div style={{
       position: 'absolute',
@@ -239,7 +240,6 @@ function NodeBg({ body, frame, n, accent, fillOpacity, borderOpacity, selected }
       top: -frameOffset,
       width: n + 2 * frameOffset,
       height: n + 2 * frameOffset,
-      pointerEvents: 'none',
       overflow: 'hidden',
       ...clipForFrameContainer(frame),
     }}>
