@@ -39,12 +39,12 @@ function parseHandle(handleId: string): { slot: Slot; subslot?: Subslot; index: 
   return { slot: parts[0] as Slot, index: parseInt(parts[1]) }
 }
 
-// (nodeId, handleId) → universal point id. "total-0" resolves to the shape's
-// own id; other handles look up the direct child point at the matching slot.
+// (nodeId, handleId) → universal point id. Pure schema-driven lookup —
+// every handle id (including total-0) resolves through the same enumeratePoints
+// walk; there is no special case for the "self" anywhere.
 function lookupPointId(d: Diagram, nodeId: string, handleId: string): string | undefined {
   const top = d.nodes.find((n) => n.id === nodeId)
   if (!top) return undefined
-  if (handleId === 'total-0') return top.id
   const { slot, subslot, index } = parseHandle(handleId)
   for (const e of enumeratePoints(top.kind, top.points)) {
     if (e.slot === slot && e.subslot === subslot && e.index === index) return e.point.id
@@ -66,11 +66,11 @@ function lookupShapeName(d: Diagram, id: string): string | undefined {
 }
 
 // Inverse: point id → (RF node id, handle id) for edge endpoint resolution.
-// Top-level shapes resolve to their own self-handle; nested points resolve via
-// findShape's path (only the last segment matters since handles only render for
-// direct children of top-level shapes).
+// Pure path-based lookup — only nested children resolve. A line endpoint that
+// references a top-level outer node id has no handle to render against (an
+// outer shape's identity is `points.total`, which is just one of its children
+// like any other slot); such endpoints fail to render.
 function pointIdToHandle(d: Diagram, pointId: string): { nodeId: string; handleId: string } | undefined {
-  if (d.nodes.some((n) => n.id === pointId)) return { nodeId: pointId, handleId: 'total-0' }
   const loc = findShape(d, pointId)
   if (!loc || loc.topContainer !== 'nodes' || loc.path.length === 0) return undefined
   const last = loc.path[loc.path.length - 1]
