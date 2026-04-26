@@ -9,7 +9,6 @@ import {
   PLUS_SMALL,
   ROW_HEIGHT,
   deriveFrame,
-  frameNWAnchor,
   geometryRegistry,
   type CanonicalBody,
   type CanonicalFrame,
@@ -469,60 +468,36 @@ function ShapeView({ data, selected }: NodeProps) {
   const fillOpacity = (selected ? theme.node.selectedFillOpacity : theme.node.fillOpacity) * geom.bodyOpacity
   const borderOpacity = (selected ? theme.node.selectedBorderOpacity : theme.node.borderOpacity) * geom.bodyOpacity
 
-  // Per-point handles + labels.
+  // Per-point handles + labels — every slot the schema enumerates, including
+  // `total`. The total slot is now a regular MaybePoint: when set it renders
+  // here like any other point; when unset it gets a plus button (below) like
+  // any other addable Maybe. No special-case rendering of shape.id/shape.name.
   const present = enumeratePoints(kind, shape.points)
-  const pointVisuals = present
-    .filter((e) => e.slot !== 'total')   // total is rendered specially below
-    .map((e) => {
-      const anchor = geom.pointAnchor(shape.points as never, e.slot, e.subslot, e.index, n)
-      if (!anchor) return null
-      const handleId = handleIdFor(e.slot, e.subslot, e.index)
-      const pid = e.point.id
-      return (
-        <span key={`pt-${pid}`}>
-          {renderLabel(pid, e.point.name, anchor, false)}
-          <BiHandle
-            position={anchor.position}
-            id={handleId}
-            style={{
-              ...pointDotStyle(accent, isSelected(pid)),
-              top: anchor.y,
-              left: anchor.x,
-              right: 'auto',
-              bottom: 'auto',
-              transform: 'translate(-50%, -50%)',
-            }}
-          />
-        </span>
-      )
-    })
-
-  // Self / "total" anchor — always rendered. The shape's `name` is the visible
-  // self-label; selection identity uses the immutable `id`. The handle id is
-  // "total-0". Anchors at the frame's NW corner when there's a visible frame
-  // outline to anchor to; collapses to body center when there isn't (points
-  // hidden, OR bodyOpacity=0 kinds like empty whose 2× frame is invisible).
-  const selfAnchor: SlotAnchor = (pointsVisible && geom.bodyOpacity > 0)
-    ? frameNWAnchor(geom.body, n)
-    : { x: n / 2, y: n / 2, position: Position.Top }
-  const selfBlock = (
-    <span key="self">
-      {renderLabel(shape.id, shape.name, selfAnchor, true)}
-      <BiHandle
-        position={Position.Top}
-        id="total-0"
-        className="total-handle"
-        style={{
-          ...pointDotStyle(accent, isSelected(shape.id)),
-          top: selfAnchor.y,
-          left: selfAnchor.x,
-          right: 'auto',
-          bottom: 'auto',
-          transform: 'translate(-50%, -50%)',
-        }}
-      />
-    </span>
-  )
+  const pointVisuals = present.map((e) => {
+    const anchor = geom.pointAnchor(shape.points as never, e.slot, e.subslot, e.index, n)
+    if (!anchor) return null
+    const handleId = handleIdFor(e.slot, e.subslot, e.index)
+    const pid = e.point.id
+    const isSelfTotal = e.slot === 'total'
+    return (
+      <span key={`pt-${pid}`}>
+        {renderLabel(pid, e.point.name, anchor, isSelfTotal)}
+        <BiHandle
+          position={anchor.position}
+          id={handleId}
+          className={isSelfTotal ? 'total-handle' : undefined}
+          style={{
+            ...pointDotStyle(accent, isSelected(pid)),
+            top: anchor.y,
+            left: anchor.x,
+            right: 'auto',
+            bottom: 'auto',
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
+      </span>
+    )
+  })
 
   // Plus buttons for addable slots — only visible when the shape is selected.
   const plusButtons = selected && enumerateAddable(kind, shape.points).map((e) => {
@@ -563,7 +538,6 @@ function ShapeView({ data, selected }: NodeProps) {
         borderOpacity={borderOpacity}
         selected={!!selected}
       />
-      {selfBlock}
       {pointVisuals}
       {plusButtons}
     </div>

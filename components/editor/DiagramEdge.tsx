@@ -9,6 +9,7 @@ import {
 } from '@xyflow/react'
 import theme, { selectionGlow } from './style/theme'
 import { useStore } from './store'
+import { geometryFor } from './geometry'
 
 interface EditableEdgeData {
   label: string
@@ -46,13 +47,15 @@ function EditableEdge({
 }: EdgeProps) {
   const d = data as unknown as EditableEdgeData
   const mode = useStore((s) => s.edgePath)
-  // Top-level empties carry handles that aren't oriented toward any side;
-  // boolean selectors stay primitive-equal across unrelated store changes.
-  const srcOnEmpty = useStore((s) =>
-    s.diagram.nodes.some((n) => n.kind === 'empty' && n.id === source),
+  // A top-level node whose kind has `framedHandles: false` (per its geometry)
+  // hosts handles that aren't oriented toward any side — edges to/from those
+  // endpoints orient dynamically toward the other end. Selectors stay
+  // primitive-equal across unrelated store changes.
+  const srcUnframed = useStore((s) =>
+    s.diagram.nodes.some((n) => n.id === source && !geometryFor(n.kind).framedHandles),
   )
-  const tgtOnEmpty = useStore((s) =>
-    s.diagram.nodes.some((n) => n.kind === 'empty' && n.id === target),
+  const tgtUnframed = useStore((s) =>
+    s.diagram.nodes.some((n) => n.id === target && !geometryFor(n.kind).framedHandles),
   )
 
   const effectiveSelected = selected
@@ -60,11 +63,11 @@ function EditableEdge({
   const [editText, setEditText] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
 
-  // Center-slot handles (no physical side) and all handles on empty carriers
-  // (which are just anchor dots, not oriented) get their Position recomputed
-  // per-edge so smoothstep routing exits on the side closest to the other end.
-  const srcIsDynamic = !!sourceHandleId?.startsWith('center-') || srcOnEmpty
-  const tgtIsDynamic = !!targetHandleId?.startsWith('center-') || tgtOnEmpty
+  // Center-slot handles (no physical side) and all handles on unframed carriers
+  // get their Position recomputed per-edge so smoothstep routing exits on the
+  // side closest to the other end.
+  const srcIsDynamic = !!sourceHandleId?.startsWith('center-') || srcUnframed
+  const tgtIsDynamic = !!targetHandleId?.startsWith('center-') || tgtUnframed
   const srcPos = srcIsDynamic ? dirPosition(targetX - sourceX, targetY - sourceY) : sourcePosition
   const tgtPos = tgtIsDynamic ? dirPosition(sourceX - targetX, sourceY - targetY) : targetPosition
 

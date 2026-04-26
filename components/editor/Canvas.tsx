@@ -21,7 +21,8 @@ import DiagramNode from './DiagramNode'
 import DiagramEdge from './DiagramEdge'
 import { useStore, initStore } from './store'
 import { useAutosave } from './save'
-import { enumerateAddable, enumeratePoints, findShape, getPointAt, slotSchema } from './points'
+import { enumerateAddable, enumeratePoints, findShape, getPointAt } from './points'
+import { geometryFor } from './geometry'
 import type { AnyShape, Diagram, ShapeKind, Slot, Subslot } from './types'
 import theme, { panelStyle, glassBlur } from './style/theme'
 
@@ -79,20 +80,11 @@ function pointIdToHandle(d: Diagram, pointId: string): { nodeId: string; handleI
   }
 }
 
-// Resolve a drop's subslot from cursor's vertical position. Triad slots have
-// 3 subslots (down/center/up); non-triad slots have none. The rhombus and
-// rectangle left/right rules predate this generalization and are preserved
-// as-is. The new branch handles triad center slots (rhombus/circle/rectangle)
-// uniformly via schema lookup — no per-kind list maintenance.
+// Resolve a drop's subslot from cursor's vertical position. Per-kind rules
+// live in `geometry.dropSubslot` as DATA — Canvas reads from the registry,
+// no kind-name switching here.
 function resolveDropSubslot(kind: ShapeKind, slot: Slot, ry: number): Subslot | undefined {
-  if (kind === 'rhombus' && (slot === 'left' || slot === 'right')) return ry < 0.5 ? 'up' : 'down'
-  if (kind === 'rectangle' && (slot === 'left' || slot === 'right')) return 'center'
-  if (slot === 'center' && slotSchema(kind, 'center').type === 'triad') {
-    if (ry < 1 / 3) return 'up'
-    if (ry > 2 / 3) return 'down'
-    return 'center'
-  }
-  return undefined
+  return geometryFor(kind).dropSubslot(slot, ry)
 }
 
 // Pick a drop's (slot, subslot) on `shape` from cursor (rx, ry) ∈ [0,1]².
@@ -399,10 +391,12 @@ function Canvas() {
       // Dropped on empty space → either extend existing line or create a new
       // line with a free-end empty carrier. Both paths inherit the source's name.
       if (existingLine) {
-        // Extending a line: spawn an empty (the empty IS the point — no extra
-        // child point auto-created) and target it directly via its self-handle.
-        const emptyId = addEmpty([position.x, position.y], attachedName)
-        addLineTarget(existingLine.id, emptyId)
+        // Extending a line: drop-spawn an empty carrier and attach the new
+        // target to its center (the empty's outer id is no longer a renderable
+        // handle, so a real center child is the connection target).
+        const emptyId = addEmpty([position.x, position.y])
+        const newPtId = addPoint(emptyId, 'center', undefined, attachedName)
+        if (newPtId) addLineTarget(existingLine.id, newPtId)
       } else {
         const freeRole: 'source' | 'target' = fromType === 'target' ? 'source' : 'target'
         addLineWithFreeEnd(attachedPtId, freeRole, [position.x, position.y])

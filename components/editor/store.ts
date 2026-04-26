@@ -41,8 +41,8 @@ interface State {
   toggleSelectedPoint: (pt: SelectedPoint) => void
 
   // === Mutations ===
-  addNode: (kind: ShapeKind, position: [number, number], name?: string) => string
-  addEmpty: (position: [number, number], name?: string) => string
+  addNode: (kind: ShapeKind, position: [number, number]) => string
+  addEmpty: (position: [number, number]) => string
   deleteNode: (id: string) => void
   renameNode: (id: string, newName: string) => void
 
@@ -138,13 +138,13 @@ export const useStore = create<State>((set, get) => {
       })
     },
 
-    addNode: (kind, position, name) => {
-      const [d, id] = M.addNode(get().diagram, kind, position, name)
+    addNode: (kind, position) => {
+      const [d, id] = M.addNode(get().diagram, kind, position)
       setCur(d)
       return id
     },
-    addEmpty: (position, name) => {
-      const [d, id] = M.addEmpty(get().diagram, position, name)
+    addEmpty: (position) => {
+      const [d, id] = M.addEmpty(get().diagram, position)
       setCur(d)
       return id
     },

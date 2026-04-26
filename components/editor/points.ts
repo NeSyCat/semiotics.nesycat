@@ -105,7 +105,6 @@ export function enumerateAddable(kind: ShapeKind, points: ShapePoints[ShapeKind]
   const out: AddableEntry[] = []
   const p = points as Record<Slot, unknown>
   for (const slot of SLOTS) {
-    if (slot === 'total') continue                      // total is auto-managed (the shape itself)
     const sch = SCHEMAS[kind][slot]
     const v = p[slot]
     if (sch.type === 'maybe') {

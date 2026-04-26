@@ -14,6 +14,7 @@ import {
 import { newLineId, newNodeId, newPointId } from './ids'
 import { defaultSpaceTime, withTranslation } from './transform'
 import { DEFAULT_COLOR } from './color'
+import { geometryFor } from './geometry'
 import { restoreDiagram } from './migrations'
 
 // === Constructors ===
@@ -87,15 +88,14 @@ export function addNode(
   d: Diagram,
   kind: ShapeKind,
   position: [number, number] = [0, 0],
-  name?: string,
 ): [Diagram, string] {
   const id = newNodeId(d)
-  const node = makeShape(kind, id, position, d.nodes.length + 1, name ?? id)
+  const node = makeShape(kind, id, position, d.nodes.length + 1)
   return [{ ...d, nodes: [...d.nodes, node] }, id]
 }
 
-export function addEmpty(d: Diagram, position: [number, number] = [0, 0], name?: string): [Diagram, string] {
-  return addNode(d, 'empty', position, name)
+export function addEmpty(d: Diagram, position: [number, number] = [0, 0]): [Diagram, string] {
+  return addNode(d, 'empty', position)
 }
 
 export function deleteNode(d: Diagram, id: string): Diagram {
@@ -265,12 +265,11 @@ export function renameLine(d: Diagram, id: string, newName: string): Diagram {
   return renameShape(d, id, newName)
 }
 
-// Create a free-floating empty carrier and a line connecting it to `anchorPtId`.
-// `freeRole` says which end of the line the free point becomes. The empty
-// inherits the anchor's `name` so both ends of the line display the same label
-// (semiotic intent: same name = same referent). The empty IS a point — its own
-// id (resolved as the "total-0" self-handle) is the line endpoint, so no extra
-// child point is auto-created.
+// Create a free-floating empty carrier with one center child and a line
+// connecting it to `anchorPtId`. The empty's `center` is the line endpoint
+// (an empty's outer id is no longer a renderable handle since selfBlock died);
+// the new center child inherits the anchor's `name` so both ends of the line
+// display the same label (semiotic intent: same name = same referent).
 export function addLineWithFreeEnd(
   d: Diagram,
   anchorPtId: string,
@@ -278,10 +277,12 @@ export function addLineWithFreeEnd(
   emptyPosition: [number, number],
 ): [Diagram, { emptyId: string; lineId: string }] {
   const anchorName = findShapeName(d, anchorPtId)
-  const [d1, emptyId] = addEmpty(d, emptyPosition, anchorName)
-  const [source, target] = freeRole === 'source' ? [emptyId, anchorPtId] : [anchorPtId, emptyId]
-  const [d2, lineId] = addLine(d1, source, target)
-  return [d2, { emptyId, lineId }]
+  const [d1, emptyId] = addEmpty(d, emptyPosition)
+  const [d2, freePtId] = addPoint(d1, emptyId, 'center', undefined, anchorName)
+  if (!freePtId) return [d, { emptyId: '', lineId: '' }]
+  const [source, target] = freeRole === 'source' ? [freePtId, anchorPtId] : [anchorPtId, freePtId]
+  const [d3, lineId] = addLine(d2, source, target)
+  return [d3, { emptyId, lineId }]
 }
 
 // Resolve a point id → its current `name` (used when a new endpoint should
@@ -340,11 +341,13 @@ export function attachLine(
   // Drop the now-stale old point (also prunes any other lines that touched it).
   let d3 = removePoint(d2, oldPtId)
 
-  // Orphaned-empty cleanup: if the old point lived in an empty node and that
-  // node now has no remaining inner points, drop the carrier.
+  // Orphaned-carrier cleanup: if the old point lived in a top-level node whose
+  // kind is flagged as a transient carrier (geom.cleanupWhenInnerEmpty) and
+  // that node now has no remaining inner points, drop the carrier. Per-kind
+  // DATA in geometry.ts decides — no kind-name switching here.
   if (oldTopId) {
     const top = d3.nodes.find((n) => n.id === oldTopId)
-    if (top && top.kind === 'empty') {
+    if (top && geometryFor(top.kind).cleanupWhenInnerEmpty) {
       let hasInner = false
       for (const inner of walkShape(top)) {
         if (inner.id !== top.id) {

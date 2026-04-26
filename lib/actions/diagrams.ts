@@ -76,7 +76,7 @@ export async function renameDiagram(id: string, title: string): Promise<void> {
 }
 
 const emptyData: Diagram = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   nodes: [],
   edges: [],
 }
