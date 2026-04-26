@@ -14,6 +14,7 @@ import {
   type SlotAnchor,
 } from './geometry'
 import { enumerateAddable, enumeratePoints, walkShape } from './points'
+import { handleIdFor } from './handles'
 import { toRgbTriple } from './color'
 import { useStore } from './store'
 import type { AnyShape, ShapeKind, Slot, Subslot } from './types'
@@ -261,11 +262,6 @@ function NodeBg({ body, frame, n, accent, fillOpacity, borderOpacity, selected }
       </div>
     </div>
   )
-}
-
-// Build handle id from slot/subslot/index. Mirrors the OLD parseHandle grammar.
-function handleIdFor(slot: Slot, subslot: Subslot | undefined, index: number): string {
-  return subslot ? `${slot}-${subslot}-${index}` : `${slot}-${index}`
 }
 
 // Position-driven label CSS — places the label external to the body, oriented

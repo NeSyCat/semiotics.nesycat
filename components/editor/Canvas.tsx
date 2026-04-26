@@ -22,22 +22,13 @@ import DiagramEdge from './DiagramEdge'
 import { useStore, initStore } from './store'
 import { useAutosave } from './save'
 import { enumerateAddable, enumeratePoints, findShape, getPointAt } from './points'
-import { geometryFor } from './geometry'
+import { geometryFor, geometryRegistry } from './geometry'
+import { handleIdFor, parseHandle } from './handles'
 import { SLOTS, type AnyShape, type Diagram, type ShapeKind, type Slot, type Subslot } from './types'
 import theme, { panelStyle, glassBlur } from './style/theme'
 
 const nodeTypes: NodeTypes = { node: DiagramNode }
 const edgeTypes: EdgeTypes = { editable: DiagramEdge }
-
-// Handle id grammar (mirrors DiagramNode's `handleIdFor`):
-//   "total-0"                  → self anchor (the shape itself)
-//   "${slot}-${index}"         → list/maybe slot (slot ∈ Slot)
-//   "${slot}-${subslot}-${idx}"→ triadic slot
-function parseHandle(handleId: string): { slot: Slot; subslot?: Subslot; index: number } {
-  const parts = handleId.split('-')
-  if (parts.length === 3) return { slot: parts[0] as Slot, subslot: parts[1] as Subslot, index: parseInt(parts[2]) }
-  return { slot: parts[0] as Slot, index: parseInt(parts[1]) }
-}
 
 // (nodeId, handleId) → universal point id. Pure schema-driven lookup —
 // every handle id (including total-0) resolves through the same enumeratePoints
@@ -76,7 +67,7 @@ function pointIdToHandle(d: Diagram, pointId: string): { nodeId: string; handleI
   const last = loc.path[loc.path.length - 1]
   return {
     nodeId: loc.topShape.id,
-    handleId: last.subslot ? `${last.slot}-${last.subslot}-${last.index}` : `${last.slot}-${last.index}`,
+    handleId: handleIdFor(last.slot, last.subslot, last.index),
   }
 }
 
@@ -491,17 +482,28 @@ function Canvas() {
       if (now - lastPaneClickRef.current < 350) {
         const position = screenToFlowPosition({ x: event.clientX, y: event.clientY })
         const xy: [number, number] = [position.x, position.y]
-        if (event.metaKey || event.ctrlKey) addNode('rectangle', xy)
-        else if (event.shiftKey)             addNode('rhombus',   xy)
-        else if (event.altKey)               addNode('triangle',  xy)
-        else if (spaceHeldRef.current)       addNode('circle',    xy)
-        else                                  addEmpty(xy)
+        // Schema-driven kind dispatch: walk the geometry registry sorted by
+        // hotkey priority (highest first) and pick the first kind whose
+        // hotkey.test matches the current modifier state. Empty's test is
+        // a catch-all (priority 0), so it always wins as the fallback.
+        const mods = {
+          meta: event.metaKey, ctrl: event.ctrlKey, shift: event.shiftKey,
+          alt: event.altKey, space: spaceHeldRef.current,
+        }
+        const sorted = (Object.entries(geometryRegistry) as Array<[ShapeKind, typeof geometryRegistry[ShapeKind]]>)
+          .sort(([, a], [, b]) => b.hotkey.priority - a.hotkey.priority)
+        for (const [kind, geom] of sorted) {
+          if (geom.hotkey.test(mods)) {
+            addNode(kind, xy)
+            break
+          }
+        }
         lastPaneClickRef.current = 0
         return
       }
       lastPaneClickRef.current = now
     },
-    [screenToFlowPosition, addNode, addEmpty, clearSelectedPoints]
+    [screenToFlowPosition, addNode, clearSelectedPoints]
   )
 
   useEffect(() => {
@@ -611,13 +613,14 @@ function Canvas() {
           {kindsOpen && (
             <div style={{ position: 'absolute', top: '100%', left: 0, paddingTop: 6 }}>
               <div style={{ ...panelStyle(), borderRadius: 8, padding: '6px 6px', minWidth: 220 }}>
-                <KindRow label="Empties" on={visibility.empty} onToggle={() => toggleVisibility('empty')} shortcut={['2×']} />
+                {/* Per-kind toggles iterate the geometry registry — adding a
+                    new kind to types.ts auto-extends this menu. */}
+                {(Object.entries(geometryRegistry) as Array<[ShapeKind, typeof geometryRegistry[ShapeKind]]>).map(([kind, geom]) => (
+                  <KindRow key={kind} label={geom.displayName} on={visibility[kind]} onToggle={() => toggleVisibility(kind)} shortcut={geom.hotkey.hint} />
+                ))}
+                {/* Orthogonal toggles — apply across every kind. */}
                 <KindRow label="Points" on={visibility.points} onToggle={() => toggleVisibility('points')} shortcut={['click +']} />
                 <KindRow label="Lines" on={visibility.lines} onToggle={() => toggleVisibility('lines')} shortcut={['drag ○→○']} />
-                <KindRow label="Triangles" on={visibility.triangle} onToggle={() => toggleVisibility('triangle')} shortcut={['Alt/⌥', '2×']} />
-                <KindRow label="Rhombuses" on={visibility.rhombus} onToggle={() => toggleVisibility('rhombus')} shortcut={['⇧', '2×']} />
-                <KindRow label="Circles" on={visibility.circle} onToggle={() => toggleVisibility('circle')} shortcut={['␣', '2×']} />
-                <KindRow label="Rectangles" on={visibility.rectangle} onToggle={() => toggleVisibility('rectangle')} shortcut={['Ctrl/⌘', '2×']} />
               </div>
             </div>
           )}

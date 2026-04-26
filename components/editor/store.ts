@@ -1,19 +1,14 @@
 import { create } from 'zustand'
 import type { Diagram, ShapeKind, Slot, Subslot } from './types'
+import { geometryRegistry } from './geometry'
 import * as M from './mutations'
 
 const MAX_HISTORY = 100
 
-// One toggle per ShapeKind, plus orthogonal points/lines toggles.
-export interface Visibility {
-  points: boolean
-  lines: boolean
-  triangle: boolean
-  rectangle: boolean
-  circle: boolean
-  rhombus: boolean
-  empty: boolean
-}
+// One toggle per ShapeKind, plus orthogonal points/lines toggles. The per-kind
+// keys derive from ShapeKind via the geometry registry — adding a new kind
+// extends Visibility automatically.
+export type Visibility = { points: boolean; lines: boolean } & { [K in ShapeKind]: boolean }
 
 export interface SelectedPoint {
   // Universal point id; identity is global, no node-context needed.
@@ -81,11 +76,9 @@ const emptyDiagram: Diagram = { schemaVersion: 1, nodes: [], edges: [] }
 const defaultVis: Visibility = {
   points: true,
   lines: true,
-  triangle: true,
-  rectangle: true,
-  circle: true,
-  rhombus: true,
-  empty: true,
+  ...(Object.fromEntries(
+    (Object.keys(geometryRegistry) as ShapeKind[]).map((k) => [k, true]),
+  ) as { [K in ShapeKind]: boolean }),
 }
 
 export const useStore = create<State>((set, get) => {

@@ -11,7 +11,7 @@ import theme, { selectionGlow } from './style/theme'
 import { useStore } from './store'
 import { geometryFor } from './geometry'
 import { SLOT_AXIAL } from './points'
-import type { Slot } from './types'
+import { parseHandle } from './handles'
 
 interface EditableEdgeData {
   label: string
@@ -33,13 +33,12 @@ function dirPosition(dx: number, dy: number): Position {
 
 // Whether a handle's Position should be recomputed dynamically per-edge.
 // True when the source kind has no framed handles (carriers like empty), OR
-// when the slot is non-axial (center / total — no physical side). Reads slot
-// from the canonical handle-id grammar (`slot-...`), per SLOT_AXIAL data.
+// when the slot is non-axial (center / total — no physical side). Reads the
+// slot via the canonical handles.parseHandle grammar; consults SLOT_AXIAL.
 function handleIsDynamic(handleId: string | null | undefined, kindUnframed: boolean): boolean {
   if (kindUnframed) return true
   if (!handleId) return false
-  const slot = handleId.split('-')[0] as Slot
-  return SLOT_AXIAL[slot] === false
+  return SLOT_AXIAL[parseHandle(handleId).slot] === false
 }
 
 function EditableEdge({

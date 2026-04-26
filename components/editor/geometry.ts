@@ -149,6 +149,27 @@ export interface ShapeGeometry<K extends ShapeKind> {
   // bridge identity with the outer (rename propagation through referent BFS).
   // False for kinds whose body itself is meaningful (triangle, circle, etc.).
   isCarrier: boolean
+  // Plural label shown in the Kinds visibility menu.
+  displayName: string
+  // Keyboard hotkey for double-click create. `test` decides whether the
+  // current modifier state matches; `priority` orders dispatch (highest wins
+  // when multiple kinds match, e.g. Ctrl+Shift would resolve to whichever has
+  // higher priority); `hint` is rendered in the Kinds menu next to the label.
+  hotkey: {
+    test: (mods: HotkeyMods) => boolean
+    hint: string[]
+    priority: number
+  }
+}
+
+// Modifier-state snapshot passed to each kind's hotkey.test for keyboard
+// dispatch. Sourced from a React.MouseEvent + a separate spaceHeld ref.
+export interface HotkeyMods {
+  meta: boolean
+  ctrl: boolean
+  shift: boolean
+  alt: boolean
+  space: boolean
 }
 
 // === Per-slot length helpers ===
@@ -247,6 +268,8 @@ const emptyGeometry: ShapeGeometry<'empty'> = {
   framedHandles: false,
   dropSubslot: defaultDropSubslot('empty'),
   isCarrier: true,
+  displayName: 'Empties',
+  hotkey: { test: () => true, hint: ['2×'], priority: 0 },
 }
 
 // === TRIANGLE (apex up) ===
@@ -303,6 +326,8 @@ const triangleGeometry: ShapeGeometry<'triangle'> = {
   framedHandles: true,
   dropSubslot: defaultDropSubslot('triangle'),
   isCarrier: false,
+  displayName: 'Triangles',
+  hotkey: { test: (m) => m.alt, hint: ['Alt/⌥', '2×'], priority: 3 },
 }
 
 // === RHOMBUS ===
@@ -404,6 +429,8 @@ const rhombusGeometry: ShapeGeometry<'rhombus'> = {
     return undefined
   },
   isCarrier: false,
+  displayName: 'Rhombuses',
+  hotkey: { test: (m) => m.shift, hint: ['⇧', '2×'], priority: 4 },
 }
 
 // === CIRCLE ===
@@ -452,6 +479,8 @@ const circleGeometry: ShapeGeometry<'circle'> = {
   framedHandles: true,
   dropSubslot: defaultDropSubslot('circle'),
   isCarrier: false,
+  displayName: 'Circles',
+  hotkey: { test: (m) => m.space, hint: ['␣', '2×'], priority: 2 },
 }
 
 // === RECTANGLE ===
@@ -540,6 +569,8 @@ const rectangleGeometry: ShapeGeometry<'rectangle'> = {
     return undefined
   },
   isCarrier: false,
+  displayName: 'Rectangles',
+  hotkey: { test: (m) => m.meta || m.ctrl, hint: ['Ctrl/⌘', '2×'], priority: 5 },
 }
 
 // === Registry ===
