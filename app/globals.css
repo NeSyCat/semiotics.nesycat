@@ -137,20 +137,15 @@ body {
   stroke-width: 20px !important;
 }
 
-/* Native search-input clear button — grey X to match sidebar text instead of system blue. */
-input[type="search"]::-webkit-search-cancel-button {
+/* Kill all native search-input affordances (Webkit's blue clear button etc.);
+   we render a custom clear button so the styling is fully ours. */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
   -webkit-appearance: none;
   appearance: none;
-  width: 14px;
-  height: 14px;
-  cursor: pointer;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.55)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><line x1='18' y1='6' x2='6' y2='18'/><line x1='6' y1='6' x2='18' y2='18'/></svg>");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-}
-input[type="search"]::-webkit-search-cancel-button:hover {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.8)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><line x1='18' y1='6' x2='6' y2='18'/><line x1='6' y1='6' x2='18' y2='18'/></svg>");
+  display: none;
 }
 
 /* GPU-promote animated edge paths to prevent stutter from node repaints */

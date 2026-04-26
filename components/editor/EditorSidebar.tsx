@@ -333,20 +333,36 @@ export default function EditorSidebar({ diagrams }: { diagrams: Diagram[] }) {
           </Link>
 
           <div className="px-3 pt-3 flex items-center gap-2">
-            <input
-              type="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search…"
-              aria-label="Search diagrams"
-              className="min-w-0 flex-1 rounded-md border px-3 text-[13px] outline-none"
-              style={{
-                height: 36,
-                borderColor: 'var(--color-glass-border)',
-                background: 'var(--color-glass-button-bg)',
-                color: 'var(--color-text-primary)',
-              }}
-            />
+            <div className="relative min-w-0 flex-1">
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search…"
+                aria-label="Search diagrams"
+                className="w-full rounded-md border text-[13px] outline-none"
+                style={{
+                  height: 36,
+                  paddingLeft: 12,
+                  paddingRight: query ? 32 : 12,
+                  borderColor: 'var(--color-glass-border)',
+                  background: 'var(--color-glass-button-bg)',
+                  color: 'var(--color-text-primary)',
+                }}
+              />
+              {query && (
+                <button
+                  type="button"
+                  aria-label="Clear search"
+                  title="Clear search"
+                  onClick={() => setQuery('')}
+                  className="absolute right-1 top-1/2 -translate-y-1/2 flex items-center justify-center rounded hover:bg-white/10"
+                  style={{ width: 24, height: 24, color: 'var(--color-text-muted)' }}
+                >
+                  <XIcon />
+                </button>
+              )}
+            </div>
             <button
               type="button"
               onClick={onCreate}
