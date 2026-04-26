@@ -170,12 +170,34 @@ function Canvas() {
     const reader = new FileReader()
     reader.onload = () => {
       try {
-        importDiagram(JSON.parse(reader.result as string))
+        const parsed = JSON.parse(reader.result as string)
+        // Accept either a raw Diagram or a backup-wrapper { id, data, … } as
+        // produced by scripts/backup-diagrams.ts (issue #16). Unwrap if needed.
+        const payload =
+          parsed && typeof parsed === 'object' && 'data' in parsed && parsed.data && typeof parsed.data === 'object'
+            ? parsed.data
+            : parsed
+        importDiagram(payload)
       } catch (err) {
         alert('Invalid JSON: ' + (err as Error).message)
       }
     }
     reader.readAsText(file)
+  }
+
+  // Drag-and-drop a diagram JSON onto the canvas to load it (read-only verify
+  // path for issue #16; remove with the rest of the legacy converter in Phase E).
+  function onCanvasDragOver(e: React.DragEvent) {
+    if (e.dataTransfer.types.includes('Files')) {
+      e.preventDefault()
+      e.dataTransfer.dropEffect = 'copy'
+    }
+  }
+  function onCanvasDrop(e: React.DragEvent) {
+    const file = e.dataTransfer.files[0]
+    if (!file) return
+    e.preventDefault()
+    importJSON(file)
   }
 
   // ===== Build nodes from abstract diagram =====
@@ -573,6 +595,8 @@ function Canvas() {
         onEdgeClick={onEdgeClick}
         onPaneClick={onPaneClick}
         onNodesDelete={onNodesDelete}
+        onDragOver={onCanvasDragOver}
+        onDrop={onCanvasDrop}
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         deleteKeyCode={['Delete', 'Backspace']}
