@@ -399,11 +399,10 @@ function Canvas() {
       // Dropped on empty space → either extend existing line or create a new
       // line with a free-end empty carrier. Both paths inherit the source's name.
       if (existingLine) {
-        // Extending a line: drop-spawn a single-point empty carrier and
-        // attach a new target at its center (the empty's identity point).
-        const emptyId = addEmpty([position.x, position.y])
-        const newPtId = addPoint(emptyId, 'center', undefined, attachedName)
-        if (newPtId) addLineTarget(existingLine.id, newPtId)
+        // Extending a line: spawn an empty (the empty IS the point — no extra
+        // child point auto-created) and target it directly via its self-handle.
+        const emptyId = addEmpty([position.x, position.y], attachedName)
+        addLineTarget(existingLine.id, emptyId)
       } else {
         const freeRole: 'source' | 'target' = fromType === 'target' ? 'source' : 'target'
         addLineWithFreeEnd(attachedPtId, freeRole, [position.x, position.y])
