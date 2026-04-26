@@ -359,7 +359,7 @@ export default function EditorSidebar({ diagrams }: { diagrams: Diagram[] }) {
                 height: 36,
                 borderColor: 'var(--color-glass-border)',
                 background: 'var(--color-glass-button-bg)',
-                color: 'var(--color-text-primary)',
+                color: 'var(--color-text-muted)',
               }}
             >
               {creating ? <Spinner /> : '+'}
