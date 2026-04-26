@@ -46,7 +46,14 @@ function EditableEdge({
 }: EdgeProps) {
   const d = data as unknown as EditableEdgeData
   const mode = useStore((s) => s.edgePath)
-  const emptyIds = useStore((s) => s.diagram.empties)
+  // Top-level empties carry handles that aren't oriented toward any side;
+  // boolean selectors stay primitive-equal across unrelated store changes.
+  const srcOnEmpty = useStore((s) =>
+    s.diagram.nodes.some((n) => n.kind === 'empty' && n.id === source),
+  )
+  const tgtOnEmpty = useStore((s) =>
+    s.diagram.nodes.some((n) => n.kind === 'empty' && n.id === target),
+  )
 
   const effectiveSelected = selected
   const [editing, setEditing] = useState(false)
@@ -56,8 +63,6 @@ function EditableEdge({
   // Center-slot handles (no physical side) and all handles on empty carriers
   // (which are just anchor dots, not oriented) get their Position recomputed
   // per-edge so smoothstep routing exits on the side closest to the other end.
-  const srcOnEmpty = emptyIds.some((e) => e.id === source)
-  const tgtOnEmpty = emptyIds.some((e) => e.id === target)
   const srcIsDynamic = !!sourceHandleId?.startsWith('center-') || srcOnEmpty
   const tgtIsDynamic = !!targetHandleId?.startsWith('center-') || tgtOnEmpty
   const srcPos = srcIsDynamic ? dirPosition(targetX - sourceX, targetY - sourceY) : sourcePosition

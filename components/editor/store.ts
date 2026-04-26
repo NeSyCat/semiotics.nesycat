@@ -1,41 +1,37 @@
 import { create } from 'zustand'
-import type { DiagramData, DiagramPoint, XY } from './types'
+import type { Diagram, ShapeKind, Slot, Subslot } from './types'
 import * as M from './mutations'
 
 const MAX_HISTORY = 100
 
+// One toggle per ShapeKind, plus orthogonal points/lines toggles.
 export interface Visibility {
   points: boolean
   lines: boolean
-  triangles: boolean
-  rectangles: boolean
-  circles: boolean
-  rhombuses: boolean
-  empties: boolean
+  triangle: boolean
+  rectangle: boolean
+  circle: boolean
+  rhombus: boolean
+  empty: boolean
 }
 
 export interface SelectedPoint {
-  pointName: string  // display label — identity comes from container context
-  container: string  // "${nodeId}|${handleId}" e.g. "R1|right-0", "D1|left-down-0", "E1|right-0"
+  // Universal point id; identity is global, no node-context needed.
+  pointId: string
 }
 
 export type EdgePathMode = 'straight' | 'smoothstep'
 
-type Side = 'left' | 'right'
-type NodeSide = 'left' | 'right' | 'center' | 'down' | 'up' | 'total'
-type Slot = 'down' | 'center' | 'up'
-export type NodeKind = 'triangle' | 'rectangle' | 'circle' | 'rhombus' | 'empty'
-
 interface State {
   visibility: Visibility
-  diagram: DiagramData
+  diagram: Diagram
   selectedPoints: SelectedPoint[]
   pointsExclusive: boolean
   edgePath: EdgePathMode
   toggleEdgePath: () => void
 
   // Undo/redo
-  history: DiagramData[]
+  history: Diagram[]
   historyIndex: number
   undo: () => void
   redo: () => void
@@ -44,35 +40,56 @@ interface State {
   setSelectedPoints: (pts: SelectedPoint[], exclusive: boolean) => void
   toggleSelectedPoint: (pt: SelectedPoint) => void
 
-  addPoint: (nodeName: string, side: NodeSide, label?: string, slot?: Slot) => number
-  removePointOnNode: (nodeName: string, side: NodeSide, index: number, slot?: Slot) => void
-  attachPoint: (lineName: string, end: M.LineEnd, nodeName: string, side: Side | 'up' | 'down', slot?: Slot) => number
-  setPointLabel: (nodeName: string, side: NodeSide, index: number, label: string, slot?: Slot) => void
+  // === Mutations ===
+  addNode: (kind: ShapeKind, position: [number, number]) => string
+  addEmpty: (position: [number, number]) => string
+  deleteNode: (id: string) => void
+  renameNode: (id: string, newName: string) => void
 
-  addLine: (source: DiagramPoint, target: DiagramPoint) => string
-  addLineTarget: (lineName: string, target: DiagramPoint) => void
-  addLineWithFreeEnd: (anchor: DiagramPoint, freeRole: 'source' | 'target', emptyPosition: XY) => { emptyName: string; lineName: string }
-  deleteLine: (name: string) => void
-  deleteLineTarget: (lineName: string, index: number) => void
-  renameLine: (oldName: string, newName: string) => boolean
+  addPoint: (parentId: string, slot: Slot, subslot?: Subslot, name?: string) => string
+  removePoint: (pointId: string) => void
+  renamePoint: (id: string, newName: string) => void
 
-  importDiagram: (d: DiagramData) => void
-
-  addNode: (kind: Exclude<NodeKind, 'empty'>, position: XY, name?: string) => string
-  addEmpty: (position: XY, side?: Side, label?: string, name?: string) => string
-  deleteNode: (kind: NodeKind, name: string) => void
-  renameNode: (kind: NodeKind, oldName: string, newName: string) => boolean
+  addLine: (sourcePtId: string, targetPtId: string) => string
+  addLineTarget: (lineId: string, targetPtId: string) => void
+  addLineWithFreeEnd: (
+    anchorPtId: string,
+    freeRole: 'source' | 'target',
+    position: [number, number],
+  ) => { emptyId: string; lineId: string }
+  deleteLine: (lineId: string) => void
+  deleteLineTarget: (lineId: string, idx: number) => void
+  renameLine: (id: string, newName: string) => void
+  attachLine: (
+    lineId: string,
+    end: M.LineEnd,
+    parentId: string,
+    slot: Slot,
+    subslot?: Subslot,
+  ) => string
 
   // One commit per drag session (one history entry).
-  updateNodePosition: (nodeName: string, position: XY) => void
-  updateNodePositions: (updates: Array<{ id: string; position: XY }>) => void
+  updateNodeTranslation: (nodeId: string, translation: [number, number]) => void
+  updateNodeTranslations: (
+    updates: Array<{ id: string; translation: [number, number] }>,
+  ) => void
+
+  importDiagram: (raw: unknown) => void
 }
 
-const emptyDiagram: DiagramData = { empties: [], lines: [], triangles: [], rhombuses: [], circles: [], rectangles: [] }
-const defaultVis: Visibility = { points: true, lines: true, triangles: true, rectangles: true, circles: true, rhombuses: true, empties: true }
+const emptyDiagram: Diagram = { schemaVersion: 1, nodes: [], edges: [] }
+const defaultVis: Visibility = {
+  points: true,
+  lines: true,
+  triangle: true,
+  rectangle: true,
+  circle: true,
+  rhombus: true,
+  empty: true,
+}
 
 export const useStore = create<State>((set, get) => {
-  const setCur = (updated: DiagramData) => {
+  const setCur = (updated: Diagram) => {
     const { history, historyIndex } = get()
     const newHistory = [...history.slice(0, historyIndex + 1), updated].slice(-MAX_HISTORY)
     set({ diagram: updated, history: newHistory, historyIndex: newHistory.length - 1 })
@@ -104,75 +121,73 @@ export const useStore = create<State>((set, get) => {
       set({ diagram: next, historyIndex: historyIndex + 1 })
     },
 
-    toggleVisibility: (kind) => { const v = { ...get().visibility, [kind]: !get().visibility[kind] }; set({ visibility: v }) },
+    toggleVisibility: (kind) => {
+      const v = { ...get().visibility, [kind]: !get().visibility[kind] }
+      set({ visibility: v })
+    },
     setSelectedPoints: (pts, exclusive) => {
       if (pts.length === 0 && get().selectedPoints.length === 0) return
       set({ selectedPoints: pts, pointsExclusive: exclusive })
     },
     toggleSelectedPoint: (pt) => {
       const c = get().selectedPoints
-      const exists = c.some((p) => p.container === pt.container)
-      set({ selectedPoints: exists ? c.filter((p) => p.container !== pt.container) : [...c, pt], pointsExclusive: false })
+      const exists = c.some((p) => p.pointId === pt.pointId)
+      set({
+        selectedPoints: exists ? c.filter((p) => p.pointId !== pt.pointId) : [...c, pt],
+        pointsExclusive: false,
+      })
     },
 
-    addPoint: (nodeName, side, label, slot) => { const [d, idx] = M.addPoint(get().diagram, nodeName, side, label, slot); setCur(d); return idx },
-    removePointOnNode: (nodeName, side, index, slot) => setCur(M.removePointOnNode(get().diagram, nodeName, side, index, slot)),
-    attachPoint: (lineName, end, nodeName, side, slot) => { const [d, idx] = M.attachPoint(get().diagram, lineName, end, nodeName, side, slot); setCur(d); return idx },
-    setPointLabel: (nodeName, side, index, label, slot) => setCur(M.setPointLabel(get().diagram, nodeName, side, index, label, slot)),
-
-    addLine: (source, target) => { const [d, n] = M.addLine(get().diagram, source, target); setCur(d); return n },
-    addLineTarget: (lineName, target) => setCur(M.addLineTarget(get().diagram, lineName, target)),
-    addLineWithFreeEnd: (anchor, freeRole, emptyPosition) => { const [d, r] = M.addLineWithFreeEnd(get().diagram, anchor, freeRole, emptyPosition); setCur(d); return r },
-    deleteLine: (name) => setCur(M.deleteLine(get().diagram, name)),
-    deleteLineTarget: (lineName, index) => setCur(M.deleteLineTarget(get().diagram, lineName, index)),
-    renameLine: (oldName, newName) => { const [d, ok] = M.renameLine(get().diagram, oldName, newName); if (ok) setCur(d); return ok },
-
-    importDiagram: (d) => setCur({ ...emptyDiagram, ...d }),
-
-    addNode: (kind, position, name) => {
-      const add = { triangle: M.addTriangle, rectangle: M.addRectangle, circle: M.addCircle, rhombus: M.addRhombus }[kind]
-      const [d, n] = add(get().diagram, position, name); setCur(d); return n
+    addNode: (kind, position) => {
+      const [d, id] = M.addNode(get().diagram, kind, position)
+      setCur(d)
+      return id
     },
-    addEmpty: (position, side, label, name) => { const [d, n] = M.addEmpty(get().diagram, position, side, label, name); setCur(d); return n },
-    deleteNode: (kind, name) => {
-      const del = { triangle: M.deleteTriangle, rectangle: M.deleteRectangle, circle: M.deleteCircle, rhombus: M.deleteRhombus, empty: M.deleteEmpty }[kind]
-      setCur(del(get().diagram, name))
+    addEmpty: (position) => {
+      const [d, id] = M.addEmpty(get().diagram, position)
+      setCur(d)
+      return id
     },
-    renameNode: (kind, oldName, newName) => {
-      const ren = { triangle: M.renameTriangle, rectangle: M.renameRectangle, circle: M.renameCircle, rhombus: M.renameRhombus, empty: M.renameEmpty }[kind]
-      const [d, ok] = ren(get().diagram, oldName, newName); if (ok) setCur(d); return ok
+    deleteNode: (id) => setCur(M.deleteNode(get().diagram, id)),
+    renameNode: (id, newName) => setCur(M.renameNode(get().diagram, id, newName)),
+
+    addPoint: (parentId, slot, subslot, name) => {
+      const [d, id] = M.addPoint(get().diagram, parentId, slot, subslot, name)
+      if (id) setCur(d)
+      return id
+    },
+    removePoint: (pointId) => setCur(M.removePoint(get().diagram, pointId)),
+    renamePoint: (id, newName) => setCur(M.renamePoint(get().diagram, id, newName)),
+
+    addLine: (sourcePtId, targetPtId) => {
+      const [d, id] = M.addLine(get().diagram, sourcePtId, targetPtId)
+      setCur(d)
+      return id
+    },
+    addLineTarget: (lineId, targetPtId) => setCur(M.addLineTarget(get().diagram, lineId, targetPtId)),
+    addLineWithFreeEnd: (anchorPtId, freeRole, position) => {
+      const [d, r] = M.addLineWithFreeEnd(get().diagram, anchorPtId, freeRole, position)
+      setCur(d)
+      return r
+    },
+    deleteLine: (lineId) => setCur(M.deleteLine(get().diagram, lineId)),
+    deleteLineTarget: (lineId, idx) => setCur(M.deleteLineTarget(get().diagram, lineId, idx)),
+    renameLine: (id, newName) => setCur(M.renameLine(get().diagram, id, newName)),
+    attachLine: (lineId, end, parentId, slot, subslot) => {
+      const [d, newPtId] = M.attachLine(get().diagram, lineId, end, parentId, slot, subslot)
+      if (newPtId) setCur(d)
+      return newPtId
     },
 
-    updateNodePosition: (nodeName, position) => {
-      const d = get().diagram
-      const stamp = <T extends { id: string; position: XY }>(xs: T[]): T[] =>
-        xs.map((x) => x.id === nodeName ? { ...x, position } : x)
-      const updated: DiagramData = {
-        ...d,
-        empties:    stamp(d.empties),
-        triangles:  stamp(d.triangles),
-        rectangles: stamp(d.rectangles),
-        circles:    stamp(d.circles),
-        rhombuses:  stamp(d.rhombuses),
-      }
-      setCur(updated)
+    updateNodeTranslation: (nodeId, translation) => {
+      setCur(M.updateNodeTranslation(get().diagram, nodeId, translation))
     },
-    updateNodePositions: (updates) => {
+    updateNodeTranslations: (updates) => {
       if (updates.length === 0) return
-      const byId = new Map(updates.map((u) => [u.id, u.position]))
-      const d = get().diagram
-      const stamp = <T extends { id: string; position: XY }>(xs: T[]): T[] =>
-        xs.map((x) => byId.has(x.id) ? { ...x, position: byId.get(x.id)! } : x)
-      const updated: DiagramData = {
-        ...d,
-        empties:    stamp(d.empties),
-        triangles:  stamp(d.triangles),
-        rectangles: stamp(d.rectangles),
-        circles:    stamp(d.circles),
-        rhombuses:  stamp(d.rhombuses),
-      }
-      setCur(updated)
+      setCur(M.updateNodeTranslations(get().diagram, updates))
     },
+
+    importDiagram: (raw) => setCur(M.importDiagram(raw)),
   }
 })
 
@@ -186,8 +201,14 @@ export function isHydrating(): boolean {
   return _hydrating
 }
 
-export function initStore(initial: DiagramData) {
-  const d = { ...emptyDiagram, ...initial }
+export function initStore(initial: Diagram) {
+  // Defensive: incoming data is normalized at the IO layer (restoreDiagram),
+  // but spread defaults so a missing field never corrupts the store.
+  const d: Diagram = {
+    schemaVersion: initial.schemaVersion ?? 1,
+    nodes: initial.nodes ?? [],
+    edges: initial.edges ?? [],
+  }
   _hydrating = true
   try {
     useStore.setState({ diagram: d, history: [d], historyIndex: 0 })

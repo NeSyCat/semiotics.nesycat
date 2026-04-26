@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# diagram backups produced by scripts/backup-diagrams.ts (issue #16)
+/backups

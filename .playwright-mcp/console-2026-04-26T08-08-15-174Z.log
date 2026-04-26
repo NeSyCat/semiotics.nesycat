@@ -1,0 +1,10 @@
+[      82ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[      90ms] [LOG] [HMR] connected @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  271567ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  271591ms] [LOG] [Fast Refresh] done in 27ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  484729ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  484757ms] [LOG] [Fast Refresh] done in 20ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  488650ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  488678ms] [LOG] [Fast Refresh] done in 19ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  502041ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  502071ms] [LOG] [Fast Refresh] done in 23ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431

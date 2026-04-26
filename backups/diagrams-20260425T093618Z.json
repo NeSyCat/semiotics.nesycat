@@ -1,0 +1,7065 @@
+[
+  {
+    "id": "aab840c7-0937-45be-b871-211abede7f61",
+    "owned_by": "ccfae30d-58ef-4cc1-9de0-bfe080197e6c",
+    "title": "Test",
+    "data": {
+      "lines": [],
+      "circles": [],
+      "empties": [],
+      "rhombuses": [],
+      "triangles": [],
+      "rectangles": []
+    },
+    "created_at": "2026-04-21 20:12:04.632583+00",
+    "updated_at": "2026-04-21 22:55:28.183+00"
+  },
+  {
+    "id": "167bee76-09df-44ac-855c-87b35df8b9e7",
+    "owned_by": "30c53b3e-6981-44f5-a8f4-de94ec1ff333",
+    "title": "Human Sysmer",
+    "data": {
+      "lines": [
+        {
+          "id": "Math \\in Meta Sc.",
+          "points": {
+            "source": {
+              "name": "Math",
+              "node": "R2",
+              "side": "total",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "Math",
+                "node": "R1",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Meta Sc. \\in Intellect",
+          "points": {
+            "source": {
+              "name": "Meta Sc.",
+              "node": "R1",
+              "side": "total",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "Meta Sc.",
+                "node": "R4",
+                "side": "left",
+                "slot": "down",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "7.Intellect \\in Human",
+          "points": {
+            "source": {
+              "name": "7.Intellect",
+              "node": "R4",
+              "side": "total",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "7.Intellect",
+                "node": "R5",
+                "side": "right",
+                "slot": "up",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Program as Object of Diagram",
+          "points": {
+            "source": {
+              "name": "Program",
+              "node": "R3",
+              "side": "total",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "Program",
+                "node": "R6",
+                "side": "down",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Geometry /in Math",
+          "points": {
+            "source": {
+              "name": "Geometry",
+              "node": "R7",
+              "side": "total",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "Geometry",
+                "node": "R2",
+                "side": "down",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Schema as Object of Diagram",
+          "points": {
+            "source": {
+              "name": "Schema",
+              "node": "R8",
+              "side": "total",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "Schema",
+                "node": "R6",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        }
+      ],
+      "circles": [],
+      "empties": [],
+      "rhombuses": [],
+      "triangles": [],
+      "rectangles": [
+        {
+          "id": "R1",
+          "points": {
+            "up": [
+              {
+                "name": "Linguistics"
+              }
+            ],
+            "down": [
+              {
+                "name": "Informatics"
+              }
+            ],
+            "left": {
+              "up": {
+                "name": "Systemics"
+              },
+              "down": {
+                "name": "Metaphys."
+              },
+              "center": [
+                {
+                  "name": "Math"
+                }
+              ]
+            },
+            "right": {
+              "up": {
+                "name": "Cogn. Sc."
+              },
+              "down": {
+                "name": "Epistemics"
+              },
+              "center": [
+                {
+                  "name": "Semiotics"
+                }
+              ]
+            },
+            "total": {
+              "name": "Meta Sc."
+            },
+            "center": {
+              "up": {
+                "name": "Logic"
+              },
+              "down": {
+                "name": "AI"
+              },
+              "center": {
+                "name": "Data Sc."
+              }
+            }
+          },
+          "position": {
+            "x": 1610.561541460578,
+            "y": 604.6502306423853
+          }
+        },
+        {
+          "id": "R2",
+          "points": {
+            "up": [
+              {
+                "name": "Algebra"
+              }
+            ],
+            "down": [
+              {
+                "name": "Geometry"
+              }
+            ],
+            "left": {
+              "center": [
+                {
+                  "name": "Order Th."
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "Topology"
+                }
+              ]
+            },
+            "total": {
+              "name": "Math"
+            },
+            "center": {
+              "up": {
+                "name": "Category Th."
+              },
+              "down": {
+                "name": "Measure Th."
+              },
+              "center": {
+                "name": "Set Th."
+              }
+            }
+          },
+          "position": {
+            "x": 1201.7817175248574,
+            "y": 1019.4678728388208
+          }
+        },
+        {
+          "id": "R3",
+          "points": {
+            "up": [
+              {
+                "name": "CAS?"
+              }
+            ],
+            "down": [
+              {
+                "name": "Differentiable Prgm."
+              }
+            ],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "UI script?"
+                }
+              ]
+            },
+            "total": {
+              "name": "Program"
+            },
+            "center": {
+              "up": {
+                "name": "Functional Prgm."
+              },
+              "down": {
+                "name": "Probalistic Prgm."
+              },
+              "center": {
+                "name": "Object Oriented Prgm."
+              }
+            }
+          },
+          "position": {
+            "x": 1752.4494804067956,
+            "y": 1176.1821632003962
+          }
+        },
+        {
+          "id": "R4",
+          "points": {
+            "up": [],
+            "down": [
+              {
+                "name": "Engineering"
+              }
+            ],
+            "left": {
+              "down": {
+                "name": "Meta Sc."
+              },
+              "center": [
+                {
+                  "name": "Natural Sc."
+                }
+              ]
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "7.Intellect"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 2021.1245979992023,
+            "y": 193.17321077616236
+          }
+        },
+        {
+          "id": "R5",
+          "points": {
+            "up": [
+              {
+                "name": "5.Social"
+              }
+            ],
+            "down": [
+              {
+                "name": "1.Material"
+              }
+            ],
+            "left": {
+              "up": {
+                "name": "8.Self"
+              },
+              "down": {
+                "name": "0.Survival"
+              },
+              "center": [
+                {
+                  "name": "2.Body"
+                }
+              ]
+            },
+            "right": {
+              "up": {
+                "name": "7.Intellect"
+              },
+              "down": {
+                "name": "-1.Reprod."
+              },
+              "center": [
+                {
+                  "name": "4.Soul"
+                }
+              ]
+            },
+            "total": {
+              "name": "Human"
+            },
+            "center": {
+              "up": {
+                "name": "6.Mind"
+              },
+              "down": {
+                "name": "3.Resources"
+              },
+              "center": {
+                "name": "Ego"
+              }
+            }
+          },
+          "position": {
+            "x": 1442.0009372623997,
+            "y": -199.1410721507654
+          }
+        },
+        {
+          "id": "R6",
+          "points": {
+            "up": [
+              {
+                "name": "(Sub-)Sentence"
+              }
+            ],
+            "down": [
+              {
+                "name": "Program"
+              }
+            ],
+            "left": {
+              "up": {
+                "name": "System"
+              },
+              "down": {
+                "name": "Ontology"
+              },
+              "center": []
+            },
+            "right": {
+              "up": {
+                "name": "Neural Net"
+              },
+              "center": [
+                {
+                  "name": "Diagram?"
+                }
+              ]
+            },
+            "total": {
+              "name": "Object of Diagram"
+            },
+            "center": {
+              "up": {
+                "name": "Term/Formula"
+              },
+              "down": {
+                "name": "Model?"
+              },
+              "center": {
+                "name": "Schema"
+              }
+            }
+          },
+          "position": {
+            "x": 2144.7941603835798,
+            "y": 643.6277242594642
+          }
+        },
+        {
+          "id": "R7",
+          "points": {
+            "up": [
+              {
+                "name": "Orthoplex"
+              }
+            ],
+            "down": [
+              {
+                "name": "Cube"
+              }
+            ],
+            "left": {
+              "up": {
+                "name": "Sphere"
+              },
+              "down": {
+                "name": "Point"
+              },
+              "center": [
+                {
+                  "name": "Isocahedral"
+                }
+              ]
+            },
+            "right": {
+              "up": {
+                "name": "Cylinder"
+              },
+              "down": {
+                "name": "Line"
+              },
+              "center": [
+                {
+                  "name": "Dodecahedral"
+                }
+              ]
+            },
+            "total": {
+              "name": "Geometry"
+            },
+            "center": {
+              "up": {
+                "name": "24-cell"
+              },
+              "down": {
+                "name": "Demicube"
+              },
+              "center": {
+                "name": "Simplex"
+              }
+            }
+          },
+          "position": {
+            "x": 757.9328032354243,
+            "y": 1463.59134771065
+          }
+        },
+        {
+          "id": "R8",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "up": {
+                "name": "Hierarchy"
+              },
+              "center": []
+            },
+            "right": {
+              "up": {
+                "name": "Network"
+              },
+              "center": []
+            },
+            "total": {
+              "name": "Schema"
+            },
+            "center": {
+              "center": {
+                "name": "Relational"
+              }
+            }
+          },
+          "position": {
+            "x": 2479.088942354606,
+            "y": 1157.4111836305597
+          }
+        },
+        {
+          "id": "R9",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "Venn Diagram"
+                }
+              ]
+            },
+            "total": {
+              "name": "Diagram"
+            },
+            "center": {
+              "up": {
+                "name": "String Diagram"
+              },
+              "down": {
+                "name": "Prob. Graph. Model"
+              },
+              "center": {
+                "name": "Set Diagram"
+              }
+            }
+          },
+          "position": {
+            "x": 679.4383490192349,
+            "y": 779.3141088831941
+          }
+        }
+      ]
+    },
+    "created_at": "2026-04-21 21:47:54.120547+00",
+    "updated_at": "2026-04-24 10:08:57.078+00"
+  },
+  {
+    "id": "61be49be-4c19-4112-8fc4-24b29079c6b2",
+    "owned_by": "ccfae30d-58ef-4cc1-9de0-bfe080197e6c",
+    "title": "Hi",
+    "data": {
+      "lines": [
+        {
+          "id": "owned_by",
+          "points": {
+            "source": {
+              "name": "uuid",
+              "node": "D3",
+              "side": "left",
+              "slot": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "uuid",
+                "node": "R4",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "owns",
+          "points": {
+            "source": {
+              "name": "uuid",
+              "node": "D3",
+              "side": "right",
+              "slot": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "uuid",
+                "node": "R5",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        }
+      ],
+      "circles": [],
+      "empties": [],
+      "rhombuses": [
+        {
+          "id": "D3",
+          "points": {
+            "left": {
+              "up": [],
+              "down": [
+                {
+                  "name": "uuid"
+                }
+              ]
+            },
+            "right": {
+              "up": [],
+              "down": [
+                {
+                  "name": "uuid"
+                }
+              ]
+            },
+            "total": {
+              "name": "Ownership"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 556.0760618494602,
+            "y": 732.0838848961287
+          }
+        }
+      ],
+      "triangles": [],
+      "rectangles": [
+        {
+          "id": "R4",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "Human"
+            },
+            "center": {
+              "center": {
+                "name": "uuid"
+              }
+            }
+          },
+          "position": {
+            "x": 217.2226095106081,
+            "y": 1304.510040572734
+          }
+        },
+        {
+          "id": "R5",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "Pets"
+            },
+            "center": {
+              "center": {
+                "name": "uuid"
+              }
+            }
+          },
+          "position": {
+            "x": 827.5893086645764,
+            "y": 1312.9923247606707
+          }
+        }
+      ]
+    },
+    "created_at": "2026-04-21 22:55:25.595481+00",
+    "updated_at": "2026-04-23 06:54:04.407+00"
+  },
+  {
+    "id": "2d4763e5-4ea5-4b0d-b110-edb5399fd09d",
+    "owned_by": "a2adaeb4-d718-4052-8412-d028581db4d2",
+    "title": "UploadAVGS",
+    "data": {
+      "lines": [
+        {
+          "id": "extracted_fields",
+          "points": {
+            "source": {
+              "name": "json",
+              "node": "R1",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "json",
+                "node": "R4",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Massnahme",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "E2",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "R2",
+                "side": "left",
+                "slot": "center",
+                "index": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "Startdatum",
+          "points": {
+            "source": {
+              "name": "date",
+              "node": "E3",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "date",
+                "node": "R2",
+                "side": "left",
+                "slot": "center",
+                "index": 2
+              }
+            ]
+          }
+        },
+        {
+          "id": "Enddatum",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "E4",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "R2",
+                "side": "left",
+                "slot": "center",
+                "index": 3
+              }
+            ]
+          }
+        },
+        {
+          "id": "Coach",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "E5",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "R2",
+                "side": "left",
+                "slot": "center",
+                "index": 4
+              }
+            ]
+          }
+        },
+        {
+          "id": "TgBstg_leer",
+          "points": {
+            "source": {
+              "name": "file",
+              "node": "E6",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "file",
+                "node": "R2",
+                "side": "left",
+                "slot": "center",
+                "index": 5
+              }
+            ]
+          }
+        },
+        {
+          "id": "Traeger",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "R3",
+              "side": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "R2",
+                "side": "up",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Anschrift",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "R3",
+              "side": "down",
+              "index": 1
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "R2",
+                "side": "up",
+                "index": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "Ort",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "R3",
+              "side": "down",
+              "index": 2
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "R2",
+                "side": "up",
+                "index": 2
+              }
+            ]
+          }
+        },
+        {
+          "id": "Telefonnummer",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R3",
+              "side": "down",
+              "index": 3
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R2",
+                "side": "up",
+                "index": 3
+              }
+            ]
+          }
+        },
+        {
+          "id": "doc_type = avgs",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "D1",
+              "side": "right",
+              "slot": "up",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "R1",
+                "side": "left",
+                "slot": "center",
+                "index": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "doc_file = avgs.pdf",
+          "points": {
+            "source": {
+              "name": "pdf",
+              "node": "D2",
+              "side": "right",
+              "slot": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "pdf",
+                "node": "R1",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "corrected_fields",
+          "points": {
+            "source": {
+              "name": "json",
+              "node": "E8",
+              "side": "left",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "json",
+                "node": "R4",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "doc_file = avgs.p",
+          "points": {
+            "source": {
+              "name": "pdf",
+              "node": "R4",
+              "side": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "pdf",
+                "node": "R5",
+                "side": "up",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "correct_fields",
+          "points": {
+            "source": {
+              "name": "json",
+              "node": "R4",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "json",
+                "node": "R6",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "L1",
+          "points": {
+            "source": {
+              "name": "sql",
+              "node": "R6",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "sql",
+                "node": "C1",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "full MR row",
+          "points": {
+            "source": {
+              "name": "json",
+              "node": "C1",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "json",
+                "node": "R7",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              },
+              {
+                "name": "json",
+                "node": "R9",
+                "side": "down",
+                "index": 0
+              },
+              {
+                "name": "json",
+                "node": "R8",
+                "side": "down",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "data for Agenturen MR",
+          "points": {
+            "source": {
+              "name": "sql",
+              "node": "R7",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "sql",
+                "node": "C2",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "of Agentur MR",
+          "points": {
+            "source": {
+              "name": "uuid",
+              "node": "C2",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "uuid",
+                "node": "R8",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              },
+              {
+                "name": "uuid",
+                "node": "R9",
+                "side": "down",
+                "index": 2
+              }
+            ]
+          }
+        },
+        {
+          "id": "data for Teilnehmer MR",
+          "points": {
+            "source": {
+              "name": "sql",
+              "node": "R8",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "sql",
+                "node": "C3",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "of Teilnehmer MR",
+          "points": {
+            "source": {
+              "name": "uuid",
+              "node": "C3",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "uuid",
+                "node": "R9",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "L2",
+          "points": {
+            "source": {
+              "name": "sql",
+              "node": "R9",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "sql",
+                "node": "C4",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "of coaching",
+          "points": {
+            "source": {
+              "name": "uuid",
+              "node": "C4",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "uuid",
+                "node": "R10",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        }
+      ],
+      "circles": [
+        {
+          "id": "C1",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": [
+              {
+                "name": "sql"
+              }
+            ],
+            "right": [
+              {
+                "name": "json"
+              }
+            ],
+            "total": {
+              "name": "Fill MR of M=Dokumente"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1333.2860031799444,
+            "y": -617.2190701591683
+          }
+        },
+        {
+          "id": "C2",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": [
+              {
+                "name": "sql"
+              }
+            ],
+            "right": [
+              {
+                "name": "uuid"
+              }
+            ],
+            "total": {
+              "name": "Fill MR of M=Agenturen"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 2521.3627627906453,
+            "y": -1215.5319688946674
+          }
+        },
+        {
+          "id": "C3",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": [
+              {
+                "name": "sql"
+              }
+            ],
+            "right": [
+              {
+                "name": "uuid"
+              }
+            ],
+            "total": {
+              "name": "Fill MR of M=Teilnehmer"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 3822.043854128654,
+            "y": -1208.1332764974532
+          }
+        },
+        {
+          "id": "C4",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": [
+              {
+                "name": "sql"
+              }
+            ],
+            "right": [
+              {
+                "name": "uuid"
+              }
+            ],
+            "total": {
+              "name": "Fill MR of M=Coachings"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 5089.320167853282,
+            "y": -945.7250100421383
+          }
+        }
+      ],
+      "empties": [
+        {
+          "id": "E2",
+          "points": {
+            "right": {
+              "name": "text"
+            }
+          },
+          "position": {
+            "x": 2163.0728767422015,
+            "y": 1204.9794633033302
+          }
+        },
+        {
+          "id": "E3",
+          "points": {
+            "right": {
+              "name": "date"
+            }
+          },
+          "position": {
+            "x": 2169.0952732282644,
+            "y": 1276.083228588212
+          }
+        },
+        {
+          "id": "E4",
+          "points": {
+            "right": {
+              "name": "text"
+            }
+          },
+          "position": {
+            "x": 2149.838599224798,
+            "y": 1339.053593952213
+          }
+        },
+        {
+          "id": "E5",
+          "points": {
+            "right": {
+              "name": "text"
+            }
+          },
+          "position": {
+            "x": 2077.2213113717457,
+            "y": 1413.2585350223192
+          }
+        },
+        {
+          "id": "E6",
+          "points": {
+            "right": {
+              "name": "file"
+            }
+          },
+          "position": {
+            "x": 2058.27044755094,
+            "y": 1535.8206060520583
+          }
+        },
+        {
+          "id": "E7",
+          "points": {},
+          "position": {
+            "x": -1306.0884103545989,
+            "y": -357.40651014660324
+          }
+        },
+        {
+          "id": "E1",
+          "points": {},
+          "position": {
+            "x": 358.705052434183,
+            "y": -1082.4417707049588
+          }
+        },
+        {
+          "id": "E8",
+          "points": {
+            "left": {
+              "name": "json"
+            }
+          },
+          "position": {
+            "x": -332.8208632574895,
+            "y": -1084.818491116217
+          }
+        },
+        {
+          "id": "E9",
+          "points": {},
+          "position": {
+            "x": -72.29494756581698,
+            "y": -993.7274849906717
+          }
+        },
+        {
+          "id": "E12",
+          "points": {},
+          "position": {
+            "x": 1798.7995104358317,
+            "y": -487.52628098775745
+          }
+        },
+        {
+          "id": "E13",
+          "points": {},
+          "position": {
+            "x": 1361.9870748524838,
+            "y": -544.6127076517975
+          }
+        },
+        {
+          "id": "E10",
+          "points": {},
+          "position": {
+            "x": 1889.378178311541,
+            "y": -587.01807801996
+          }
+        }
+      ],
+      "rhombuses": [
+        {
+          "id": "D1",
+          "points": {
+            "left": {
+              "up": [],
+              "down": []
+            },
+            "right": {
+              "up": [
+                {
+                  "name": "text"
+                }
+              ],
+              "down": []
+            },
+            "total": {
+              "name": "AVGS Button"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": -1117.5529490972217,
+            "y": -414.3649118744163
+          }
+        },
+        {
+          "id": "D2",
+          "points": {
+            "left": {
+              "up": [],
+              "down": []
+            },
+            "right": {
+              "up": [],
+              "down": [
+                {
+                  "name": "pdf"
+                }
+              ]
+            },
+            "total": {
+              "name": "System Upload Button"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": -1088.9659580942966,
+            "y": -916.4214800367969
+          }
+        }
+      ],
+      "triangles": [],
+      "rectangles": [
+        {
+          "id": "R1",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "pdf"
+                },
+                {
+                  "name": "text"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "json"
+                }
+              ]
+            },
+            "total": {
+              "name": "Doc Extract (Edge Function)"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": -493.21319198096796,
+            "y": -620.3848522539001
+          }
+        },
+        {
+          "id": "R2",
+          "points": {
+            "up": [
+              {
+                "name": "text"
+              },
+              {
+                "name": "text"
+              },
+              {
+                "name": "text"
+              },
+              {
+                "name": "int"
+              }
+            ],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "json"
+                },
+                {
+                  "name": "text"
+                },
+                {
+                  "name": "date"
+                },
+                {
+                  "name": "text"
+                },
+                {
+                  "name": "text"
+                },
+                {
+                  "name": "file"
+                }
+              ]
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "Fill TgBstg"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 3686.3579039621745,
+            "y": 1603.5724313513958
+          }
+        },
+        {
+          "id": "R3",
+          "points": {
+            "up": [],
+            "down": [
+              {
+                "name": "text"
+              },
+              {
+                "name": "text"
+              },
+              {
+                "name": "text"
+              },
+              {
+                "name": "int"
+              }
+            ],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "Fetch Data"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 3677.0471527812024,
+            "y": 812.0030692057217
+          }
+        },
+        {
+          "id": "R4",
+          "points": {
+            "up": [],
+            "down": [
+              {
+                "name": "pdf"
+              }
+            ],
+            "left": {
+              "center": [
+                {
+                  "name": "json"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "json"
+                }
+              ]
+            },
+            "total": {
+              "name": "Output Error Check"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 241.49305243418308,
+            "y": -620.7166278478146
+          }
+        },
+        {
+          "id": "R6",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "json"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "sql"
+                }
+              ]
+            },
+            "total": {
+              "name": "Query Generation for Document MR"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 801.425884988825,
+            "y": -617.8197836799234
+          }
+        },
+        {
+          "id": "R5",
+          "points": {
+            "up": [
+              {
+                "name": "pdf"
+              }
+            ],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "Document Upload"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 243.40197385346812,
+            "y": 29.68875197904329
+          }
+        },
+        {
+          "id": "R7",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "json"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "sql"
+                }
+              ]
+            },
+            "total": {
+              "name": "Query Generation for Agentur MR"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1861.7745404987047,
+            "y": -1218.556772921797
+          }
+        },
+        {
+          "id": "R8",
+          "points": {
+            "up": [
+              {
+                "name": "json"
+              }
+            ],
+            "down": [
+              {
+                "name": "json"
+              }
+            ],
+            "left": {
+              "center": [
+                {
+                  "name": "uuid"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "sql"
+                }
+              ]
+            },
+            "total": {
+              "name": "Query Generation for Teilnehmer MR"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 3145.22948774203,
+            "y": -1197.129300473056
+          }
+        },
+        {
+          "id": "R9",
+          "points": {
+            "up": [],
+            "down": [
+              {
+                "name": "json"
+              },
+              {
+                "name": "P1"
+              },
+              {
+                "name": "uuid"
+              }
+            ],
+            "left": {
+              "center": [
+                {
+                  "name": "uuid"
+                },
+                {
+                  "name": "uuid"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "sql"
+                }
+              ]
+            },
+            "total": {
+              "name": "Query Generation for Coaching MR"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 4623.012902158235,
+            "y": -943.9204600023808
+          }
+        },
+        {
+          "id": "R10",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "uuid"
+                }
+              ]
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "Query Generation for Coaching MR (insert UUID)"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 5683.545414231354,
+            "y": -948.7730290217398
+          }
+        }
+      ]
+    },
+    "created_at": "2026-04-21 23:20:35.063898+00",
+    "updated_at": "2026-04-24 07:23:32.656+00"
+  },
+  {
+    "id": "9c3c24a6-dfbb-47db-b326-85bf688ecbb3",
+    "owned_by": "a2adaeb4-d718-4052-8412-d028581db4d2",
+    "title": "DesignSys Workflow",
+    "data": {
+      "lines": [
+        {
+          "id": "L1",
+          "points": {
+            "source": {
+              "name": "JSON",
+              "node": "C_claude",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "JSON",
+                "node": "R1",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "L2",
+          "points": {
+            "source": {
+              "name": "URL",
+              "node": "C_figma",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "URL",
+                "node": "C_claude",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "L3",
+          "points": {
+            "source": {
+              "name": "strings",
+              "node": "C_claude",
+              "side": "right",
+              "index": 1
+            },
+            "targets": [
+              {
+                "name": "strings",
+                "node": "R2",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "L4",
+          "points": {
+            "source": {
+              "name": "strings",
+              "node": "R1",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "strings",
+                "node": "R2",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "L5",
+          "points": {
+            "source": {
+              "name": "strings",
+              "node": "C_cursor",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "strings",
+                "node": "R2",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        }
+      ],
+      "circles": [
+        {
+          "id": "C_figma",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": [],
+            "right": [
+              {
+                "name": "URL"
+              }
+            ],
+            "total": {
+              "name": "Figma Cloud"
+            },
+            "center": {
+              "center": {
+                "name": "Figma"
+              }
+            }
+          },
+          "position": {
+            "x": -149.7660630285885,
+            "y": 151.53793381162586
+          }
+        },
+        {
+          "id": "C_cursor",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": [],
+            "right": [
+              {
+                "name": "strings"
+              }
+            ],
+            "total": {
+              "name": "Local"
+            },
+            "center": {
+              "center": {
+                "name": "Cursor"
+              }
+            }
+          },
+          "position": {
+            "x": 848.2399963213584,
+            "y": 495.27977917589885
+          }
+        },
+        {
+          "id": "C_claude",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": [
+              {
+                "name": "URL"
+              }
+            ],
+            "right": [
+              {
+                "name": "JSON"
+              },
+              {
+                "name": "strings"
+              }
+            ],
+            "total": {
+              "name": "Local"
+            },
+            "center": {
+              "center": {
+                "name": "Claude Code"
+              }
+            }
+          },
+          "position": {
+            "x": 438.49310288621905,
+            "y": 149.3564849543506
+          }
+        }
+      ],
+      "empties": [],
+      "rhombuses": [],
+      "triangles": [],
+      "rectangles": [
+        {
+          "id": "R1",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "JSON"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "strings"
+                }
+              ]
+            },
+            "total": {
+              "name": "Cloud -> Local"
+            },
+            "center": {
+              "center": {
+                "name": "Figma MCP"
+              }
+            }
+          },
+          "position": {
+            "x": 1095.309297055043,
+            "y": -223.81221171473214
+          }
+        },
+        {
+          "id": "R2",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "strings"
+                }
+              ]
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "Local"
+            },
+            "center": {
+              "center": {
+                "name": "Local File Edits"
+              }
+            }
+          },
+          "position": {
+            "x": 1840.0564121705945,
+            "y": 171.81933652056335
+          }
+        }
+      ]
+    },
+    "created_at": "2026-04-21 23:24:09.061703+00",
+    "updated_at": "2026-04-21 23:24:42.571+00"
+  },
+  {
+    "id": "d360dabf-0db9-485e-a25d-c2e3ef3a3b4d",
+    "owned_by": "c2f62a05-7943-40b1-9eb7-12dbf37c38c7",
+    "title": "Untitled",
+    "data": {
+      "lines": [],
+      "circles": [],
+      "empties": [],
+      "rhombuses": [],
+      "triangles": [],
+      "rectangles": []
+    },
+    "created_at": "2026-04-22 12:26:52.695861+00",
+    "updated_at": "2026-04-22 12:26:52.695861+00"
+  },
+  {
+    "id": "3a34fd16-7f5b-4d20-b99a-0f14cccfcae5",
+    "owned_by": "c2f62a05-7943-40b1-9eb7-12dbf37c38c7",
+    "title": "Untitled",
+    "data": {
+      "lines": [
+        {
+          "id": "L1",
+          "points": {
+            "source": {
+              "name": "P2",
+              "node": "R2",
+              "side": "left",
+              "slot": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "P2",
+                "node": "R1",
+                "side": "up",
+                "index": 0
+              }
+            ]
+          }
+        }
+      ],
+      "circles": [],
+      "empties": [
+        {
+          "id": "E1",
+          "points": {},
+          "position": {
+            "x": 325.80757311316796,
+            "y": 1045.452313739216
+          }
+        }
+      ],
+      "rhombuses": [
+        {
+          "id": "D1",
+          "points": {
+            "left": {
+              "up": [],
+              "down": []
+            },
+            "right": {
+              "up": [],
+              "down": []
+            },
+            "total": {
+              "name": "D1"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 740.7187871298986,
+            "y": 261.51910846966985
+          }
+        }
+      ],
+      "triangles": [
+        {
+          "id": "T1",
+          "points": {
+            "left": [],
+            "right": [],
+            "total": {
+              "name": "T1"
+            }
+          },
+          "position": {
+            "x": 1078.1187693052614,
+            "y": 289.00495461810254
+          }
+        },
+        {
+          "id": "T2",
+          "points": {
+            "left": [],
+            "right": [],
+            "total": {
+              "name": "T2"
+            }
+          },
+          "position": {
+            "x": 1078.1187693052614,
+            "y": 289.00495461810254
+          }
+        },
+        {
+          "id": "T3",
+          "points": {
+            "left": [],
+            "right": [],
+            "total": {
+              "name": "T3"
+            }
+          },
+          "position": {
+            "x": 630.2613340138249,
+            "y": -58.83059730885617
+          }
+        },
+        {
+          "id": "T4",
+          "points": {
+            "left": [],
+            "right": [],
+            "total": {
+              "name": "T4"
+            }
+          },
+          "position": {
+            "x": 458.0140816159976,
+            "y": -146.4087718983523
+          }
+        }
+      ],
+      "rectangles": [
+        {
+          "id": "R1",
+          "points": {
+            "up": [
+              {
+                "name": "P2"
+              }
+            ],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "R1"
+            },
+            "center": {
+              "center": {
+                "name": "P1"
+              }
+            }
+          },
+          "position": {
+            "x": 233.20083159150732,
+            "y": 483.47908769959633
+          }
+        },
+        {
+          "id": "R2",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "down": {
+                "name": "P2"
+              },
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "R2"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 856.1044520673363,
+            "y": -132.92869832115215
+          }
+        },
+        {
+          "id": "R3",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "R3"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 602.847719555746,
+            "y": -232.10200767937005
+          }
+        },
+        {
+          "id": "R4",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "R4"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1385.6071644462722,
+            "y": -96.36337561742907
+          }
+        },
+        {
+          "id": "R5",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "R5"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 193.60716444627224,
+            "y": -52.363375617428915
+          }
+        },
+        {
+          "id": "R6",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "R6"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 685.1430335023829,
+            "y": 678.8813454613012
+          }
+        },
+        {
+          "id": "R7",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "R7"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1203.1430335023829,
+            "y": 786.8813454613012
+          }
+        },
+        {
+          "id": "R8",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "R8"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1531.1430335023829,
+            "y": 374.88134546130084
+          }
+        },
+        {
+          "id": "R9",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "R9"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1319.1430335023833,
+            "y": -475.11865453869905
+          }
+        }
+      ]
+    },
+    "created_at": "2026-04-22 12:26:59.655682+00",
+    "updated_at": "2026-04-22 12:31:37.889+00"
+  },
+  {
+    "id": "8b3dfcbb-830b-4731-849c-55d92bc5c487",
+    "owned_by": "30c53b3e-6981-44f5-a8f4-de94ec1ff333",
+    "title": "Datenbank Vorl.",
+    "data": {
+      "lines": [
+        {
+          "id": "is_attended_by",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D1",
+              "side": "left",
+              "slot": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R1",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "attends",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D1",
+              "side": "right",
+              "slot": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R2",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "tests",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D2",
+              "side": "left",
+              "slot": "up",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R1",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "is_tested_by",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D2",
+              "side": "right",
+              "slot": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R4",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "works_for",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D3",
+              "side": "right",
+              "slot": "up",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R4",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "works_with",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D3",
+              "side": "left",
+              "slot": "up",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R3",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "L1",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D4",
+              "side": "right",
+              "slot": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R4",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "L2",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D4",
+              "side": "right",
+              "slot": "up",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R2",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Name",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "R4",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "E2",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Room",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R4",
+              "side": "right",
+              "slot": "center",
+              "index": 1
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "E3",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Rank",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R4",
+              "side": "right",
+              "slot": "center",
+              "index": 2
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "E4",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "is_preceeded_by",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D5",
+              "side": "left",
+              "slot": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R2",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "is_succeeded_by",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D5",
+              "side": "right",
+              "slot": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R2",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "AsstName",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "R3",
+              "side": "left",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "E6",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Subject",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "R3",
+              "side": "left",
+              "slot": "center",
+              "index": 1
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "E7",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "ProfPerNo",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R4",
+              "side": "center",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "E1",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "AsstPerNo",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R3",
+              "side": "center",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "E5",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "StuNo",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R1",
+              "side": "center",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "E8",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "StuName",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "R1",
+              "side": "left",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "E9",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Semester",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R1",
+              "side": "left",
+              "slot": "center",
+              "index": 1
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "E10",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "CouNo",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R2",
+              "side": "center",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "E11",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "SCH",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R2",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "E12",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Title",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "R2",
+              "side": "right",
+              "slot": "center",
+              "index": 1
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "E13",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        }
+      ],
+      "circles": [],
+      "empties": [
+        {
+          "id": "E2",
+          "points": {
+            "left": {
+              "name": "text"
+            }
+          },
+          "position": {
+            "x": 2007.5488073528493,
+            "y": 1368.1862512322662
+          }
+        },
+        {
+          "id": "E3",
+          "points": {
+            "left": {
+              "name": "int"
+            }
+          },
+          "position": {
+            "x": 2012.5968882548211,
+            "y": 1422.6239381739406
+          }
+        },
+        {
+          "id": "E4",
+          "points": {
+            "left": {
+              "name": "int"
+            }
+          },
+          "position": {
+            "x": 2015.5496653854882,
+            "y": 1474.106916571854
+          }
+        },
+        {
+          "id": "E6",
+          "points": {
+            "left": {
+              "name": "text"
+            }
+          },
+          "position": {
+            "x": 149.22364706133362,
+            "y": 1324.0788920136733
+          }
+        },
+        {
+          "id": "E7",
+          "points": {
+            "left": {
+              "name": "text"
+            }
+          },
+          "position": {
+            "x": 144.47403794597096,
+            "y": 1392.752100991256
+          }
+        },
+        {
+          "id": "E1",
+          "points": {
+            "left": {
+              "name": "int"
+            }
+          },
+          "position": {
+            "x": 1645.669779569071,
+            "y": 1684.22635021096
+          }
+        },
+        {
+          "id": "E5",
+          "points": {
+            "left": {
+              "name": "int"
+            }
+          },
+          "position": {
+            "x": 514.0920048423601,
+            "y": 1618.6669279022017
+          }
+        },
+        {
+          "id": "E8",
+          "points": {
+            "left": {
+              "name": "int"
+            }
+          },
+          "position": {
+            "x": 525.5930855277167,
+            "y": 76.0822022483167
+          }
+        },
+        {
+          "id": "E9",
+          "points": {
+            "left": {
+              "name": "text"
+            }
+          },
+          "position": {
+            "x": 166.03392630067862,
+            "y": 302.4713025023777
+          }
+        },
+        {
+          "id": "E10",
+          "points": {
+            "left": {
+              "name": "int"
+            }
+          },
+          "position": {
+            "x": 166.03392630067864,
+            "y": 373.89887958788347
+          }
+        },
+        {
+          "id": "E11",
+          "points": {
+            "left": {
+              "name": "int"
+            }
+          },
+          "position": {
+            "x": 1940.3439542299718,
+            "y": 148.67159882299168
+          }
+        },
+        {
+          "id": "E12",
+          "points": {
+            "left": {
+              "name": "int"
+            }
+          },
+          "position": {
+            "x": 1986.6168628551611,
+            "y": 301.8508825477567
+          }
+        },
+        {
+          "id": "E13",
+          "points": {
+            "left": {
+              "name": "text"
+            }
+          },
+          "position": {
+            "x": 1988.2124803939607,
+            "y": 370.46243671614116
+          }
+        }
+      ],
+      "rhombuses": [
+        {
+          "id": "D1",
+          "points": {
+            "left": {
+              "up": [],
+              "down": [
+                {
+                  "name": "int"
+                }
+              ]
+            },
+            "right": {
+              "up": [],
+              "down": [
+                {
+                  "name": "int"
+                }
+              ]
+            },
+            "total": {
+              "name": "Attendance"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1013.1561753620068,
+            "y": 216.00741043675635
+          }
+        },
+        {
+          "id": "D2",
+          "points": {
+            "left": {
+              "up": [
+                {
+                  "name": "int"
+                }
+              ],
+              "down": []
+            },
+            "right": {
+              "up": [],
+              "down": [
+                {
+                  "name": "int"
+                }
+              ]
+            },
+            "total": {
+              "name": "Testing"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1009.0203462482245,
+            "y": 720.4005030884471
+          }
+        },
+        {
+          "id": "D3",
+          "points": {
+            "left": {
+              "up": [
+                {
+                  "name": "int"
+                }
+              ],
+              "down": []
+            },
+            "right": {
+              "up": [
+                {
+                  "name": "int"
+                }
+              ],
+              "down": []
+            },
+            "total": {
+              "name": "Working"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1002.2156587482245,
+            "y": 1327.205190588447
+          }
+        },
+        {
+          "id": "D4",
+          "points": {
+            "left": {
+              "up": [],
+              "down": []
+            },
+            "right": {
+              "up": [
+                {
+                  "name": "int"
+                }
+              ],
+              "down": [
+                {
+                  "name": "int"
+                }
+              ]
+            },
+            "total": {
+              "name": "Teaching"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1524.6410004548152,
+            "y": 715.6923263284566
+          }
+        },
+        {
+          "id": "D5",
+          "points": {
+            "left": {
+              "up": [],
+              "down": [
+                {
+                  "name": "int"
+                }
+              ]
+            },
+            "right": {
+              "up": [],
+              "down": [
+                {
+                  "name": "int"
+                }
+              ]
+            },
+            "total": {
+              "name": "Requirement"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1559.3123387457367,
+            "y": -273.8676547340553
+          }
+        }
+      ],
+      "triangles": [],
+      "rectangles": [
+        {
+          "id": "R1",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "text"
+                },
+                {
+                  "name": "int"
+                }
+              ]
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "Student"
+            },
+            "center": {
+              "center": {
+                "name": "int"
+              }
+            }
+          },
+          "position": {
+            "x": 422.3570518509594,
+            "y": 265.71378692035523
+          }
+        },
+        {
+          "id": "R2",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "int"
+                },
+                {
+                  "name": "text"
+                }
+              ]
+            },
+            "total": {
+              "name": "Course"
+            },
+            "center": {
+              "center": {
+                "name": "int"
+              }
+            }
+          },
+          "position": {
+            "x": 1576.0971571180917,
+            "y": 261.1919866907023
+          }
+        },
+        {
+          "id": "R3",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "text"
+                },
+                {
+                  "name": "text"
+                }
+              ]
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "Assistant"
+            },
+            "center": {
+              "center": {
+                "name": "int"
+              }
+            }
+          },
+          "position": {
+            "x": 415.00035435238453,
+            "y": 1283.4425710019484
+          }
+        },
+        {
+          "id": "R4",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "text"
+                },
+                {
+                  "name": "int"
+                },
+                {
+                  "name": "int"
+                }
+              ]
+            },
+            "total": {
+              "name": "Professor"
+            },
+            "center": {
+              "center": {
+                "name": "int"
+              }
+            }
+          },
+          "position": {
+            "x": 1544.26533790312,
+            "y": 1351.358223883658
+          }
+        }
+      ]
+    },
+    "created_at": "2026-04-23 06:54:46.413668+00",
+    "updated_at": "2026-04-23 08:59:34.592+00"
+  },
+  {
+    "id": "37fdfe3e-9ed3-4a2d-a18c-dedde8e3e4e3",
+    "owned_by": "ee0a2c6b-713f-4ccc-8a48-3118d5b0148f",
+    "title": "Untitled",
+    "data": {
+      "lines": [],
+      "circles": [],
+      "empties": [],
+      "rhombuses": [],
+      "triangles": [],
+      "rectangles": []
+    },
+    "created_at": "2026-04-23 08:53:33.822615+00",
+    "updated_at": "2026-04-23 08:53:33.822615+00"
+  },
+  {
+    "id": "0f8cf99f-7b18-438f-a4fa-54a6aa51b106",
+    "owned_by": "30c53b3e-6981-44f5-a8f4-de94ec1ff333",
+    "title": "Datenbank Vorl. + FK",
+    "data": {
+      "lines": [
+        {
+          "id": "Room",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R4",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "E3",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Rank",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R4",
+              "side": "right",
+              "slot": "center",
+              "index": 1
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "E4",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Subject",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "R3",
+              "side": "left",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "E7",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "ProfPerNo",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R4",
+              "side": "center",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R7",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "AsstPerNo",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R3",
+              "side": "center",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R7",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "StuNo",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R1",
+              "side": "center",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "E8",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "StuName",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "R1",
+              "side": "left",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "E9",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Semester",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R1",
+              "side": "left",
+              "slot": "center",
+              "index": 1
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "E10",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "CouNo",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R2",
+              "side": "center",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "E11",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "SCH",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R2",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "E12",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Title",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "R2",
+              "side": "right",
+              "slot": "center",
+              "index": 1
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "E13",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "is_taught_by",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R2",
+              "side": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R4",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Grade",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D2",
+              "side": "left",
+              "slot": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "E14",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "is_tested_by",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D2",
+              "side": "center",
+              "slot": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R4",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "tests",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D2",
+              "side": "center",
+              "slot": "up",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R1",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "is_attended_by",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D1",
+              "side": "center",
+              "slot": "up",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R1",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "attends",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D1",
+              "side": "center",
+              "slot": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R2",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "is_succeeded_by",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D5",
+              "side": "center",
+              "slot": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R2",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "is_preceeded_by",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D5",
+              "side": "center",
+              "slot": "up",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R2",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "works_for",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R3",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R4",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "in_course",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "D2",
+              "side": "center",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R2",
+                "side": "center",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "PerNo",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R7",
+              "side": "center",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "E1",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Name",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "R7",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "E5",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        }
+      ],
+      "circles": [],
+      "empties": [
+        {
+          "id": "E3",
+          "points": {
+            "left": {
+              "name": "int"
+            }
+          },
+          "position": {
+            "x": 1982.5968882548211,
+            "y": 1133.2933297899895
+          }
+        },
+        {
+          "id": "E4",
+          "points": {
+            "left": {
+              "name": "int"
+            }
+          },
+          "position": {
+            "x": 1983.5496653854882,
+            "y": 1198.1150914200002
+          }
+        },
+        {
+          "id": "E7",
+          "points": {
+            "left": {
+              "name": "text"
+            }
+          },
+          "position": {
+            "x": 150.4797641487742,
+            "y": 1170.7334908321454
+          }
+        },
+        {
+          "id": "E8",
+          "points": {
+            "left": {
+              "name": "int"
+            }
+          },
+          "position": {
+            "x": 525.5930855277167,
+            "y": 76.0822022483167
+          }
+        },
+        {
+          "id": "E9",
+          "points": {
+            "left": {
+              "name": "text"
+            }
+          },
+          "position": {
+            "x": 166.03392630067862,
+            "y": 302.4713025023777
+          }
+        },
+        {
+          "id": "E10",
+          "points": {
+            "left": {
+              "name": "int"
+            }
+          },
+          "position": {
+            "x": 166.03392630067864,
+            "y": 373.89887958788347
+          }
+        },
+        {
+          "id": "E11",
+          "points": {
+            "left": {
+              "name": "int"
+            }
+          },
+          "position": {
+            "x": 1894.3439542299718,
+            "y": 94.67159882299168
+          }
+        },
+        {
+          "id": "E12",
+          "points": {
+            "left": {
+              "name": "int"
+            }
+          },
+          "position": {
+            "x": 1986.6168628551611,
+            "y": 301.8508825477567
+          }
+        },
+        {
+          "id": "E13",
+          "points": {
+            "left": {
+              "name": "text"
+            }
+          },
+          "position": {
+            "x": 1988.2124803939607,
+            "y": 370.46243671614116
+          }
+        },
+        {
+          "id": "E14",
+          "points": {
+            "left": {
+              "name": "int"
+            }
+          },
+          "position": {
+            "x": 914.0231315597491,
+            "y": 961.7979952824617
+          }
+        },
+        {
+          "id": "E1",
+          "points": {
+            "left": {
+              "name": "int"
+            }
+          },
+          "position": {
+            "x": 1124.883492470724,
+            "y": 1697.7892443929893
+          }
+        },
+        {
+          "id": "E5",
+          "points": {
+            "left": {
+              "name": "text"
+            }
+          },
+          "position": {
+            "x": 1508.3538663299955,
+            "y": 1508.643700908441
+          }
+        }
+      ],
+      "rhombuses": [
+        {
+          "id": "D1",
+          "points": {
+            "left": {
+              "up": [],
+              "down": []
+            },
+            "right": {
+              "up": [],
+              "down": []
+            },
+            "total": {
+              "name": "Attendance"
+            },
+            "center": {
+              "up": {
+                "name": "int"
+              },
+              "down": {
+                "name": "int"
+              }
+            }
+          },
+          "position": {
+            "x": 1017.1561753620068,
+            "y": 212.00741043675635
+          }
+        },
+        {
+          "id": "D2",
+          "points": {
+            "left": {
+              "up": [],
+              "down": [
+                {
+                  "name": "int"
+                }
+              ]
+            },
+            "right": {
+              "up": [],
+              "down": []
+            },
+            "total": {
+              "name": "Testing"
+            },
+            "center": {
+              "up": {
+                "name": "int"
+              },
+              "down": {
+                "name": "int"
+              },
+              "center": {
+                "name": "int"
+              }
+            }
+          },
+          "position": {
+            "x": 1009.0203462482245,
+            "y": 720.4005030884471
+          }
+        },
+        {
+          "id": "D5",
+          "points": {
+            "left": {
+              "up": [],
+              "down": []
+            },
+            "right": {
+              "up": [],
+              "down": []
+            },
+            "total": {
+              "name": "Requirement"
+            },
+            "center": {
+              "up": {
+                "name": "int"
+              },
+              "down": {
+                "name": "int"
+              }
+            }
+          },
+          "position": {
+            "x": 1385.0148777707666,
+            "y": -191.04730823003723
+          }
+        }
+      ],
+      "triangles": [],
+      "rectangles": [
+        {
+          "id": "R1",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "text"
+                },
+                {
+                  "name": "int"
+                }
+              ]
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "Student"
+            },
+            "center": {
+              "center": {
+                "name": "int"
+              }
+            }
+          },
+          "position": {
+            "x": 422.3570518509594,
+            "y": 265.71378692035523
+          }
+        },
+        {
+          "id": "R2",
+          "points": {
+            "up": [],
+            "down": [
+              {
+                "name": "int"
+              }
+            ],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "int"
+                },
+                {
+                  "name": "text"
+                }
+              ]
+            },
+            "total": {
+              "name": "Course"
+            },
+            "center": {
+              "center": {
+                "name": "int"
+              }
+            }
+          },
+          "position": {
+            "x": 1540.0971571180917,
+            "y": 261.1919866907023
+          }
+        },
+        {
+          "id": "R3",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "text"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "int"
+                }
+              ]
+            },
+            "total": {
+              "name": "Assistant"
+            },
+            "center": {
+              "center": {
+                "name": "int"
+              }
+            }
+          },
+          "position": {
+            "x": 415.00035435238453,
+            "y": 1091.4425710019484
+          }
+        },
+        {
+          "id": "R4",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "int"
+                },
+                {
+                  "name": "int"
+                }
+              ]
+            },
+            "total": {
+              "name": "Professor"
+            },
+            "center": {
+              "center": {
+                "name": "int"
+              }
+            }
+          },
+          "position": {
+            "x": 1544.26533790312,
+            "y": 1089.358223883658
+          }
+        },
+        {
+          "id": "R7",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "text"
+                }
+              ]
+            },
+            "total": {
+              "name": "Saff"
+            },
+            "center": {
+              "center": {
+                "name": "int"
+              }
+            }
+          },
+          "position": {
+            "x": 1024.5656298893482,
+            "y": 1345.2763882853462
+          }
+        }
+      ]
+    },
+    "created_at": "2026-04-23 08:59:09.229594+00",
+    "updated_at": "2026-04-23 19:41:11.648+00"
+  },
+  {
+    "id": "832d0092-b076-437b-8630-b74b90ed27cc",
+    "owned_by": "30c53b3e-6981-44f5-a8f4-de94ec1ff333",
+    "title": "Alice kills a cat",
+    "data": {
+      "lines": [
+        {
+          "id": "h",
+          "points": {
+            "source": {
+              "name": "human",
+              "node": "R1",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "human",
+                "node": "R2",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "e",
+          "points": {
+            "source": {
+              "name": "entity",
+              "node": "R2",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "entity",
+                "node": "D1",
+                "side": "left",
+                "slot": "up",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "c",
+          "points": {
+            "source": {
+              "name": "cat",
+              "node": "C1",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "cat",
+                "node": "R3",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "m",
+          "points": {
+            "source": {
+              "name": "mortal",
+              "node": "R3",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "mortal",
+                "node": "D1",
+                "side": "left",
+                "slot": "down",
+                "index": 0
+              }
+            ]
+          }
+        }
+      ],
+      "circles": [
+        {
+          "id": "C1",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": [],
+            "right": [
+              {
+                "name": "cat"
+              }
+            ],
+            "total": {
+              "name": "a"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 588.9417373414025,
+            "y": 548.8068299041055
+          }
+        }
+      ],
+      "empties": [],
+      "rhombuses": [
+        {
+          "id": "D1",
+          "points": {
+            "left": {
+              "up": [
+                {
+                  "name": "entity"
+                }
+              ],
+              "down": [
+                {
+                  "name": "mortal"
+                }
+              ]
+            },
+            "right": {
+              "up": [],
+              "down": [],
+              "center": {
+                "name": "Bool"
+              }
+            },
+            "total": {
+              "name": "kills"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1687.016784386325,
+            "y": 295.7268980079167
+          }
+        }
+      ],
+      "triangles": [],
+      "rectangles": [
+        {
+          "id": "R1",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "human"
+                }
+              ]
+            },
+            "total": {
+              "name": "Alice"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 611.1134880096348,
+            "y": 72.78669760559248
+          }
+        },
+        {
+          "id": "R2",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "human"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "entity"
+                }
+              ]
+            },
+            "total": {
+              "name": "is a"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1172.5034293583487,
+            "y": 70.11716090404468
+          }
+        },
+        {
+          "id": "R3",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "cat"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "mortal"
+                }
+              ]
+            },
+            "total": {
+              "name": "is a"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1172.9127526449531,
+            "y": 546.6237785863447
+          }
+        }
+      ]
+    },
+    "created_at": "2026-04-23 12:34:56.73236+00",
+    "updated_at": "2026-04-23 20:50:48.367+00"
+  },
+  {
+    "id": "ea04aa1e-80cc-4b51-97af-8e38ee2b4636",
+    "owned_by": "d4545857-85f9-4e19-b82b-effabc04e1d3",
+    "title": "Untitled",
+    "data": {
+      "lines": [],
+      "circles": [],
+      "empties": [],
+      "rhombuses": [],
+      "triangles": [],
+      "rectangles": []
+    },
+    "created_at": "2026-04-23 19:25:00.770854+00",
+    "updated_at": "2026-04-23 19:25:00.770854+00"
+  },
+  {
+    "id": "4732b110-c801-49fc-827c-0d249ef884f8",
+    "owned_by": "d4545857-85f9-4e19-b82b-effabc04e1d3",
+    "title": "Test 1",
+    "data": {
+      "lines": [],
+      "circles": [
+        {
+          "id": "C1",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": [],
+            "right": [],
+            "total": {
+              "name": "C1"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 207,
+            "y": 300.5
+          }
+        }
+      ],
+      "empties": [
+        {
+          "id": "E1",
+          "points": {},
+          "position": {
+            "x": 459.5,
+            "y": 220.5
+          }
+        },
+        {
+          "id": "E2",
+          "points": {},
+          "position": {
+            "x": 290.5,
+            "y": 280
+          }
+        },
+        {
+          "id": "E3",
+          "points": {},
+          "position": {
+            "x": 407,
+            "y": 306
+          }
+        },
+        {
+          "id": "E4",
+          "points": {},
+          "position": {
+            "x": 803,
+            "y": 432
+          }
+        }
+      ],
+      "rhombuses": [
+        {
+          "id": "D1",
+          "points": {
+            "left": {
+              "up": [],
+              "down": []
+            },
+            "right": {
+              "up": [],
+              "down": []
+            },
+            "total": {
+              "name": "D1"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 767,
+            "y": 475.5
+          }
+        },
+        {
+          "id": "D2",
+          "points": {
+            "left": {
+              "up": [],
+              "down": []
+            },
+            "right": {
+              "up": [],
+              "down": []
+            },
+            "total": {
+              "name": "D2"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1105,
+            "y": 280.5
+          }
+        },
+        {
+          "id": "D3",
+          "points": {
+            "left": {
+              "up": [],
+              "down": []
+            },
+            "right": {
+              "up": [],
+              "down": []
+            },
+            "total": {
+              "name": "D3"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 607,
+            "y": 148.5
+          }
+        },
+        {
+          "id": "D4",
+          "points": {
+            "left": {
+              "up": [],
+              "down": []
+            },
+            "right": {
+              "up": [],
+              "down": []
+            },
+            "total": {
+              "name": "D4"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1121,
+            "y": 48.5
+          }
+        },
+        {
+          "id": "D5",
+          "points": {
+            "left": {
+              "up": [],
+              "down": []
+            },
+            "right": {
+              "up": [],
+              "down": []
+            },
+            "total": {
+              "name": "D5"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 825,
+            "y": -3.5
+          }
+        }
+      ],
+      "triangles": [],
+      "rectangles": []
+    },
+    "created_at": "2026-04-23 19:25:10.058073+00",
+    "updated_at": "2026-04-23 19:41:00.91+00"
+  },
+  {
+    "id": "830fd08f-b430-489f-b50e-305f611a8cdc",
+    "owned_by": "30c53b3e-6981-44f5-a8f4-de94ec1ff333",
+    "title": "PAZ Renderer types.py",
+    "data": {
+      "lines": [
+        {
+          "id": "transform",
+          "points": {
+            "source": {
+              "name": "LSE(3)",
+              "node": "E1",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "LSE(3)",
+                "node": "R5",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "colorRGB",
+          "points": {
+            "source": {
+              "name": "[0,1]^3",
+              "node": "E2",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "[0,1]^3",
+                "node": "R5",
+                "side": "left",
+                "slot": "center",
+                "index": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "color",
+          "points": {
+            "source": {
+              "name": "[0,1]^3",
+              "node": "R5",
+              "side": "right",
+              "slot": "center",
+              "index": 1
+            },
+            "targets": [
+              {
+                "name": "[0,1]^3",
+                "node": "E7",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "form",
+          "points": {
+            "source": {
+              "name": "R^3",
+              "node": "R5",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "R^3",
+                "node": "E4",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "reflectionPhong",
+          "points": {
+            "source": {
+              "name": "[0,1]^3",
+              "node": "E3",
+              "side": "left",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "[0,1]^3",
+                "node": "R5",
+                "side": "left",
+                "slot": "center",
+                "index": 2
+              }
+            ]
+          }
+        },
+        {
+          "id": "shininess",
+          "points": {
+            "source": {
+              "name": "[0,1]",
+              "node": "E5",
+              "side": "left",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "[0,1]",
+                "node": "R5",
+                "side": "left",
+                "slot": "center",
+                "index": 3
+              }
+            ]
+          }
+        }
+      ],
+      "circles": [],
+      "empties": [
+        {
+          "id": "E1",
+          "points": {
+            "right": {
+              "name": "LSE(3)"
+            }
+          },
+          "position": {
+            "x": 2402.0124861340346,
+            "y": -128.52580186961546
+          }
+        },
+        {
+          "id": "E2",
+          "points": {
+            "right": {
+              "name": "[0,1]^3"
+            }
+          },
+          "position": {
+            "x": 2370.075076831994,
+            "y": -17.824551878199085
+          }
+        },
+        {
+          "id": "E7",
+          "points": {
+            "left": {
+              "name": "[0,1]^3"
+            }
+          },
+          "position": {
+            "x": 3575.2951459022333,
+            "y": 102.16329828124955
+          }
+        },
+        {
+          "id": "E4",
+          "points": {
+            "left": {
+              "name": "R^3"
+            }
+          },
+          "position": {
+            "x": 3560.8332330859103,
+            "y": -1.6898438049403097
+          }
+        },
+        {
+          "id": "E3",
+          "points": {
+            "left": {
+              "name": "[0,1]^3"
+            }
+          },
+          "position": {
+            "x": 2468.7933390861886,
+            "y": 97.42640570636041
+          }
+        },
+        {
+          "id": "E5",
+          "points": {
+            "left": {
+              "name": "[0,1]"
+            }
+          },
+          "position": {
+            "x": 2475.2540003641907,
+            "y": 231.95106357258408
+          }
+        }
+      ],
+      "rhombuses": [],
+      "triangles": [],
+      "rectangles": [
+        {
+          "id": "R5",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "LSE(3)"
+                },
+                {
+                  "name": "[0,1]^3"
+                },
+                {
+                  "name": "[0,1]^3"
+                },
+                {
+                  "name": "[0,1]"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "R^3"
+                },
+                {
+                  "name": "[0,1]^3"
+                }
+              ]
+            },
+            "total": {
+              "name": "Sphere"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 2945.8446901801076,
+            "y": -35.19212655090047
+          }
+        },
+        {
+          "id": "R6",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "P2"
+                }
+              ]
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "Shape"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 3033.3146835551556,
+            "y": 908.7915422656152
+          }
+        },
+        {
+          "id": "R7",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "Primitivo"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1790.2309237933562,
+            "y": 675.4737274239177
+          }
+        }
+      ]
+    },
+    "created_at": "2026-04-23 20:49:53.141983+00",
+    "updated_at": "2026-04-23 20:59:18.547+00"
+  },
+  {
+    "id": "12859c94-5d44-4e97-801d-082f60740f71",
+    "owned_by": "a2adaeb4-d718-4052-8412-d028581db4d2",
+    "title": "Document Workflow",
+    "data": {
+      "lines": [
+        {
+          "id": "uploadAVGS",
+          "points": {
+            "source": {
+              "name": "pdf",
+              "node": "C2",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "pdf",
+                "node": "R1",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "dataAVGS",
+          "points": {
+            "source": {
+              "name": "json",
+              "node": "R1",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "json",
+                "node": "R2",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              },
+              {
+                "name": "json",
+                "node": "R3",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              },
+              {
+                "name": "json",
+                "node": "R4",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "VertragSendung",
+          "points": {
+            "source": {
+              "name": "pdf",
+              "node": "R3",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "pdf",
+                "node": "R5",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "extraDataTrgbst",
+          "points": {
+            "source": {
+              "name": "json",
+              "node": "C1",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "json",
+                "node": "R2",
+                "side": "left",
+                "slot": "center",
+                "index": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "dataClient",
+          "points": {
+            "source": {
+              "name": "json",
+              "node": "R4",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "json",
+                "node": "R3",
+                "side": "up",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "dataTrgrbst",
+          "points": {
+            "source": {
+              "name": "P2",
+              "node": "R2",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "P2",
+                "node": "R3",
+                "side": "down",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "SignaturTrgr/Coach",
+          "points": {
+            "source": {
+              "name": "jpg",
+              "node": "E1",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "jpg",
+                "node": "R3",
+                "side": "down",
+                "index": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "SignaturTeiln",
+          "points": {
+            "source": {
+              "name": "jpg",
+              "node": "C3",
+              "side": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "jpg",
+                "node": "R5",
+                "side": "up",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "VertragSign",
+          "points": {
+            "source": {
+              "name": "pdf",
+              "node": "R5",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "pdf",
+                "node": "E3",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "CoachZuweisung",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "C1",
+              "side": "right",
+              "index": 1
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "R2",
+                "side": "left",
+                "slot": "center",
+                "index": 2
+              }
+            ]
+          }
+        },
+        {
+          "id": "dataErstgsprch",
+          "points": {
+            "source": {
+              "name": "pdf",
+              "node": "R6",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "pdf",
+                "node": "C1",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Erstgesprch",
+          "points": {
+            "source": {
+              "name": "json",
+              "node": "C4",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "json",
+                "node": "R6",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "dataVertragSign",
+          "points": {
+            "source": {
+              "name": "json",
+              "node": "R5",
+              "side": "right",
+              "slot": "center",
+              "index": 1
+            },
+            "targets": [
+              {
+                "name": "json",
+                "node": "R7",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Thema",
+          "points": {
+            "source": {
+              "name": "text",
+              "node": "E4",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "text",
+                "node": "R7",
+                "side": "left",
+                "slot": "center",
+                "index": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "Datum + TimeRange",
+          "points": {
+            "source": {
+              "name": "date/time",
+              "node": "E5",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "date/time",
+                "node": "R7",
+                "side": "left",
+                "slot": "center",
+                "index": 2
+              }
+            ]
+          }
+        },
+        {
+          "id": "Umfang (UE)",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "E6",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R7",
+                "side": "left",
+                "slot": "center",
+                "index": 3
+              }
+            ]
+          }
+        },
+        {
+          "id": "EinzelNachwSendung",
+          "points": {
+            "source": {
+              "name": "pdf",
+              "node": "R7",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "pdf",
+                "node": "R8",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "SignaturCoach",
+          "points": {
+            "source": {
+              "name": "jpg",
+              "node": "E7",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "jpg",
+                "node": "R8",
+                "side": "down",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "SignaturTeilnEinzlNachw",
+          "points": {
+            "source": {
+              "name": "jpg",
+              "node": "C5",
+              "side": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "jpg",
+                "node": "R8",
+                "side": "up",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "docEinzlNachw",
+          "points": {
+            "source": {
+              "name": "pdf",
+              "node": "R8",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "pdf",
+                "node": "E8",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "SignaturTeilnTeilnLst",
+          "points": {
+            "source": {
+              "name": "jpg",
+              "node": "C6",
+              "side": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "jpg",
+                "node": "R9",
+                "side": "up",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "docTeilnBesch.",
+          "points": {
+            "source": {
+              "name": "pdf",
+              "node": "R9",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "pdf",
+                "node": "C7",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "CoachinBeendet",
+          "points": {
+            "source": {
+              "name": "int",
+              "node": "R8",
+              "side": "right",
+              "slot": "center",
+              "index": 1
+            },
+            "targets": [
+              {
+                "name": "int",
+                "node": "R9",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              },
+              {
+                "name": "int",
+                "node": "R10",
+                "side": "up",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "dataEinzlnachw",
+          "points": {
+            "source": {
+              "name": "json",
+              "node": "R7",
+              "side": "right",
+              "slot": "center",
+              "index": 1
+            },
+            "targets": [
+              {
+                "name": "json",
+                "node": "R9",
+                "side": "left",
+                "slot": "center",
+                "index": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "docTeilnLst",
+          "points": {
+            "source": {
+              "name": "pdf",
+              "node": "R9",
+              "side": "right",
+              "slot": "center",
+              "index": 1
+            },
+            "targets": [
+              {
+                "name": "pdf",
+                "node": "E10",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "AfAFragen",
+          "points": {
+            "source": {
+              "name": "json",
+              "node": "C8",
+              "side": "right",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "json",
+                "node": "R10",
+                "side": "left",
+                "slot": "center",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "docAbschlsbr",
+          "points": {
+            "source": {
+              "name": "pdf",
+              "node": "R10",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "pdf",
+                "node": "C9",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "SignaturTrgr/CoachAbschlsbr",
+          "points": {
+            "source": {
+              "name": "jpg",
+              "node": "E11",
+              "side": "left",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "jpg",
+                "node": "R10",
+                "side": "down",
+                "index": 0
+              }
+            ]
+          }
+        }
+      ],
+      "circles": [
+        {
+          "id": "C1",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": [
+              {
+                "name": "pdf"
+              }
+            ],
+            "right": [
+              {
+                "name": "json"
+              },
+              {
+                "name": "text"
+              }
+            ],
+            "total": {
+              "name": "Trgr"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 332.13697314900776,
+            "y": 764.1945184298118
+          }
+        },
+        {
+          "id": "C2",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": [],
+            "right": [
+              {
+                "name": "pdf"
+              }
+            ],
+            "total": {
+              "name": "Trgr"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": -220.4157463553462,
+            "y": 294.2621867801499
+          }
+        },
+        {
+          "id": "C3",
+          "points": {
+            "up": [],
+            "down": [
+              {
+                "name": "jpg"
+              }
+            ],
+            "left": [],
+            "right": [],
+            "total": {
+              "name": "Teilnehmend."
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 2175.4475074204784,
+            "y": -199.54473701515462
+          }
+        },
+        {
+          "id": "C4",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": [],
+            "right": [
+              {
+                "name": "json"
+              }
+            ],
+            "total": {
+              "name": "Trgr"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": -727.3938279852862,
+            "y": 768.9562184009071
+          }
+        },
+        {
+          "id": "C5",
+          "points": {
+            "up": [],
+            "down": [
+              {
+                "name": "jpg"
+              }
+            ],
+            "left": [],
+            "right": [],
+            "total": {
+              "name": "Teilnehmend."
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 3463.5846146505896,
+            "y": -437.9836977093971
+          }
+        },
+        {
+          "id": "C6",
+          "points": {
+            "up": [],
+            "down": [
+              {
+                "name": "jpg"
+              }
+            ],
+            "left": [],
+            "right": [],
+            "total": {
+              "name": "Teilnehmd."
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 4089.6738513152363,
+            "y": -188.49743555056716
+          }
+        },
+        {
+          "id": "C7",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": [
+              {
+                "name": "pdf"
+              }
+            ],
+            "right": [],
+            "total": {
+              "name": "Teilnehmd."
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 4603.983704030693,
+            "y": 182.397881241734
+          }
+        },
+        {
+          "id": "C8",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": [],
+            "right": [
+              {
+                "name": "json"
+              }
+            ],
+            "total": {
+              "name": "Coach"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 2926.5595255443145,
+            "y": 1120.4347048737786
+          }
+        },
+        {
+          "id": "C9",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": [
+              {
+                "name": "pdf"
+              }
+            ],
+            "right": [],
+            "total": {
+              "name": "AfA"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 4101.677166921225,
+            "y": 1123.9015096807707
+          }
+        }
+      ],
+      "empties": [
+        {
+          "id": "E1",
+          "points": {
+            "right": {
+              "name": "jpg"
+            }
+          },
+          "position": {
+            "x": 1715.1717979121092,
+            "y": 725.0395967183953
+          }
+        },
+        {
+          "id": "E2",
+          "points": {},
+          "position": {
+            "x": 2295.246955941485,
+            "y": 163.22549023328452
+          }
+        },
+        {
+          "id": "E3",
+          "points": {
+            "left": {
+              "name": "pdf"
+            }
+          },
+          "position": {
+            "x": 2673.793875385945,
+            "y": 248.97217692594904
+          }
+        },
+        {
+          "id": "E4",
+          "points": {
+            "right": {
+              "name": "text"
+            }
+          },
+          "position": {
+            "x": 2492.72448077371,
+            "y": 632.2874549322835
+          }
+        },
+        {
+          "id": "E5",
+          "points": {
+            "right": {
+              "name": "date/time"
+            }
+          },
+          "position": {
+            "x": 2481.6964659296395,
+            "y": 717.1085787041922
+          }
+        },
+        {
+          "id": "E6",
+          "points": {
+            "right": {
+              "name": "int"
+            }
+          },
+          "position": {
+            "x": 2490.922758005669,
+            "y": 811.2680539284157
+          }
+        },
+        {
+          "id": "E7",
+          "points": {
+            "right": {
+              "name": "jpg"
+            }
+          },
+          "position": {
+            "x": 3509.0642733304035,
+            "y": 413.72128528358934
+          }
+        },
+        {
+          "id": "E8",
+          "points": {
+            "left": {
+              "name": "pdf"
+            }
+          },
+          "position": {
+            "x": 3865.4011072016265,
+            "y": 12.07453750571775
+          }
+        },
+        {
+          "id": "E10",
+          "points": {
+            "left": {
+              "name": "pdf"
+            }
+          },
+          "position": {
+            "x": 4519.190085555234,
+            "y": 726.309905033868
+          }
+        },
+        {
+          "id": "E11",
+          "points": {
+            "left": {
+              "name": "jpg"
+            }
+          },
+          "position": {
+            "x": 3665.888501417711,
+            "y": 1399.3804602847915
+          }
+        },
+        {
+          "id": "E9",
+          "points": {},
+          "position": {
+            "x": 145.88158646279402,
+            "y": 606.9711249680222
+          }
+        }
+      ],
+      "rhombuses": [],
+      "triangles": [],
+      "rectangles": [
+        {
+          "id": "R1",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "pdf"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "json"
+                }
+              ]
+            },
+            "total": {
+              "name": "AVGS verarbeiten"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 326.3937008112599,
+            "y": 299.6808723181883
+          }
+        },
+        {
+          "id": "R2",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "json"
+                },
+                {
+                  "name": "json"
+                },
+                {
+                  "name": "text"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "P2"
+                }
+              ]
+            },
+            "total": {
+              "name": "Trgrbst Erstellen"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1010.0391799180466,
+            "y": 815.7403264880642
+          }
+        },
+        {
+          "id": "R3",
+          "points": {
+            "up": [
+              {
+                "name": "json"
+              }
+            ],
+            "down": [
+              {
+                "name": "P2"
+              },
+              {
+                "name": "jpg"
+              }
+            ],
+            "left": {
+              "center": [
+                {
+                  "name": "json"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "pdf"
+                }
+              ]
+            },
+            "total": {
+              "name": "Vertrag erstellen"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1629.142000584479,
+            "y": 328.5670784072197
+          }
+        },
+        {
+          "id": "R4",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "json"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "json"
+                }
+              ]
+            },
+            "total": {
+              "name": "Stammdaten ausfuellen"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 995.3168038085657,
+            "y": -167.27543127662807
+          }
+        },
+        {
+          "id": "R5",
+          "points": {
+            "up": [
+              {
+                "name": "jpg"
+              }
+            ],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "pdf"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "pdf"
+                },
+                {
+                  "name": "json"
+                }
+              ]
+            },
+            "total": {
+              "name": "Vertrag unterschreiben"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 2178.1012460962097,
+            "y": 328.07202669022
+          }
+        },
+        {
+          "id": "R6",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "json"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "pdf"
+                }
+              ]
+            },
+            "total": {
+              "name": "Checkliste Erstgesprch ausfuellen"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": -209.77194111575355,
+            "y": 767.6711687208441
+          }
+        },
+        {
+          "id": "R7",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "json"
+                },
+                {
+                  "name": "text"
+                },
+                {
+                  "name": "date/time"
+                },
+                {
+                  "name": "int"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "pdf"
+                },
+                {
+                  "name": "json"
+                }
+              ]
+            },
+            "total": {
+              "name": "Einzelnachweis ausfuellen"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 2900.83704992837,
+            "y": 606.7766559309088
+          }
+        },
+        {
+          "id": "R8",
+          "points": {
+            "up": [
+              {
+                "name": "jpg"
+              }
+            ],
+            "down": [
+              {
+                "name": "jpg"
+              }
+            ],
+            "left": {
+              "center": [
+                {
+                  "name": "pdf"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "pdf"
+                },
+                {
+                  "name": "int"
+                }
+              ]
+            },
+            "total": {
+              "name": "Einzelnachweis unterschr"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 3460.1479622954844,
+            "y": 83.14148596500999
+          }
+        },
+        {
+          "id": "R9",
+          "points": {
+            "up": [
+              {
+                "name": "jpg"
+              }
+            ],
+            "down": [],
+            "left": {
+              "center": [
+                {
+                  "name": "int"
+                },
+                {
+                  "name": "json"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "pdf"
+                },
+                {
+                  "name": "pdf"
+                }
+              ]
+            },
+            "total": {
+              "name": "Teilnahmeliste ausfuellen"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 4083.347799721479,
+            "y": 619.7508047836532
+          }
+        },
+        {
+          "id": "R10",
+          "points": {
+            "up": [
+              {
+                "name": "int"
+              }
+            ],
+            "down": [
+              {
+                "name": "jpg"
+              }
+            ],
+            "left": {
+              "center": [
+                {
+                  "name": "json"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "pdf"
+                }
+              ]
+            },
+            "total": {
+              "name": "Abschlussbericht ausfuellen"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 3564.8073482791388,
+            "y": 991.3175699070221
+          }
+        }
+      ]
+    },
+    "created_at": "2026-04-24 07:41:12.728768+00",
+    "updated_at": "2026-04-25 09:08:21.747+00"
+  },
+  {
+    "id": "7b9ae38d-c736-46b0-8cc8-35733610ff13",
+    "owned_by": "4859cb7e-c8c5-4cbf-8b1a-ccbcf97a80ca",
+    "title": "Untitled",
+    "data": {
+      "lines": [],
+      "circles": [],
+      "empties": [],
+      "rhombuses": [],
+      "triangles": [],
+      "rectangles": []
+    },
+    "created_at": "2026-04-24 10:16:11.654493+00",
+    "updated_at": "2026-04-24 10:16:11.654493+00"
+  },
+  {
+    "id": "b49b1a4b-7536-4946-a09d-d815f36a32b7",
+    "owned_by": "4859cb7e-c8c5-4cbf-8b1a-ccbcf97a80ca",
+    "title": "Untitled",
+    "data": {
+      "lines": [
+        {
+          "id": "rGEH",
+          "points": {
+            "source": {
+              "name": "!!!!",
+              "node": "R2",
+              "side": "total",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "!!!!",
+                "node": "R1",
+                "side": "down",
+                "index": 0
+              },
+              {
+                "name": "!!!!",
+                "node": "E4",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        }
+      ],
+      "circles": [],
+      "empties": [
+        {
+          "id": "E1",
+          "points": {},
+          "position": {
+            "x": 388,
+            "y": 217
+          }
+        },
+        {
+          "id": "E2",
+          "points": {},
+          "position": {
+            "x": 341,
+            "y": 158
+          }
+        },
+        {
+          "id": "E3",
+          "points": {},
+          "position": {
+            "x": 298,
+            "y": 164.5
+          }
+        },
+        {
+          "id": "E4",
+          "points": {
+            "left": {
+              "name": "!!!!"
+            },
+            "right": {
+              "name": "!!!!"
+            }
+          },
+          "position": {
+            "x": -19.974471701232574,
+            "y": -376.76683178540173
+          }
+        }
+      ],
+      "rhombuses": [],
+      "triangles": [],
+      "rectangles": [
+        {
+          "id": "R1",
+          "points": {
+            "up": [],
+            "down": [
+              {
+                "name": "!!!!"
+              }
+            ],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "R1"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 298.56977347219953,
+            "y": 157.69598608701946
+          }
+        },
+        {
+          "id": "R2",
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "!!!!"
+            },
+            "center": {
+              "up": {
+                "name": "anderer Name"
+              }
+            }
+          },
+          "position": {
+            "x": 176.5301913193733,
+            "y": 813.2800994048094
+          }
+        }
+      ]
+    },
+    "created_at": "2026-04-24 10:16:20.777975+00",
+    "updated_at": "2026-04-24 10:18:30.696+00"
+  },
+  {
+    "id": "8a35b79a-d8f7-4187-8aba-c7021d0d9bdb",
+    "owned_by": "555fc181-0a41-4f58-bfd1-542a62efed5d",
+    "title": "Untitled",
+    "data": {
+      "lines": [
+        {
+          "id": "L1",
+          "points": {
+            "source": {
+              "name": "P2",
+              "node": "E1",
+              "side": "left",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "P2",
+                "node": "E2",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "L2",
+          "points": {
+            "source": {
+              "name": "P2",
+              "node": "E2",
+              "side": "left",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "P2",
+                "node": "E3",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "L3",
+          "points": {
+            "source": {
+              "name": "P2",
+              "node": "E5",
+              "side": "left",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "P2",
+                "node": "E6",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "L4",
+          "points": {
+            "source": {
+              "name": "P2",
+              "node": "E6",
+              "side": "left",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "P2",
+                "node": "E1",
+                "side": "right",
+                "index": 0
+              }
+            ]
+          }
+        }
+      ],
+      "circles": [],
+      "empties": [
+        {
+          "id": "E1",
+          "points": {
+            "left": {
+              "name": "P2"
+            },
+            "right": {
+              "name": "P2"
+            }
+          },
+          "position": {
+            "x": 767.5,
+            "y": 523
+          }
+        },
+        {
+          "id": "E2",
+          "points": {
+            "left": {
+              "name": "P2"
+            }
+          },
+          "position": {
+            "x": 816,
+            "y": 547
+          }
+        },
+        {
+          "id": "E3",
+          "points": {
+            "left": {
+              "name": "P2"
+            }
+          },
+          "position": {
+            "x": 758.5,
+            "y": 461.5
+          }
+        },
+        {
+          "id": "E4",
+          "points": {},
+          "position": {
+            "x": 963,
+            "y": 353
+          }
+        },
+        {
+          "id": "E5",
+          "points": {
+            "left": {
+              "name": "P2"
+            }
+          },
+          "position": {
+            "x": 911,
+            "y": 435.5
+          }
+        },
+        {
+          "id": "E6",
+          "points": {
+            "left": {
+              "name": "P2"
+            }
+          },
+          "position": {
+            "x": 1001,
+            "y": 459
+          }
+        }
+      ],
+      "rhombuses": [],
+      "triangles": [],
+      "rectangles": []
+    },
+    "created_at": "2026-04-24 10:18:00.286616+00",
+    "updated_at": "2026-04-24 10:19:10.06+00"
+  },
+  {
+    "id": "93a8e172-5547-4d24-a011-bee50911f8a4",
+    "owned_by": "30c53b3e-6981-44f5-a8f4-de94ec1ff333",
+    "title": "Semiotic Types",
+    "data": {
+      "lines": [
+        {
+          "id": "transform",
+          "points": {
+            "source": {
+              "name": "4.SpaceTime",
+              "node": "R1",
+              "side": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "4.SpaceTime",
+                "node": "E1",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "color",
+          "points": {
+            "source": {
+              "name": "3.Color",
+              "node": "R1",
+              "side": "right",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "3.Color",
+                "node": "E2",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "points",
+          "points": {
+            "source": {
+              "name": "0.ShapePoints[K]",
+              "node": "R1",
+              "side": "center",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "0.ShapePoints[K]",
+                "node": "E5",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "weight",
+          "points": {
+            "source": {
+              "name": "6.Mass",
+              "node": "R1",
+              "side": "center",
+              "slot": "down",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "6.Mass",
+                "node": "E6",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "order",
+          "points": {
+            "source": {
+              "name": "2.Order",
+              "node": "R1",
+              "side": "left",
+              "slot": "center",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "2.Order",
+                "node": "E7",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "equations",
+          "points": {
+            "source": {
+              "name": "5.Expression[]",
+              "node": "R1",
+              "side": "up",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "5.Expression[]",
+                "node": "E9",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Category Th. in Math",
+          "points": {
+            "source": {
+              "name": "Category Theory",
+              "node": "R3",
+              "side": "total",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "Category Theory",
+                "node": "R2",
+                "side": "center",
+                "slot": "up",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "id",
+          "points": {
+            "source": {
+              "name": "1.string",
+              "node": "R1",
+              "side": "center",
+              "slot": "up",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "1.string",
+                "node": "E3",
+                "side": "left",
+                "index": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "Geometry in Math",
+          "points": {
+            "source": {
+              "name": "Geometry",
+              "node": "R4",
+              "side": "total",
+              "index": 0
+            },
+            "targets": [
+              {
+                "name": "Geometry",
+                "node": "R2",
+                "side": "down",
+                "index": 0
+              }
+            ]
+          }
+        }
+      ],
+      "circles": [],
+      "empties": [
+        {
+          "id": "E1",
+          "points": {
+            "left": {
+              "name": "4.SpaceTime"
+            }
+          },
+          "position": {
+            "x": 1533.7829427669496,
+            "y": 733.592918966456
+          }
+        },
+        {
+          "id": "E2",
+          "points": {
+            "left": {
+              "name": "3.Color"
+            }
+          },
+          "position": {
+            "x": 1914.634029983892,
+            "y": 390.31411734913195
+          }
+        },
+        {
+          "id": "E5",
+          "points": {
+            "left": {
+              "name": "0.ShapePoints[K]"
+            }
+          },
+          "position": {
+            "x": 2013.793936855796,
+            "y": 267.9375735218993
+          }
+        },
+        {
+          "id": "E8",
+          "points": {},
+          "position": {
+            "x": 804.0777966814356,
+            "y": 360.15708769831315
+          }
+        },
+        {
+          "id": "E6",
+          "points": {
+            "left": {
+              "name": "6.Mass"
+            }
+          },
+          "position": {
+            "x": 2014.5756900598867,
+            "y": 518.1049458124098
+          }
+        },
+        {
+          "id": "E7",
+          "points": {
+            "left": {
+              "name": "2.Order"
+            }
+          },
+          "position": {
+            "x": 1158.8181280285662,
+            "y": 401.3068872048586
+          }
+        },
+        {
+          "id": "E9",
+          "points": {
+            "left": {
+              "name": "5.Expression[]"
+            }
+          },
+          "position": {
+            "x": 1532.30186704829,
+            "y": 57.53931191447384
+          }
+        },
+        {
+          "id": "E3",
+          "points": {
+            "left": {
+              "name": "1.string"
+            }
+          },
+          "position": {
+            "x": 1994.4014883139578,
+            "y": 154.84328944939807
+          }
+        }
+      ],
+      "rhombuses": [],
+      "triangles": [],
+      "rectangles": [
+        {
+          "id": "R1",
+          "points": {
+            "up": [
+              {
+                "name": "5.Expression[]"
+              }
+            ],
+            "down": [
+              {
+                "name": "4.SpaceTime"
+              }
+            ],
+            "left": {
+              "center": [
+                {
+                  "name": "2.Order"
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "3.Color"
+                }
+              ]
+            },
+            "total": {
+              "name": "-1.Shape"
+            },
+            "center": {
+              "up": {
+                "name": "1.string"
+              },
+              "down": {
+                "name": "6.Mass"
+              },
+              "center": {
+                "name": "0.ShapePoints[K]"
+              }
+            }
+          },
+          "position": {
+            "x": 1432.5,
+            "y": 324.5
+          }
+        },
+        {
+          "id": "R2",
+          "points": {
+            "up": [
+              {
+                "name": "Algebra"
+              }
+            ],
+            "down": [
+              {
+                "name": "Geometry"
+              }
+            ],
+            "left": {
+              "center": [
+                {
+                  "name": "Order Th."
+                }
+              ]
+            },
+            "right": {
+              "center": [
+                {
+                  "name": "Topology"
+                }
+              ]
+            },
+            "total": {
+              "name": "Mathematics"
+            },
+            "center": {
+              "up": {
+                "name": "Category Theory"
+              },
+              "down": {
+                "name": "Measure Theory"
+              },
+              "center": {
+                "name": "Set Theory"
+              }
+            }
+          },
+          "position": {
+            "x": 719.9548284797237,
+            "y": 329.9487175391517
+          }
+        },
+        {
+          "id": "R3",
+          "points": {
+            "up": [
+              {
+                "name": "Hom"
+              }
+            ],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "total": {
+              "name": "Category Theory"
+            },
+            "center": {
+              "up": {
+                "name": "ids"
+              },
+              "center": {
+                "name": "Obj"
+              }
+            }
+          },
+          "position": {
+            "x": 1488.960600828161,
+            "y": -529.1799001417968
+          }
+        },
+        {
+          "id": "R4",
+          "points": {
+            "up": [
+              {
+                "name": "+, -, *, /"
+              }
+            ],
+            "down": [
+              {
+                "name": "< , >"
+              }
+            ],
+            "left": {
+              "down": {
+                "name": "|| ||"
+              },
+              "center": [
+                {
+                  "name": ">, <"
+                }
+              ]
+            },
+            "right": {
+              "down": {
+                "name": "d( , )"
+              },
+              "center": []
+            },
+            "total": {
+              "name": "Geometry"
+            },
+            "center": {}
+          },
+          "position": {
+            "x": 1419.825306173449,
+            "y": 1148.8938606374786
+          }
+        }
+      ]
+    },
+    "created_at": "2026-04-24 15:44:35.581484+00",
+    "updated_at": "2026-04-25 09:29:05.592+00"
+  },
+  {
+    "id": "bde1e76e-016d-4ad8-9554-a28d27743ea4",
+    "owned_by": "a2adaeb4-d718-4052-8412-d028581db4d2",
+    "title": "Untitled",
+    "data": {
+      "lines": [],
+      "circles": [],
+      "empties": [],
+      "rhombuses": [],
+      "triangles": [],
+      "rectangles": []
+    },
+    "created_at": "2026-04-25 09:03:56.181855+00",
+    "updated_at": "2026-04-25 09:03:56.181855+00"
+  },
+  {
+    "id": "31ae467b-b4c0-43d2-aca6-43665be2ca49",
+    "owned_by": "30c53b3e-6981-44f5-a8f4-de94ec1ff333",
+    "title": "Untitled",
+    "data": {
+      "edges": [],
+      "nodes": [
+        {
+          "id": "S1",
+          "kind": "rectangle",
+          "color": [
+            1,
+            0,
+            0
+          ],
+          "order": 1,
+          "points": {
+            "up": [],
+            "down": [],
+            "left": {
+              "center": []
+            },
+            "right": {
+              "center": []
+            },
+            "center": {}
+          },
+          "weight": 1,
+          "equations": [],
+          "transform": {
+            "time": {
+              "created": 1777109567148,
+              "updated": 1777109679932
+            },
+            "space": {
+              "scale": [
+                1,
+                1
+              ],
+              "rotation": 0.12400236953148264,
+              "translation": [
+                22.575,
+                -7.666666666666667
+              ]
+            }
+          }
+        }
+      ],
+      "schemaVersion": 1
+    },
+    "created_at": "2026-04-25 09:32:44.784969+00",
+    "updated_at": "2026-04-25 09:34:40.5+00"
+  }
+]

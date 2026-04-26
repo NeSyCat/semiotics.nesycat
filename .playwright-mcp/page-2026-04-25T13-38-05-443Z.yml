@@ -1,0 +1,54 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - application [ref=e4]:
+      - generic [ref=e6]:
+        - generic:
+          - generic:
+            - group [ref=e7]:
+              - generic [ref=e8] [cursor=pointer]:
+                - generic [ref=e10]: E1
+                - generic [ref=e15]: τ
+            - group [ref=e19]:
+              - generic [ref=e20] [cursor=pointer]:
+                - generic [ref=e22]: E2
+                - generic [ref=e27]: S
+                - generic [ref=e32]: S_2
+            - group [ref=e36]:
+              - generic [ref=e37] [cursor=pointer]:
+                - generic [ref=e39]: E3
+                - generic [ref=e44]: T
+            - group [ref=e48]:
+              - generic [ref=e49] [cursor=pointer]:
+                - img
+                - generic:
+                  - generic:
+                    - img
+                - generic [ref=e51]: T_2
+                - generic [ref=e56]: τ_2
+                - generic [ref=e61]: τ_3
+            - group [ref=e65]:
+              - generic [ref=e68]: R
+            - group [ref=e72]:
+              - generic [ref=e73] [cursor=pointer]:
+                - img
+                - generic:
+                  - generic:
+                    - img
+                - generic [ref=e75]: D
+                - generic [ref=e80]: S_3
+                - generic [ref=e85]: τ_4
+            - group [ref=e89]:
+              - generic [ref=e90] [cursor=pointer]:
+                - img
+                - generic:
+                  - generic:
+                    - img
+                - generic [ref=e92]: D_2
+                - generic [ref=e97]: S_4
+                - generic [ref=e102]: τ_5
+      - img
+    - generic [ref=e107]:
+      - button "Kinds" [ref=e109] [cursor=pointer]
+      - button "Straight" [ref=e110] [cursor=pointer]
+    - button "JSON" [ref=e112] [cursor=pointer]
+  - alert [ref=e113]

@@ -238,6 +238,7 @@ export default function EditorSidebar({ diagrams }: { diagrams: Diagram[] }) {
   const [creating, setCreating] = useState(false)
   const [optimisticNew, setOptimisticNew] = useState<Diagram | null>(null)
   const [landingHref, setLandingHref] = useState('/')
+  const [query, setQuery] = useState('')
 
   // Expose sidebar width so canvas-overlay controls (Kinds/Straight, React Flow
   // Controls) can shift with the slide. Cleared on unmount so non-editor routes
@@ -300,6 +301,11 @@ export default function EditorSidebar({ diagrams }: { diagrams: Diagram[] }) {
     ? [optimisticNew, ...diagrams.filter((d) => d.id !== optimisticNew.id)]
     : diagrams
 
+  const q = query.trim().toLowerCase()
+  const filteredDiagrams = q
+    ? renderedDiagrams.filter((d) => (d.title || 'Untitled').toLowerCase().includes(q))
+    : renderedDiagrams
+
   return (
     <>
       <aside
@@ -326,30 +332,63 @@ export default function EditorSidebar({ diagrams }: { diagrams: Diagram[] }) {
             </span>
           </Link>
 
-          <div className="px-3 pt-3">
+          <div className="px-3 pt-3 flex items-center gap-2">
+            <div className="relative min-w-0 flex-1">
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search…"
+                aria-label="Search diagrams"
+                className="w-full rounded-md border text-[13px] outline-none"
+                style={{
+                  height: 36,
+                  paddingLeft: 12,
+                  paddingRight: query ? 32 : 12,
+                  borderColor: 'var(--color-glass-border)',
+                  background: 'var(--color-glass-button-bg)',
+                  color: 'var(--color-text-primary)',
+                }}
+              />
+              {query && (
+                <button
+                  type="button"
+                  aria-label="Clear search"
+                  title="Clear search"
+                  onClick={() => setQuery('')}
+                  className="absolute right-1 top-1/2 -translate-y-1/2 flex items-center justify-center rounded hover:bg-white/10"
+                  style={{ width: 24, height: 24, color: 'var(--color-text-muted)' }}
+                >
+                  <XIcon />
+                </button>
+              )}
+            </div>
             <button
               type="button"
               onClick={onCreate}
               disabled={creating}
-              className="flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-md border px-3 py-2 text-[13px] font-semibold transition-colors hover:bg-white/5 disabled:opacity-70"
+              aria-label="New diagram"
+              title="New diagram"
+              className="flex shrink-0 items-center justify-center rounded-md border text-[18px] font-semibold leading-none transition-colors hover:bg-white/5 disabled:opacity-70"
               style={{
+                width: 36,
+                height: 36,
                 borderColor: 'var(--color-glass-border)',
                 background: 'var(--color-glass-button-bg)',
-                color: 'var(--color-text-primary)',
+                color: 'var(--color-text-muted)',
               }}
             >
-              {creating ? <Spinner /> : null}
-              <span>{creating ? 'Creating…' : '+ New diagram'}</span>
+              {creating ? <Spinner /> : '+'}
             </button>
           </div>
 
           <div className="flex-1 overflow-auto pt-3">
-            {renderedDiagrams.length === 0 ? (
+            {filteredDiagrams.length === 0 ? (
               <div className="t-small px-4 py-4" style={{ color: 'var(--color-text-dimmed)' }}>
-                {creating ? 'Creating…' : 'No diagrams yet.'}
+                {creating ? 'Creating…' : q ? 'No matches.' : 'No diagrams yet.'}
               </div>
             ) : (
-              renderedDiagrams.map((d) => (
+              filteredDiagrams.map((d) => (
                 <DiagramItem
                   key={d.id}
                   d={d}

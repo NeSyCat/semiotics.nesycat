@@ -1,0 +1,33 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - application [ref=e4]:
+      - generic [ref=e6]:
+        - generic:
+          - generic:
+            - group [ref=e7]:
+              - generic [ref=e8] [cursor=pointer]:
+                - generic [ref=e10]: τ
+                - generic [ref=e15]: id
+            - group [ref=e19]:
+              - generic [ref=e20] [cursor=pointer]:
+                - img
+                - generic:
+                  - generic:
+                    - img
+                - generic [ref=e22]: T
+                - generic [ref=e27]: σ
+                - generic [ref=e32]: f
+            - group [ref=e36]:
+              - generic [ref=e39]: R
+            - group [ref=e43]:
+              - generic [ref=e44] [cursor=pointer]:
+                - generic [ref=e46]: C
+                - generic [ref=e51]: r
+                - generic [ref=e56]: id_2
+                - generic [ref=e61]: f_2
+      - img
+    - generic [ref=e66]:
+      - button "Kinds" [ref=e68] [cursor=pointer]
+      - button "Straight" [ref=e69] [cursor=pointer]
+    - button "JSON" [ref=e71] [cursor=pointer]
+  - alert [ref=e72]

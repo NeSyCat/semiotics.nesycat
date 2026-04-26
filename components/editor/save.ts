@@ -3,13 +3,13 @@
 import { useEffect, useRef } from 'react'
 import { useStore, isHydrating } from './store'
 import { saveDiagram } from '@/lib/actions/diagrams'
-import type { DiagramData } from './types'
+import type { Diagram } from './types'
 
 const DEBOUNCE_MS = 300
 
 export function useAutosave(diagramId: string | null) {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const pendingRef = useRef<DiagramData | null>(null)
+  const pendingRef = useRef<Diagram | null>(null)
   // Serialized payload of the last successful save. Guards against redundant
   // server-action calls when two distinct diagram references happen to encode
   // the same content (e.g. an edit followed by an undo that restores the
