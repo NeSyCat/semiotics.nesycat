@@ -361,7 +361,6 @@ function ShapeView({ data, selected }: NodeProps) {
   const setSelectedPoints = useStore((s) => s.setSelectedPoints)
   const toggleSelectedPoint = useStore((s) => s.toggleSelectedPoint)
   const renamePoint = useStore((s) => s.renamePoint)
-  const renameNode = useStore((s) => s.renameNode)
 
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editText, setEditText] = useState('')
@@ -377,40 +376,34 @@ function ShapeView({ data, selected }: NodeProps) {
     setEditingId(pid)
     setEditText(currentName)
   }
-  function commitEdit(isSelf: boolean) {
+  function commitEdit() {
     if (!editingId) return
     const next = editText.trim()
-    if (next) {
-      if (isSelf) renameNode(editingId, next)
-      else renamePoint(editingId, next)
-    }
+    if (next) renamePoint(editingId, next)
     setEditingId(null)
   }
 
   // Render a label. `pid` is the stable internal id (drives selection state
   // and edit-target identity); `name` is the user-visible text and may collide
-  // across shapes. Editing edits `name`; the id is immutable.
-  function renderLabel(pid: string, name: string, anchor: SlotAnchor, isSelf: boolean) {
+  // across shapes. Editing edits `name`; the id is immutable. ONE styling for
+  // every point — total has no special "self" treatment.
+  function renderLabel(pid: string, name: string, anchor: SlotAnchor) {
     const editing = editingId === pid
     const sel = isSelected(pid)
     const baseStyle: React.CSSProperties = {
-      fontSize: isSelf ? theme.fontSize : theme.smallFontSize,
-      fontWeight: isSelf ? 600 : 500,
-      color: isSelf ? theme.text.primary : (sel ? theme.text.primary : theme.text.secondary),
-      textShadow: isSelf ? theme.text.shadow : undefined,
-      fontFamily: isSelf ? 'inherit' : "'SF Mono', Menlo, monospace",
-      background: !isSelf && sel ? `rgba(${accent}, 0.25)` : 'transparent',
-      border: !isSelf && sel ? `1px solid rgba(${accent}, 0.7)` : '1px solid transparent',
+      fontSize: theme.smallFontSize,
+      fontWeight: 500,
+      color: sel ? theme.text.primary : theme.text.secondary,
+      fontFamily: "'SF Mono', Menlo, monospace",
+      background: sel ? `rgba(${accent}, 0.25)` : 'transparent',
+      border: sel ? `1px solid rgba(${accent}, 0.7)` : '1px solid transparent',
       borderRadius: 3,
-      padding: isSelf ? 0 : '1px 5px',
+      padding: '1px 5px',
       boxSizing: 'border-box',
       lineHeight: 1.3,
       whiteSpace: 'nowrap',
     }
-    const containerStyle: React.CSSProperties = {
-      ...labelStyle(anchor, n),
-      ...(isSelf ? { zIndex: 2 } : {}),
-    }
+    const containerStyle: React.CSSProperties = labelStyle(anchor, n)
     if (editing) {
       const textAlign = anchor.position === Position.Left ? 'right'
         : anchor.position === Position.Right ? 'left' : 'center'
@@ -421,10 +414,10 @@ function ShapeView({ data, selected }: NodeProps) {
             value={editText}
             onChange={(e) => setEditText(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter') commitEdit(isSelf)
+              if (e.key === 'Enter') commitEdit()
               if (e.key === 'Escape') setEditingId(null)
             }}
-            onBlur={() => commitEdit(isSelf)}
+            onBlur={() => commitEdit()}
             size={Math.max(1, editText.length)}
             style={{ ...baseStyle, outline: 'none', textAlign }}
           />
@@ -434,7 +427,7 @@ function ShapeView({ data, selected }: NodeProps) {
     return (
       <div key={`lbl-${pid}`} style={containerStyle}>
         <span
-          className={isSelf ? 'point-label total-label' : 'point-label'}
+          className="point-label"
           onClick={(e) => {
             e.stopPropagation()
             const sp = { pointId: pid }
@@ -469,23 +462,21 @@ function ShapeView({ data, selected }: NodeProps) {
   const borderOpacity = (selected ? theme.node.selectedBorderOpacity : theme.node.borderOpacity) * geom.bodyOpacity
 
   // Per-point handles + labels — every slot the schema enumerates, including
-  // `total`. The total slot is now a regular MaybePoint: when set it renders
-  // here like any other point; when unset it gets a plus button (below) like
-  // any other addable Maybe. No special-case rendering of shape.id/shape.name.
+  // `total`. The total slot is just another MaybePoint: when set it renders
+  // here like any other point; when unset it gets a plus button (below). No
+  // per-slot styling — one pipeline governs every point.
   const present = enumeratePoints(kind, shape.points)
   const pointVisuals = present.map((e) => {
     const anchor = geom.pointAnchor(shape.points as never, e.slot, e.subslot, e.index, n)
     if (!anchor) return null
     const handleId = handleIdFor(e.slot, e.subslot, e.index)
     const pid = e.point.id
-    const isSelfTotal = e.slot === 'total'
     return (
       <span key={`pt-${pid}`}>
-        {renderLabel(pid, e.point.name, anchor, isSelfTotal)}
+        {renderLabel(pid, e.point.name, anchor)}
         <BiHandle
           position={anchor.position}
           id={handleId}
-          className={isSelfTotal ? 'total-handle' : undefined}
           style={{
             ...pointDotStyle(accent, isSelected(pid)),
             top: anchor.y,

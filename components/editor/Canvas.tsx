@@ -23,7 +23,7 @@ import { useStore, initStore } from './store'
 import { useAutosave } from './save'
 import { enumerateAddable, enumeratePoints, findShape, getPointAt } from './points'
 import { geometryFor } from './geometry'
-import type { AnyShape, Diagram, ShapeKind, Slot, Subslot } from './types'
+import { SLOTS, type AnyShape, type Diagram, type ShapeKind, type Slot, type Subslot } from './types'
 import theme, { panelStyle, glassBlur } from './style/theme'
 
 const nodeTypes: NodeTypes = { node: DiagramNode }
@@ -80,31 +80,29 @@ function pointIdToHandle(d: Diagram, pointId: string): { nodeId: string; handleI
   }
 }
 
-// Resolve a drop's subslot from cursor's vertical position. Per-kind rules
-// live in `geometry.dropSubslot` as DATA — Canvas reads from the registry,
-// no kind-name switching here.
-function resolveDropSubslot(kind: ShapeKind, slot: Slot, ry: number): Subslot | undefined {
-  return geometryFor(kind).dropSubslot(slot, ry)
-}
-
 // Pick a drop's (slot, subslot) on `shape` from cursor (rx, ry) ∈ [0,1]².
-// Same five candidates for every kind — no per-kind exceptions. Filtered against
-// `enumerateAddable` so occupied MAYBE slots drop out (no overwrite, no fall-
-// through guard needed downstream); then sorted by proximity. Returns undefined
-// when nothing is addable.
+// Schema-driven: walk every slot the kind declares, ask the geometry where its
+// `+` button would sit, pick the addable one whose anchor is closest to the
+// cursor in pixel space. No hard-coded slot list, no per-slot distance heuristic
+// — the position comes entirely from per-kind data in geometry.ts.
 function pickDropSlot(shape: AnyShape, rx: number, ry: number): { slot: Slot; subslot?: Subslot } | undefined {
+  const geom = geometryFor(shape.kind)
+  const n = geom.nodeSize(shape.points as never)
+  const cx = rx * n
+  const cy = ry * n
   const addable = enumerateAddable(shape.kind, shape.points)
-  const dists: Array<{ slot: Slot; dist: number }> = [
-    { slot: 'left',   dist: rx },
-    { slot: 'right',  dist: 1 - rx },
-    { slot: 'up',     dist: ry },
-    { slot: 'down',   dist: 1 - ry },
-    { slot: 'center', dist: Math.max(Math.abs(rx - 0.5), Math.abs(ry - 0.5)) },
-  ]
-  return dists
-    .map((c) => ({ slot: c.slot, subslot: resolveDropSubslot(shape.kind, c.slot, ry), dist: c.dist }))
-    .filter((c) => addable.some((a) => a.slot === c.slot && a.subslot === c.subslot))
-    .sort((a, b) => a.dist - b.dist)[0]
+  let best: { slot: Slot; subslot?: Subslot; dist: number } | undefined
+  for (const slot of SLOTS) {
+    const subslot = geom.dropSubslot(slot, ry)
+    if (!addable.some((a) => a.slot === slot && a.subslot === subslot)) continue
+    const anchor = geom.plusAnchor(shape.points as never, slot, subslot, n)
+    if (!anchor) continue
+    const dx = anchor.x - cx
+    const dy = anchor.y - cy
+    const dist = Math.sqrt(dx * dx + dy * dy)
+    if (!best || dist < best.dist) best = { slot, subslot, dist }
+  }
+  return best && { slot: best.slot, subslot: best.subslot }
 }
 
 function Canvas() {

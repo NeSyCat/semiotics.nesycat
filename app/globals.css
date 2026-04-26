@@ -153,8 +153,9 @@ input[type="search"]::-webkit-search-results-decoration {
   will-change: stroke-dashoffset;
 }
 
-/* Hide point dots and labels via CSS — no React re-render needed. */
-.points-hidden .react-flow__handle:not(.total-handle) {
+/* Hide ALL point dots and labels via CSS — total is just another point and
+   the visibility toggle hides it uniformly with the rest. */
+.points-hidden .react-flow__handle {
   width: 1px !important;
   height: 1px !important;
   min-width: 0 !important;
@@ -163,7 +164,7 @@ input[type="search"]::-webkit-search-results-decoration {
   opacity: 0 !important;
   box-shadow: none !important;
 }
-.points-hidden .point-label:not(.total-label) {
+.points-hidden .point-label {
   display: none !important;
 }
 
