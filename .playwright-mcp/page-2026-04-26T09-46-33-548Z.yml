@@ -1,0 +1,65 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - application [ref=e4]:
+      - generic [ref=e6]:
+        - generic:
+          - generic:
+            - img:
+              - group "Edge from P to impl." [ref=e7] [cursor=pointer]
+            - img:
+              - group "Edge from Q to impl." [ref=e10] [cursor=pointer]
+            - img:
+              - group "Edge from E2 to P" [ref=e13] [cursor=pointer]
+            - img:
+              - group "Edge from E2 to Q" [ref=e16] [cursor=pointer]
+          - generic:
+            - generic [ref=e20]: p
+            - generic [ref=e22]: q
+            - generic [ref=e24]: x
+            - generic [ref=e26]: x
+          - generic:
+            - group [ref=e27]:
+              - generic [ref=e28] [cursor=pointer]:
+                - generic [ref=e33]: τ
+                - generic [ref=e38]: E1
+            - group [ref=e42]:
+              - generic [ref=e43] [cursor=pointer]:
+                - generic [ref=e48]: S
+                - generic [ref=e53]: S
+                - generic [ref=e58]: E2
+            - group [ref=e62]:
+              - generic [ref=e63] [cursor=pointer]:
+                - generic [ref=e68]: T
+                - generic [ref=e73]: E3
+            - group [ref=e77]:
+              - generic [ref=e78] [cursor=pointer]:
+                - img
+                - img [ref=e82]
+                - generic [ref=e85]: τ
+                - generic [ref=e90]: τ
+                - generic [ref=e95]: impl.
+            - group [ref=e99]:
+              - generic [ref=e100] [cursor=pointer]:
+                - img
+                - img [ref=e104]
+                - generic [ref=e107]: c
+            - group [ref=e111]:
+              - generic [ref=e112] [cursor=pointer]:
+                - img
+                - img [ref=e116]
+                - generic [ref=e119]: S
+                - generic [ref=e124]: τ
+                - generic [ref=e129]: P
+            - group [ref=e133]:
+              - generic [ref=e134] [cursor=pointer]:
+                - img
+                - img [ref=e138]
+                - generic [ref=e141]: S
+                - generic [ref=e146]: τ
+                - generic [ref=e151]: Q
+      - img
+    - generic [ref=e156]:
+      - button "Kinds" [ref=e158] [cursor=pointer]
+      - button "Straight" [ref=e159] [cursor=pointer]
+    - button "JSON" [ref=e161] [cursor=pointer]
+  - alert [ref=e162]

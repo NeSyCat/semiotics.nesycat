@@ -1,0 +1,88 @@
+[      92ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[     101ms] [LOG] [HMR] connected @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1379630ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1379677ms] [LOG] [Fast Refresh] done in 43ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1395268ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1395295ms] [LOG] [Fast Refresh] done in 20ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1403765ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1403790ms] [LOG] [Fast Refresh] done in 22ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1413908ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1413931ms] [LOG] [Fast Refresh] done in 21ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1429156ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1429182ms] [LOG] [Fast Refresh] done in 21ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1436565ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1436586ms] [LOG] [Fast Refresh] done in 26ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1444923ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1444946ms] [LOG] [Fast Refresh] done in 28ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1454351ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1454377ms] [LOG] [Fast Refresh] done in 23ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1463883ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1463909ms] [LOG] [Fast Refresh] done in 20ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1470520ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1470536ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1470537ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1470594ms] [LOG] [Fast Refresh] done in 19ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1493070ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1493083ms] ReferenceError: selfBlock is not defined
+    at ShapeView (http://localhost:3456/_next/static/chunks/_07wadv0._.js?id=%255Bproject%255D%252Fcomponents%252Feditor%252FDiagramNode.tsx+%255Bapp-client%255D+%2528ecmascript%2529:721:13)
+    at Object.react_stack_bottom_frame (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:15037:24)
+    at renderWithHooks (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6081:21)
+    at updateSimpleMemoComponent (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5944:16)
+    at beginWork (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6780:24)
+    at runWithFiberInDEV (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:74)
+    at performUnitOfWork (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9555:97)
+    at workLoopSync (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9449:40)
+    at renderRootSync (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9098:47)
+    at performSyncWorkOnRoot (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10263:9)
+    at flushSyncWorkAcrossRoots_impl (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10179:316)
+    at flushSyncWork$1 (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9230:86)
+    at Object.scheduleRefresh (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:299:13)
+    at http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:391:33
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:384:38)
+    at applyUpdate (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:878:31)
+    at http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:886:13
+[ 1493103ms] [LOG] [Fast Refresh] done in 26ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1497559ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1497561ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1497598ms] [LOG] [Fast Refresh] done in 21ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1497668ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1497678ms] [LOG] [HMR] connected @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1517056ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1517079ms] [LOG] [Fast Refresh] done in 21ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1544667ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1544677ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1544677ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1544715ms] [LOG] [Fast Refresh] done in 17ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1559212ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1559216ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1559217ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1559241ms] [LOG] [Fast Refresh] done in 17ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1580358ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1580362ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1580363ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1580387ms] [LOG] [Fast Refresh] done in 23ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1597162ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1597165ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1597166ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1597192ms] [LOG] [Fast Refresh] done in 18ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1615793ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1615817ms] [LOG] [Fast Refresh] done in 28ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1623327ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1623350ms] [LOG] [Fast Refresh] done in 34ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1635327ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1635348ms] [LOG] [Fast Refresh] done in 26ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1647365ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1647395ms] [LOG] [Fast Refresh] done in 17ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1661630ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1661659ms] [LOG] [Fast Refresh] done in 19ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1699397ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1699400ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1699401ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1699445ms] [LOG] [Fast Refresh] done in 30ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1707686ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1707698ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1707699ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1707735ms] [LOG] [Fast Refresh] done in 18ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431

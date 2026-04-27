@@ -1,0 +1,16 @@
+[     367ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[     429ms] [LOG] [HMR] connected @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  977102ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  977133ms] [LOG] [Fast Refresh] done in 33ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  992591ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  992615ms] [LOG] [Fast Refresh] done in 30ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1051840ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1051866ms] [LOG] [Fast Refresh] done in 23ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1059560ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1059585ms] [LOG] [Fast Refresh] done in 23ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1075030ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1075057ms] [LOG] [Fast Refresh] done in 22ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1089595ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1089620ms] [LOG] [Fast Refresh] done in 23ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1105346ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 1105376ms] [LOG] [Fast Refresh] done in 34ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431

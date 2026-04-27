@@ -1,0 +1,141 @@
+[      79ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[      89ms] [LOG] [HMR] connected @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  765042ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  765057ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  765057ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  765068ms] [LOG] [Fast Refresh] done in 26ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  794721ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  794725ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  794725ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  794750ms] [LOG] [Fast Refresh] done in 19ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  824062ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  824091ms] [LOG] [Fast Refresh] done in 19ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  893552ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  893562ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  893563ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  893626ms] ReferenceError: handleIsDynamic is not defined
+    at EditableEdge (http://localhost:3456/_next/static/chunks/_07wadv0._.js?id=%255Bproject%255D%252Fcomponents%252Feditor%252FDiagramEdge.tsx+%255Bapp-client%255D+%2528ecmascript%2529:58:26)
+    at Object.react_stack_bottom_frame (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:15037:24)
+    at renderWithHooks (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6081:21)
+    at updateSimpleMemoComponent (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5944:16)
+    at updateMemoComponent (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5919:302)
+    at beginWork (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6778:24)
+    at runWithFiberInDEV (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:74)
+    at performUnitOfWork (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9555:97)
+    at workLoopSync (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9449:40)
+    at renderRootSync (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9098:47)
+    at performSyncWorkOnRoot (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10263:9)
+    at flushSyncWorkAcrossRoots_impl (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10179:316)
+    at processRootScheduleInMicrotask (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10200:106)
+    at http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10274:158
+[  893623ms] [LOG] [Fast Refresh] done in 23ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  899752ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  899753ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  899808ms] ReferenceError: handleIsDynamic is not defined
+    at EditableEdge (http://localhost:3456/_next/static/chunks/_07wadv0._.js?id=%255Bproject%255D%252Fcomponents%252Feditor%252FDiagramEdge.tsx+%255Bapp-client%255D+%2528ecmascript%2529:58:26)
+    at Object.react_stack_bottom_frame (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:15037:24)
+    at renderWithHooks (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6081:21)
+    at updateSimpleMemoComponent (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5944:16)
+    at updateMemoComponent (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5919:302)
+    at beginWork (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6778:24)
+    at runWithFiberInDEV (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:74)
+    at performUnitOfWork (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9555:97)
+    at workLoopSync (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9449:40)
+    at renderRootSync (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9098:47)
+    at performSyncWorkOnRoot (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10263:9)
+    at flushSyncWorkAcrossRoots_impl (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10179:316)
+    at processRootScheduleInMicrotask (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10200:106)
+    at http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10274:158
+[  899789ms] [LOG] [Fast Refresh] done in 17ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  899862ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  899870ms] [LOG] [HMR] connected @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  899917ms] ReferenceError: handleIsDynamic is not defined
+    at EditableEdge (http://localhost:3456/_next/static/chunks/_07wadv0._.js:3135:26)
+    at Object.react_stack_bottom_frame (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:15037:24)
+    at renderWithHooks (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6081:21)
+    at updateSimpleMemoComponent (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5944:16)
+    at updateMemoComponent (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:5919:302)
+    at beginWork (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6778:24)
+    at runWithFiberInDEV (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:74)
+    at performUnitOfWork (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9555:97)
+    at workLoopSync (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9449:40)
+    at renderRootSync (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9098:47)
+    at performSyncWorkOnRoot (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10263:9)
+    at flushSyncWorkAcrossRoots_impl (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10179:316)
+    at processRootScheduleInMicrotask (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10200:106)
+    at http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10274:158
+[  913294ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  913295ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  913322ms] [LOG] [Fast Refresh] done in 21ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  913354ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  913363ms] [LOG] [HMR] connected @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  927627ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  927652ms] [LOG] [Fast Refresh] done in 24ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  934252ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  934280ms] [LOG] [Fast Refresh] done in 20ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  953904ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  953907ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  953929ms] [LOG] [Fast Refresh] done in 24ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  954046ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  954129ms] [LOG] [Fast Refresh] done in 184ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  954230ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  954300ms] [LOG] [Fast Refresh] done in 170ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  954304ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3456/embed/sample/CSG:0
+[  954318ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  954325ms] [LOG] [HMR] connected @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  954378ms] ReferenceError: maybeLen is not defined
+    at module evaluation (http://localhost:3456/_next/static/chunks/_07wadv0._.js:1370:1)
+    at http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:1307:27
+    at runModuleExecutionHooks (http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:1636:13)
+    at instantiateModuleShared (http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:1305:9)
+    at instantiateModule (http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:1621:12)
+    at getOrInstantiateModuleFromParent (http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:1604:12)
+    at DevContext.esmImport [as i] (http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:278:20)
+    at module evaluation (http://localhost:3456/_next/static/chunks/_07wadv0._.js:2344:161)
+    at http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:1307:27
+    at runModuleExecutionHooks (http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:1636:13)
+    at instantiateModuleShared (http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:1305:9)
+    at instantiateModule (http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:1621:12)
+    at getOrInstantiateModuleFromParent (http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:1604:12)
+    at DevContext.esmImport [as i] (http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:278:20)
+    at module evaluation (http://localhost:3456/_next/static/chunks/_07wadv0._.js:3410:165)
+    at http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:1307:27
+    at runModuleExecutionHooks (http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:1636:13)
+    at instantiateModuleShared (http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:1305:9)
+    at instantiateModule (http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:1621:12)
+    at getOrInstantiateModuleFromParent (http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:1604:12)
+    at DevContext.commonJsRequire [as r] (http://localhost:3456/_next/static/chunks/turbopack-_0p44nws._.js:299:12)
+    at requireModule (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_0p3wegg._.js:95:84)
+    at initializeModuleChunk (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_0p3wegg._.js:1110:25)
+    at resolveModuleChunk (http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_0p3wegg._.js:1030:43)
+    at http://localhost:3456/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_0p3wegg._.js:1758:24
+[  954380ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3456/favicon.ico:0
+[  957381ms] [WARNING] The resource http://localhost:3456/_next/static/chunks/node_modules_%40xyflow_react_dist_style_0iupz4v.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3456/embed/sample/CSG:0
+[  966146ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  966147ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  966148ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  966168ms] [LOG] [Fast Refresh] done in 27ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  966255ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  966264ms] [LOG] [HMR] connected @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  996020ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  996046ms] [LOG] [Fast Refresh] done in 29ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431

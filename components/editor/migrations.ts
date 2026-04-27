@@ -42,9 +42,12 @@ function pickExtras(obj: object, known: ReadonlyArray<string>): Record<string, u
 }
 
 function canonicalShape<S extends AnyShape>(s: S): S {
+  // Field order matches the Shape interface in types.ts. `name` is spread
+  // conditionally so the key is OMITTED (not set to undefined) when absent —
+  // the JSON output then has no name field at all for nameless shapes.
   return {
     id: s.id,
-    name: s.name,
+    ...(s.name !== undefined && { name: s.name }),
     points: canonicalPoints(s.kind, s.points),
     kind: s.kind,
     order: s.order,
@@ -59,7 +62,7 @@ function canonicalShape<S extends AnyShape>(s: S): S {
 function canonicalLine(l: AnyLine): AnyLine {
   return {
     id: l.id,
-    name: l.name,
+    ...(l.name !== undefined && { name: l.name }),
     points: canonicalPoints(l.kind, l.points),
     kind: l.kind,
     order: l.order,

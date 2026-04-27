@@ -1,0 +1,97 @@
+[      80ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[      89ms] [LOG] [HMR] connected @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  370689ms] [ERROR] ./components/editor/Canvas.tsx:37:10
+the name `parseHandle` is defined multiple times
+  35 | //   "${slot}-${index}"         → list/maybe slot (slot ∈ Slot)
+  36 | //   "${slot}-${subslot}-${idx}"→ triadic slot
+> 37 | function parseHandle(handleId: string): { slot: Slot; subslot?: Subslot; index: number } {
+     |          ^^^^^^^^^^^
+  38 |   const parts = handleId.split('-')
+  39 |   if (parts.length === 3) return { slot: parts[0] as Slot, subslot: parts[1] as Subslot, i...
+  40 |   return { slot: parts[0] as Slot, index: parseInt(parts[1]) }
+
+Ecmascript file had an error
+
+Import trace:
+  Server Component:
+    ./components/editor/Canvas.tsx
+    ./app/editor/[id]/page.tsx @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  370699ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  370734ms] [ERROR] ./components/editor/Canvas.tsx:37:10
+the name `parseHandle` is defined multiple times
+  35 | //   "${slot}-${index}"         → list/maybe slot (slot ∈ Slot)
+  36 | //   "${slot}-${subslot}-${idx}"→ triadic slot
+> 37 | function parseHandle(handleId: string): { slot: Slot; subslot?: Subslot; index: number } {
+     |          ^^^^^^^^^^^
+  38 |   const parts = handleId.split('-')
+  39 |   if (parts.length === 3) return { slot: parts[0] as Slot, subslot: parts[1] as Subslot, i...
+  40 |   return { slot: parts[0] as Slot, index: parseInt(parts[1]) }
+
+Ecmascript file had an error
+
+Import trace:
+  Server Component:
+    ./components/editor/Canvas.tsx
+    ./app/editor/[id]/page.tsx @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  370802ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  379900ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  379948ms] [LOG] [Fast Refresh] done in 56ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  411401ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  411425ms] [LOG] [Fast Refresh] done in 30ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  416733ms] [ERROR] ./components/editor/DiagramNode.tsx:268:10
+the name `handleIdFor` is defined multiple times
+  266 |
+  267 | // Build handle id from slot/subslot/index. Mirrors the OLD parseHandle grammar.
+> 268 | function handleIdFor(slot: Slot, subslot: Subslot | undefined, index: number): string {
+      |          ^^^^^^^^^^^
+  269 |   return subslot ? `${slot}-${subslot}-${index}` : `${slot}-${index}`
+  270 | }
+  271 |
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./components/editor/DiagramNode.tsx [Client Component Browser]
+    ./components/editor/Canvas.tsx [Client Component Browser]
+    ./components/editor/Canvas.tsx [Server Component]
+    ./app/editor/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/editor/DiagramNode.tsx [Client Component SSR]
+    ./components/editor/Canvas.tsx [Client Component SSR]
+    ./components/editor/Canvas.tsx [Server Component]
+    ./app/editor/[id]/page.tsx [Server Component] @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  416780ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  422314ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  422356ms] [LOG] [Fast Refresh] done in 43ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  436545ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  436573ms] [LOG] [Fast Refresh] done in 21ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  510408ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  510419ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  510419ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  510431ms] [LOG] [Fast Refresh] done in 25ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  521456ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  521460ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  521460ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  521481ms] [LOG] [Fast Refresh] done in 23ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  534654ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  534659ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  534659ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  534677ms] [LOG] [Fast Refresh] done in 23ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  544249ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  544253ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  544254ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  544272ms] [LOG] [Fast Refresh] done in 23ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  564112ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  564116ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  564117ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  564135ms] [LOG] [Fast Refresh] done in 25ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  579285ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  579288ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  579288ms] [WARNING] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002 @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  579315ms] [LOG] [Fast Refresh] done in 18ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  602463ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  602485ms] [LOG] [Fast Refresh] done in 28ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  615054ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  615077ms] [LOG] [Fast Refresh] done in 26ms @ http://localhost:3456/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431

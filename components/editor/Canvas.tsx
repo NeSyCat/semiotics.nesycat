@@ -216,7 +216,7 @@ function Canvas() {
           animated: true,
           hidden: !visibility.lines,
           data: {
-            label: line.id,
+            label: line.name ?? line.id,
             onRename: (newName: string) => renameLine(line.id, newName),
           },
         })

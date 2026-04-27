@@ -34,8 +34,13 @@ function makeShape<K extends ShapeKind>(
   // is a labeled leaf). Outer / intermediate shapes — created by addNode /
   // addEmpty without a name — leave `.name` undefined. Their identity comes
   // from walking their `points.total` chain to the labeled leaf.
-  const base = {
+  // Field order MUST match the Shape interface in types.ts so JSON output
+  // mirrors the canonical layout (id, name, points, kind, order, color,
+  // transform, equations, weight). Spread inserts name conditionally between
+  // id and points without losing object-literal type checking.
+  return {
     id,
+    ...(name !== undefined && { name }),
     points: emptyShapePoints(kind),
     kind,
     order,
@@ -43,15 +48,18 @@ function makeShape<K extends ShapeKind>(
     transform: defaultSpaceTime(translation),
     equations: [],
     weight: 1,
-  }
-  return (name === undefined ? base : { ...base, name }) as AnyShape
+  } as AnyShape
 }
 
-function makeLine(id: string, source: string, target: string, name?: string): AnyLine {
-  const base = {
+function makeLine(id: string, source: string, target: string, name: string = id): AnyLine {
+  // Lines are labeled entities (their .name renders as the edge label), so
+  // they always have a name — defaulting to the id when no explicit name is
+  // provided, same convention as addPoint for labeled leaves.
+  return {
     id,
+    name,
     points: emptyShapePoints('empty'),
-    kind: 'empty' as const,
+    kind: 'empty',
     order: 0,
     color: DEFAULT_COLOR,
     transform: defaultSpaceTime(),
@@ -59,8 +67,7 @@ function makeLine(id: string, source: string, target: string, name?: string): An
     weight: 1,
     source,
     targets: [target],
-  }
-  return (name === undefined ? base : { ...base, name }) as AnyLine
+  } as AnyLine
 }
 
 // === Helpers ===
