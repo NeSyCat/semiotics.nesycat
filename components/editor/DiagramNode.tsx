@@ -13,7 +13,7 @@ import {
   type CanonicalFrame,
   type SlotAnchor,
 } from './geometry'
-import { enumerateAddable, enumeratePoints, walkShape } from './points'
+import { enumerateAddable, enumeratePoints, shapeLabel, walkShape } from './points'
 import { handleIdFor } from './handles'
 import { toRgbTriple } from './color'
 import { useStore } from './store'
@@ -466,9 +466,13 @@ function ShapeView({ data, selected }: NodeProps) {
     if (!anchor) return null
     const handleId = handleIdFor(e.slot, e.subslot, e.index)
     const pid = e.point.id
+    // Label resolves through the total chain — for a labeled leaf returns its
+    // own .name; for an intermediate shape, walks down to the terminator. If
+    // no shape in the chain has a name, the label is suppressed.
+    const label = shapeLabel(e.point)
     return (
       <span key={`pt-${pid}`}>
-        {renderLabel(pid, e.point.name, anchor)}
+        {label !== undefined && renderLabel(pid, label, anchor)}
         <BiHandle
           position={anchor.position}
           id={handleId}

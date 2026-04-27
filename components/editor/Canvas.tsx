@@ -21,7 +21,7 @@ import DiagramNode from './DiagramNode'
 import DiagramEdge from './DiagramEdge'
 import { useStore, initStore } from './store'
 import { useAutosave } from './save'
-import { enumerateAddable, enumeratePoints, findShape, getPointAt } from './points'
+import { enumerateAddable, enumeratePoints, findShape, getPointAt, shapeLabel } from './points'
 import { geometryFor, geometryRegistry } from './geometry'
 import { handleIdFor, parseHandle } from './handles'
 import { SLOTS, type AnyShape, type Diagram, type ShapeKind, type Slot, type Subslot } from './types'
@@ -43,7 +43,9 @@ function lookupPointId(d: Diagram, nodeId: string, handleId: string): string | u
   return undefined
 }
 
-// Resolve a point id → its current `name` for endpoint-name inheritance on drop.
+// Resolve a point id → its current visible label for endpoint-name inheritance
+// on drop. Walks the total chain via shapeLabel — for a labeled leaf returns
+// its own .name; for an intermediate shape walks down to the terminator.
 function lookupShapeName(d: Diagram, id: string): string | undefined {
   const loc = findShape(d, id)
   if (!loc) return undefined
@@ -53,7 +55,7 @@ function lookupShapeName(d: Diagram, id: string): string | undefined {
     if (!next) return undefined
     cur = next
   }
-  return cur.name
+  return shapeLabel(cur)
 }
 
 // Inverse: point id → (RF node id, handle id) for edge endpoint resolution.

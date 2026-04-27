@@ -276,6 +276,21 @@ export function* walkAllShapes(d: Diagram): Generator<AnyShape> {
   for (const e of d.edges) yield* walkShape(e)
 }
 
+// Walk the `points.total` chain down to its terminator (the deepest shape
+// whose own `points.total` is undefined) and return that terminator's name.
+// The shape's identity is the leaf at the end of the total chain — for an
+// outer shape with `points.total = leaf{name:"Cats"}`, returns "Cats". For
+// a bare leaf with `points.total = undefined`, returns the leaf's own name.
+// Returns undefined if no shape in the chain has a name set.
+export function shapeLabel(s: AnyShape | undefined): string | undefined {
+  if (!s) return undefined
+  let cur: AnyShape = s
+  while ((cur.points as { total?: AnyShape }).total !== undefined) {
+    cur = (cur.points as { total: AnyShape }).total
+  }
+  return cur.name
+}
+
 // Locate where a shape (by id) lives in the diagram and the path to it from
 // its top-level container. `topShape` is the diagram-level node or edge whose
 // recursive `points` tree contains the target. `path` is empty when the target

@@ -108,12 +108,14 @@ export type Mass = number
 // trailing comments record each field's slot. `points` is recursive: each slot
 // holds another Shape (or `undefined` / `[]` at leaves), so the type bottoms
 // out cleanly without a separate Point declaration. `id` is the unique internal
-// identifier; `name` is the user-visible label and may collide (line endpoints
-// dragged from a point inherit the source's name, so the same name reads as
-// "the same referent" across multiple visual occurrences).
+// identifier; `name` is OPTIONAL — set on terminator leaves (the `points.total`
+// chain endpoints that carry a visible label). Outer / intermediate shapes have
+// `name === undefined`; their identity is read by walking down their
+// `points.total` chain to the labeled leaf. Same name across multiple shapes
+// reads as "the same referent" (semiotic intent).
 export interface Shape<K extends ShapeKind = ShapeKind> {
   id:        string           // -2  (left.up)
-  name:      string           // -1  (right.up)
+  name?:     string           // -1  (right.up) — only set on labeled leaves
   points:    ShapePoints[K]   //  0  (center.center)
   kind:      K                //  1  (center.up)
   order:     Order            //  2  (left.center)

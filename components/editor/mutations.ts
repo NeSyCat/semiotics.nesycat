@@ -9,7 +9,7 @@
 import type { AnyLine, AnyShape, Diagram, ShapeKind, Slot, Subslot } from './types'
 import {
   addPointAt, emptyShapePoints, findShape, getPointAt,
-  modifyAtPath, replaceEdge, replaceNode, walkShape,
+  modifyAtPath, replaceEdge, replaceNode, shapeLabel, walkShape,
 } from './points'
 import { newLineId, newNodeId, newPointId } from './ids'
 import { defaultSpaceTime, withTranslation } from './transform'
@@ -28,11 +28,14 @@ function makeShape<K extends ShapeKind>(
   id: string,
   translation: [number, number] = [0, 0],
   order = 0,
-  name: string = id,
+  name?: string,
 ): AnyShape {
-  return {
+  // `name` is set only when the caller explicitly provides one (i.e., the shape
+  // is a labeled leaf). Outer / intermediate shapes — created by addNode /
+  // addEmpty without a name — leave `.name` undefined. Their identity comes
+  // from walking their `points.total` chain to the labeled leaf.
+  const base = {
     id,
-    name,
     points: emptyShapePoints(kind),
     kind,
     order,
@@ -40,15 +43,15 @@ function makeShape<K extends ShapeKind>(
     transform: defaultSpaceTime(translation),
     equations: [],
     weight: 1,
-  } as AnyShape
+  }
+  return (name === undefined ? base : { ...base, name }) as AnyShape
 }
 
-function makeLine(id: string, source: string, target: string, name: string = id): AnyLine {
-  return {
+function makeLine(id: string, source: string, target: string, name?: string): AnyLine {
+  const base = {
     id,
-    name,
     points: emptyShapePoints('empty'),
-    kind: 'empty',
+    kind: 'empty' as const,
     order: 0,
     color: DEFAULT_COLOR,
     transform: defaultSpaceTime(),
@@ -56,7 +59,8 @@ function makeLine(id: string, source: string, target: string, name: string = id)
     weight: 1,
     source,
     targets: [target],
-  } as AnyLine
+  }
+  return (name === undefined ? base : { ...base, name }) as AnyLine
 }
 
 // === Helpers ===
@@ -114,12 +118,16 @@ export function renameNode(d: Diagram, id: string, newName: string): Diagram {
 // === Generic shape rename — works on any shape (top-level or nested). ===
 // Edits the user-visible `name`; `id` is immutable so line refs stay valid.
 // Names may collide across shapes — that's the point (e.g. two endpoints both
-// called "x" share a referent). Empty names are rejected (label would vanish).
+// called "x" share a referent). Only shapes that ALREADY have a `.name` get
+// renamed; nameless carrier shapes (outers, intermediates) are left alone so
+// the rename-propagation BFS doesn't accidentally label them. Empty names
+// are rejected (label would vanish).
 function renameShape(d: Diagram, id: string, newName: string): Diagram {
   if (!newName.trim()) return d
   const loc = findShape(d, id)
   if (!loc) return d
-  const replacer = (s: AnyShape): AnyShape => ({ ...s, name: newName } as AnyShape)
+  const replacer = (s: AnyShape): AnyShape =>
+    s.name === undefined ? s : ({ ...s, name: newName } as AnyShape)
   const newTop = modifyAtPath(loc.topShape, loc.path, replacer)
   if (newTop === undefined) return d
   return loc.topContainer === 'nodes'
@@ -288,15 +296,18 @@ export function addLineWithFreeEnd(
   return [d3, { emptyId, lineId }]
 }
 
-// Resolve a point id → its current `name` (used when a new endpoint should
-// inherit the source's label). Returns undefined if the id isn't found.
+// Resolve a point id → its current visible label (used when a new endpoint
+// should inherit the source's label). Walks the total chain via shapeLabel —
+// for a labeled leaf returns its own .name; for an intermediate shape walks
+// down to the terminator. Returns undefined if the id isn't found or the
+// shape has no labeled total leaf.
 function findShapeName(d: Diagram, id: string): string | undefined {
   const loc = findShape(d, id)
   if (!loc) return undefined
   const s = loc.path.length === 0
     ? loc.topShape
     : walkToPath(loc.topShape, loc.path)
-  return s?.name
+  return shapeLabel(s)
 }
 
 export type LineEnd = { kind: 'source' } | { kind: 'target'; index: number }
