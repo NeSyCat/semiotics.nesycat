@@ -143,12 +143,24 @@ export interface ShapeGeometry<K extends ShapeKind> {
   // returns the subslot the new point should land in (undefined ⇒ no subslot).
   // Replaces hard-coded `kind === 'rhombus' || kind === 'rectangle'` switches in Canvas.
   dropSubslot: (slot: Slot, ry: number) => Subslot | undefined
-  // True if this kind is a carrier — a wrapper kind whose body has no meaning
-  // beyond holding inner points. Carriers self-delete when their last inner
-  // point is removed (orphan-cleanup in mutations.ts). NOTE: carriers do NOT
-  // share identity with their inner points — sibling points inside a carrier
-  // are still SEPARATE referents at distinct slots, and renaming one does not
-  // propagate to the others. False for kinds whose body itself is meaningful.
+  // True if this kind is a carrier — a transient wrapper whose identity IS
+  // its payload (its inner point), not its body. Two consumer behaviors flow
+  // from this single semantic role:
+  //
+  //   1. Orphan-cleanup (mutations.ts): when the last inner point is removed,
+  //      the carrier is deleted from the diagram (no body to leave behind).
+  //   2. Drag-to-attach (Canvas.tsx onNodeDragStop): dragging a single-shape
+  //      carrier onto another shape re-parents the carrier's inner point
+  //      INTO that shape — the user is interpreted as moving the payload.
+  //
+  // Both behaviors derive from "carrier IS its payload"; non-carrier kinds
+  // (rectangle, circle, etc.) have meaningful bodies and skip both behaviors.
+  //
+  // NOTE: carriers do NOT share identity ACROSS their sibling inner points —
+  // a carrier holding multiple points (left + center + right) has SEPARATE
+  // referents at each slot; renaming one does not propagate to the others.
+  // The carrier-ness is about the wrapper-vs-payload relationship, not about
+  // sibling identity.
   isCarrier: boolean
   // Plural label shown in the Kinds visibility menu.
   displayName: string
