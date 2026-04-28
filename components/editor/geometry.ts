@@ -315,11 +315,21 @@ const triangleGeometry: ShapeGeometry<'triangle'> = {
     return undefined
   },
   plusAnchor: (_p, slot, _sub, n) => {
-    if (slot === 'up')     return { x: triApexX(n), y: triApexY(n) - 30, position: Position.Top    }
-    if (slot === 'down')   return { x: n / 2,       y: triBaseY(n) + 30, position: Position.Bottom }
-    if (slot === 'left')   return { x: -30,         y: triCenterY(n),    position: Position.Left   }
-    if (slot === 'right')  return { x: n + 30,      y: triCenterY(n),    position: Position.Right  }
-    if (slot === 'center') return { x: n / 2,       y: triCenterY(n),    position: Position.Top    }
+    // Plus buttons sit ON the triangle's edges and corners — same convention
+    // as rhombus and rectangle. The apex is the up-slot corner, the base
+    // midpoint is the down-slot anchor, and left/right plus sit at the
+    // midpoint of each slanted edge.
+    if (slot === 'up')     return { x: triApexX(n), y: triApexY(n),    position: Position.Top    }
+    if (slot === 'down')   return { x: n / 2,       y: triBaseY(n),    position: Position.Bottom }
+    if (slot === 'left')   {
+      const [x, y] = triSlantPt('left', 0.5, n)
+      return { x, y, position: Position.Left }
+    }
+    if (slot === 'right')  {
+      const [x, y] = triSlantPt('right', 0.5, n)
+      return { x, y, position: Position.Right }
+    }
+    if (slot === 'center') return { x: n / 2, y: triCenterY(n), position: Position.Top }
     if (slot === 'total')  return frameNWAnchor(triangleBody, n)
     return undefined
   },
