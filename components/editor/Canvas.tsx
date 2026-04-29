@@ -222,52 +222,27 @@ function Canvas() {
         })
       })
     }
-    // === PASS 1: per-pair label spread ===
-    // Group edges by the DIRECTED (source, target) pair (bidirectional pairs
-    // stay in separate groups — otherwise symmetric offsets push labels the
-    // same way in world space and merge instead of separating).
+    // === Greedy MIS label placement (single pass) ===
+    // Industry-standard generic post-processing for edge label overlap (cf.
+    // yWorks GreedyMISLabeling on a DiscreteEdgeLabelModel). Walk edges in
+    // id order; for each, try a discrete set of `labelFraction` candidates
+    // along its line and place at the first one whose label box doesn't
+    // overlap an already-placed label. If everything collides, keep the
+    // initial midpoint and accept the residual overlap.
     //
-    // Only nudge when the widest label in a group is wide enough to hard-
-    // overlap at the midpoint. Short labels keep their natural midpoint.
+    // Multi-edges between the same source / target don't need a separate
+    // pre-spread: they all start at fraction 0.5, and the greedy collision
+    // detection nudges every-but-the-first to the alternative fractions.
+    // No magic NUDGE_THRESHOLD — narrow labels stay at midpoint when they
+    // don't actually collide.
+    //
+    // Endpoint resolver uses the EXACT handle position (`parseHandle` +
+    // `geom.pointAnchor`) — same coordinates DiagramEdge renders the line
+    // at, so the collision detector matches the rendered geometry.
     const CHAR_W = 7
     const LABEL_PADDING = 16
     const LABEL_HEIGHT = 22
-    const NUDGE_THRESHOLD_PX = 100
-    const STEP = 0.1
-    const groups = new Map<string, Edge[]>()
-    for (const e of out) {
-      const key = `${e.source}|${e.target}`
-      const list = groups.get(key) ?? []
-      list.push(e)
-      groups.set(key, list)
-    }
-    for (const group of groups.values()) {
-      if (group.length < 2) continue
-      const maxLabelWidth = Math.max(...group.map((e) => {
-        const label = (e.data as { label?: string })?.label ?? ''
-        return label.length * CHAR_W + LABEL_PADDING
-      }))
-      if (maxLabelWidth < NUDGE_THRESHOLD_PX) continue
-      group.sort((a, b) => a.id.localeCompare(b.id))
-      const mid = (group.length - 1) / 2
-      group.forEach((e, i) => {
-        const fraction = 0.5 + (i - mid) * STEP
-        e.data = { ...(e.data ?? {}), labelFraction: fraction }
-      })
-    }
-
-    // === PASS 2: cross-pair spatial collision avoidance ===
-    // Two edges between DIFFERENT node pairs can still have their label boxes
-    // collide in screen space (e.g. two parallel lines running close together).
-    // Greedy placement: walk edges in id order, for each one try labelFraction
-    // candidates until one places the label box without overlapping any
-    // previously-placed label.
-    //
-    // Endpoint resolver uses the EXACT handle position (`parseHandle` +
-    // `geom.pointAnchor`) — same coordinates DiagramEdge renders the line at,
-    // so the collision detector matches the rendered geometry. (Approximating
-    // as node centers had a small but real bias, which let some labels collide
-    // visually while looking non-colliding to the heuristic.)
+    const TRY_FRACTIONS = [0.5, 0.4, 0.6, 0.35, 0.65, 0.3, 0.7, 0.25, 0.75, 0.2, 0.8]
     const endpointPosition = (
       nodeId: string,
       handleId: string | null | undefined,
@@ -285,7 +260,6 @@ function Canvas() {
         y: node.transform.space.translation[1] + anchor.y,
       }
     }
-    const TRY_FRACTIONS = [0.5, 0.4, 0.6, 0.35, 0.65, 0.3, 0.7, 0.25, 0.75, 0.2, 0.8]
     interface Box { x: number; y: number; w: number; h: number }
     const overlap = (a: Box, b: Box) =>
       Math.abs(a.x - b.x) < (a.w + b.w) / 2 && Math.abs(a.y - b.y) < (a.h + b.h) / 2
@@ -297,12 +271,10 @@ function Canvas() {
       if (!a || !b) continue
       const label = (e.data as { label?: string })?.label ?? ''
       const w = label.length * CHAR_W + LABEL_PADDING
-      const initialT = (e.data as { labelFraction?: number })?.labelFraction ?? 0.5
-      const candidates = [initialT, ...TRY_FRACTIONS.filter((t) => t !== initialT)]
       const xAt = (t: number) => a.x + (b.x - a.x) * t
       const yAt = (t: number) => a.y + (b.y - a.y) * t
-      let chosen = initialT
-      for (const t of candidates) {
+      let chosen = 0.5
+      for (const t of TRY_FRACTIONS) {
         const box: Box = { x: xAt(t), y: yAt(t), w, h: LABEL_HEIGHT }
         if (!placed.some((p) => overlap(p, box))) {
           chosen = t
@@ -310,7 +282,7 @@ function Canvas() {
         }
       }
       placed.push({ x: xAt(chosen), y: yAt(chosen), w, h: LABEL_HEIGHT })
-      if (chosen !== initialT) {
+      if (chosen !== 0.5) {
         e.data = { ...(e.data ?? {}), labelFraction: chosen }
       }
     }
