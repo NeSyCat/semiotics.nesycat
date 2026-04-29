@@ -261,16 +261,29 @@ function Canvas() {
     // collide in screen space (e.g. two parallel lines running close together).
     // Greedy placement: walk edges in id order, for each one try labelFraction
     // candidates until one places the label box without overlapping any
-    // previously-placed label. Approximates the line endpoint as the source/
-    // target node center — good enough for collision detection.
-    const nodeCenter = new Map<string, { cx: number; cy: number }>()
-    for (const node of diagram.nodes) {
+    // previously-placed label.
+    //
+    // Endpoint resolver uses the EXACT handle position (`parseHandle` +
+    // `geom.pointAnchor`) — same coordinates DiagramEdge renders the line at,
+    // so the collision detector matches the rendered geometry. (Approximating
+    // as node centers had a small but real bias, which let some labels collide
+    // visually while looking non-colliding to the heuristic.)
+    const endpointPosition = (
+      nodeId: string,
+      handleId: string | null | undefined,
+    ): { x: number; y: number } | undefined => {
+      if (!handleId) return undefined
+      const node = diagram.nodes.find((n) => n.id === nodeId)
+      if (!node) return undefined
       const g = geometryFor(node.kind)
-      const half = g.nodeSize(node.points as never) / 2
-      nodeCenter.set(node.id, {
-        cx: node.transform.space.translation[0] + half,
-        cy: node.transform.space.translation[1] + half,
-      })
+      const n = g.nodeSize(node.points as never)
+      const { slot, subslot, index } = parseHandle(handleId)
+      const anchor = g.pointAnchor(node.points as never, slot, subslot, index, n)
+      if (!anchor) return undefined
+      return {
+        x: node.transform.space.translation[0] + anchor.x,
+        y: node.transform.space.translation[1] + anchor.y,
+      }
     }
     const TRY_FRACTIONS = [0.5, 0.4, 0.6, 0.35, 0.65, 0.3, 0.7, 0.25, 0.75, 0.2, 0.8]
     interface Box { x: number; y: number; w: number; h: number }
@@ -279,15 +292,15 @@ function Canvas() {
     const placed: Box[] = []
     const sortedEdges = [...out].sort((a, b) => a.id.localeCompare(b.id))
     for (const e of sortedEdges) {
-      const a = nodeCenter.get(e.source)
-      const b = nodeCenter.get(e.target)
+      const a = endpointPosition(e.source, e.sourceHandle)
+      const b = endpointPosition(e.target, e.targetHandle)
       if (!a || !b) continue
       const label = (e.data as { label?: string })?.label ?? ''
       const w = label.length * CHAR_W + LABEL_PADDING
       const initialT = (e.data as { labelFraction?: number })?.labelFraction ?? 0.5
       const candidates = [initialT, ...TRY_FRACTIONS.filter((t) => t !== initialT)]
-      const xAt = (t: number) => a.cx + (b.cx - a.cx) * t
-      const yAt = (t: number) => a.cy + (b.cy - a.cy) * t
+      const xAt = (t: number) => a.x + (b.x - a.x) * t
+      const yAt = (t: number) => a.y + (b.y - a.y) * t
       let chosen = initialT
       for (const t of candidates) {
         const box: Box = { x: xAt(t), y: yAt(t), w, h: LABEL_HEIGHT }
