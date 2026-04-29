@@ -222,18 +222,16 @@ function Canvas() {
         })
       })
     }
-    // Label anti-overlap: group edges by the DIRECTED (source,target) pair
-    // (bidirectional pairs stay in separate groups — otherwise symmetric
-    // offsets push labels the same way in world space and merge instead of
-    // separating).
+    // === PASS 1: per-pair label spread ===
+    // Group edges by the DIRECTED (source, target) pair (bidirectional pairs
+    // stay in separate groups — otherwise symmetric offsets push labels the
+    // same way in world space and merge instead of separating).
     //
     // Only nudge when the widest label in a group is wide enough to hard-
-    // overlap at the midpoint. Short labels (≲ NUDGE_THRESHOLD_PX) keep their
-    // natural midpoint. Wide ones get a GENTLE centered spread around 0.5
-    // (step 0.1 per index) so labels stay near the line center instead of
-    // being pushed toward the endpoints.
+    // overlap at the midpoint. Short labels keep their natural midpoint.
     const CHAR_W = 7
     const LABEL_PADDING = 16
+    const LABEL_HEIGHT = 22
     const NUDGE_THRESHOLD_PX = 100
     const STEP = 0.1
     const groups = new Map<string, Edge[]>()
@@ -256,6 +254,52 @@ function Canvas() {
         const fraction = 0.5 + (i - mid) * STEP
         e.data = { ...(e.data ?? {}), labelFraction: fraction }
       })
+    }
+
+    // === PASS 2: cross-pair spatial collision avoidance ===
+    // Two edges between DIFFERENT node pairs can still have their label boxes
+    // collide in screen space (e.g. two parallel lines running close together).
+    // Greedy placement: walk edges in id order, for each one try labelFraction
+    // candidates until one places the label box without overlapping any
+    // previously-placed label. Approximates the line endpoint as the source/
+    // target node center — good enough for collision detection.
+    const nodeCenter = new Map<string, { cx: number; cy: number }>()
+    for (const node of diagram.nodes) {
+      const g = geometryFor(node.kind)
+      const half = g.nodeSize(node.points as never) / 2
+      nodeCenter.set(node.id, {
+        cx: node.transform.space.translation[0] + half,
+        cy: node.transform.space.translation[1] + half,
+      })
+    }
+    const TRY_FRACTIONS = [0.5, 0.4, 0.6, 0.35, 0.65, 0.3, 0.7, 0.25, 0.75, 0.2, 0.8]
+    interface Box { x: number; y: number; w: number; h: number }
+    const overlap = (a: Box, b: Box) =>
+      Math.abs(a.x - b.x) < (a.w + b.w) / 2 && Math.abs(a.y - b.y) < (a.h + b.h) / 2
+    const placed: Box[] = []
+    const sortedEdges = [...out].sort((a, b) => a.id.localeCompare(b.id))
+    for (const e of sortedEdges) {
+      const a = nodeCenter.get(e.source)
+      const b = nodeCenter.get(e.target)
+      if (!a || !b) continue
+      const label = (e.data as { label?: string })?.label ?? ''
+      const w = label.length * CHAR_W + LABEL_PADDING
+      const initialT = (e.data as { labelFraction?: number })?.labelFraction ?? 0.5
+      const candidates = [initialT, ...TRY_FRACTIONS.filter((t) => t !== initialT)]
+      const xAt = (t: number) => a.cx + (b.cx - a.cx) * t
+      const yAt = (t: number) => a.cy + (b.cy - a.cy) * t
+      let chosen = initialT
+      for (const t of candidates) {
+        const box: Box = { x: xAt(t), y: yAt(t), w, h: LABEL_HEIGHT }
+        if (!placed.some((p) => overlap(p, box))) {
+          chosen = t
+          break
+        }
+      }
+      placed.push({ x: xAt(chosen), y: yAt(chosen), w, h: LABEL_HEIGHT })
+      if (chosen !== initialT) {
+        e.data = { ...(e.data ?? {}), labelFraction: chosen }
+      }
     }
     return out
   }, [diagram, visibility.lines, renameLine])
