@@ -153,9 +153,11 @@ input[type="search"]::-webkit-search-results-decoration {
   will-change: stroke-dashoffset;
 }
 
-/* Hide ALL point dots and labels via CSS — total is just another point and
-   the visibility toggle hides it uniformly with the rest. */
-.points-hidden .react-flow__handle {
+/* Hide point dots and labels via CSS when the Points toggle is off. The
+   total slot is exempt — it carries the shape's identity anchor (its label
+   is the shape's name), so each shape stays addressable when Points are
+   hidden. */
+.points-hidden .react-flow__handle:not(.total-handle) {
   width: 1px !important;
   height: 1px !important;
   min-width: 0 !important;
@@ -164,7 +166,7 @@ input[type="search"]::-webkit-search-results-decoration {
   opacity: 0 !important;
   box-shadow: none !important;
 }
-.points-hidden .point-label {
+.points-hidden .point-label:not(.total-label) {
   display: none !important;
 }
 

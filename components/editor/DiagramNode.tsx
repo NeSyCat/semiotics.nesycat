@@ -380,9 +380,10 @@ function ShapeView({ data, selected }: NodeProps) {
 
   // Render a label. `pid` is the stable internal id (drives selection state
   // and edit-target identity); `name` is the user-visible text and may collide
-  // across shapes. Editing edits `name`; the id is immutable. ONE styling for
-  // every point — total has no special "self" treatment.
-  function renderLabel(pid: string, name: string, anchor: SlotAnchor) {
+  // across shapes. Editing edits `name`; the id is immutable. `extraClass` is
+  // appended to the span's className so per-slot CSS rules (e.g. exempting
+  // total labels from the .points-hidden rule) can target specific labels.
+  function renderLabel(pid: string, name: string, anchor: SlotAnchor, extraClass?: string) {
     const editing = editingId === pid
     const sel = isSelected(pid)
     const baseStyle: React.CSSProperties = {
@@ -422,7 +423,7 @@ function ShapeView({ data, selected }: NodeProps) {
     return (
       <div key={`lbl-${pid}`} style={containerStyle}>
         <span
-          className="point-label"
+          className={extraClass ? `point-label ${extraClass}` : 'point-label'}
           onClick={(e) => {
             e.stopPropagation()
             const sp = { pointId: pid }
@@ -486,12 +487,17 @@ function ShapeView({ data, selected }: NodeProps) {
     // own .name; for an intermediate shape, walks down to the terminator. If
     // no shape in the chain has a name, the label is suppressed.
     const label = shapeLabel(e.point)
+    // Tag the total slot's handle and label so the .points-hidden CSS rule
+    // can exempt them — total is the shape's identity anchor, kept visible
+    // when the user toggles Points off so each shape stays addressable.
+    const isTotal = e.slot === 'total'
     return (
       <span key={`pt-${pid}`}>
-        {label !== undefined && renderLabel(pid, label, anchor)}
+        {label !== undefined && renderLabel(pid, label, anchor, isTotal ? 'total-label' : undefined)}
         <BiHandle
           position={anchor.position}
           id={handleId}
+          className={isTotal ? 'total-handle' : undefined}
           style={{
             ...pointDotStyle(accent, isSelected(pid)),
             top: anchor.y,
