@@ -259,7 +259,7 @@ const emptyBody: CanonicalBody = { type: 'circle' }
 const emptyGeometry: ShapeGeometry<'empty'> = {
   body: emptyBody,
   bodyOpacity: 0,
-  nodeSize: () => BASE_SIZE / 4,
+  nodeSize: () => BASE_SIZE / 2,
   pointAnchor: (_p, slot, _sub, _idx, n) => {
     if (slot === 'left')   return { x: 0,     y: n / 2, position: Position.Left   }
     if (slot === 'right')  return { x: n,     y: n / 2, position: Position.Right  }
