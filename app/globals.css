@@ -153,11 +153,16 @@ input[type="search"]::-webkit-search-results-decoration {
   will-change: stroke-dashoffset;
 }
 
-/* Hide point dots and labels via CSS when the Points toggle is off. The
-   total slot is exempt — it carries the shape's identity anchor (its label
-   is the shape's name), so each shape stays addressable when Points are
-   hidden. */
-.points-hidden .react-flow__handle:not(.total-handle) {
+/* Hide point dots and labels via CSS when the Points toggle is off, then
+   re-show the total slot — its label is the shape's identity anchor, kept
+   visible when Points are toggled off so each shape stays addressable.
+
+   We use override-and-undo (not :not()) because Tailwind v4 / Lightning CSS
+   strips `:not(.total-*)` exclusions when those classes aren't used as
+   selectors elsewhere. The override pattern below survives that pass:
+   the exemption rules use `.total-handle` / `.total-label` as full
+   selectors, which the optimizer keeps. */
+.points-hidden .react-flow__handle {
   width: 1px !important;
   height: 1px !important;
   min-width: 0 !important;
@@ -166,8 +171,18 @@ input[type="search"]::-webkit-search-results-decoration {
   opacity: 0 !important;
   box-shadow: none !important;
 }
-.points-hidden .point-label:not(.total-label) {
+.points-hidden .point-label {
   display: none !important;
+}
+.points-hidden .total-handle {
+  width: 12px !important;
+  height: 12px !important;
+  min-width: 12px !important;
+  min-height: 12px !important;
+  opacity: 1 !important;
+}
+.points-hidden .total-label {
+  display: flex !important;
 }
 
 @keyframes spin {
