@@ -59,8 +59,10 @@ SDK clients + middleware) are the **runtime** glue — they consume what
 - **Supabase CLI** looks for `supabase/config.toml` relative to cwd. Since the
   config now lives at `_concept/04-data-schema/`, run `cd _concept/04-data-schema`
   before any `supabase` CLI command.
-- **Drizzle**: `drizzle.config.ts` is pinned at root by `drizzle-kit`. Its
-  `schema:` and `out:` paths point into `_concept/03-orm-schema/`.
+- **Drizzle**: `drizzle.config.ts` lives at `_concept/03-orm-schema/drizzle.config.ts`
+  (with the rest of the Drizzle stack). The `db:*` scripts in `package.json`
+  pass `--config _concept/03-orm-schema/drizzle.config.ts`. Always invoke them
+  via `npm run db:…` so cwd stays at repo root and `.env.local` resolves.
 
 ## Deployment
 
