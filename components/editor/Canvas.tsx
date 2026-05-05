@@ -628,6 +628,8 @@ function Canvas() {
         deleteKeyCode={['Delete', 'Backspace']}
         panOnScroll
         zoomOnPinch
+        minZoom={0.05}
+        maxZoom={4}
         proOptions={{ hideAttribution: true }}
         style={{ background: theme.canvas.background }}
       >
