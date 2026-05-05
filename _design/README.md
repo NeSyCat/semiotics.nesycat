@@ -1,4 +1,4 @@
-# design/
+# _design/
 
 Visual design pipeline, mirroring `02-Design.01..04` from the project taxonomy.
 

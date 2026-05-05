@@ -1,4 +1,4 @@
-# concept/
+# _concept/
 
 Everything in the schema-building pipeline that exists *before* the application runs.
 

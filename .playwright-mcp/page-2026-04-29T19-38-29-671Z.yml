@@ -1,0 +1,195 @@
+- generic [ref=e2]:
+  - navigation [ref=e3]:
+    - generic [ref=e4]:
+      - img [ref=e5]
+      - generic [ref=e9]: NeSyCat
+    - generic [ref=e10]:
+      - link "Docs" [ref=e11] [cursor=pointer]:
+        - /url: "#motivation"
+      - link "Examples" [ref=e12] [cursor=pointer]:
+        - /url: "#examples"
+      - link "Roadmap" [ref=e13] [cursor=pointer]:
+        - /url: "#roadmap"
+      - link "Paper" [ref=e14] [cursor=pointer]:
+        - /url: "#cite"
+      - link "GitHub" [ref=e15] [cursor=pointer]:
+        - /url: https://github.com/NeSyCat/Diagrams
+    - button "Sign in with GitHub" [ref=e16] [cursor=pointer]:
+      - img [ref=e17]
+      - text: Sign in with GitHub
+  - generic [ref=e19]:
+    - generic [ref=e20]: NeSyCat · Diagrams editor · v0.x
+    - heading "Draw string diagrams. Compile to Haskell." [level=1] [ref=e21]
+    - paragraph [ref=e22]: A web editor for category-theoretic string diagrams. Compose shapes, wire their points, and round-trip the whole diagram as JSON — the visible surface of the NeSyCat toolkit for neuro-symbolic research.
+    - generic [ref=e23]:
+      - button "Sign in with GitHub" [ref=e24] [cursor=pointer]:
+        - img [ref=e25]
+        - text: Sign in with GitHub
+      - link "Read the paper ↗" [ref=e27] [cursor=pointer]:
+        - /url: "#cite"
+        - text: Read the paper
+        - generic [ref=e28]: ↗
+      - link "GitHub" [ref=e29] [cursor=pointer]:
+        - /url: https://github.com/NeSyCat/Diagrams
+        - img [ref=e30]
+        - text: GitHub
+    - generic [ref=e32]: no install · runs in browser · JSON-in / JSON-out
+  - generic [ref=e35]:
+    - img [ref=e36]
+    - generic [ref=e39]: Loading preview…
+  - generic [ref=e41]:
+    - generic [ref=e42]:
+      - generic [ref=e43]: § 1 Motivation
+      - heading "Domain theory, drawn." [level=2] [ref=e44]
+    - generic [ref=e45]:
+      - paragraph [ref=e46]:
+        - text: NeSyCat —
+        - emphasis [ref=e47]: Neuro-Symbolic Category
+        - text: — sits at the intersection of category theory, deep learning, and formal logic. Researchers already think in string diagrams. The editor just gives those diagrams a live canvas and a JSON spine so they can feed a codegen pipeline.
+      - paragraph [ref=e48]:
+        - text: "The tool is deliberately narrow: four shape primitives, one empty carrier, two edge modes, no chrome beyond Kinds and JSON. The canvas"
+        - emphasis [ref=e49]: is
+        - text: the product.
+  - generic [ref=e50]:
+    - generic [ref=e51]: § 2 Features
+    - heading "Everything you need; nothing you don't." [level=2] [ref=e52]
+    - generic [ref=e53]:
+      - generic [ref=e54]:
+        - generic [ref=e55]: "01"
+        - generic [ref=e56]: Shape primitives
+        - generic [ref=e57]: Rectangle, triangle, circle, rhombus, and the empty carrier. Each shape has addressable points — total, side, and slot.
+      - generic [ref=e58]:
+        - generic [ref=e59]: "02"
+        - generic [ref=e60]: Point wiring
+        - generic [ref=e61]: Connect any point to any point. Lines carry names; edge labels render on solid dark capsules so math reads clean.
+      - generic [ref=e62]:
+        - generic [ref=e63]: "03"
+        - generic [ref=e64]: JSON round-trip
+        - generic [ref=e65]: Export, import, diff. Diagrams are pure data — versionable in git, reviewable in a PR, scriptable in Python.
+      - generic [ref=e66]:
+        - generic [ref=e67]: "04"
+        - generic [ref=e68]: Haskell codegen
+        - generic [ref=e69]: On the roadmap. Pipe diagrams into the NeSyCat/HaskTorch bindings and compile a presheaf straight to runnable code.
+  - generic [ref=e70]:
+    - generic [ref=e71]:
+      - generic [ref=e72]:
+        - generic [ref=e73]: § 3 Examples
+        - heading "Diagrams from the field." [level=2] [ref=e74]
+        - generic [ref=e75]: Three samples shipped with the repo. Click any to open in the editor.
+      - link "Browse all examples →" [ref=e76] [cursor=pointer]:
+        - /url: https://github.com/NeSyCat/Diagrams
+        - text: Browse all examples
+        - generic [ref=e77]: →
+    - generic [ref=e78]:
+      - link "Loading preview… CSG composition CSG.json Cube ∩ Sphere, composed via Rotate and Scale morphisms." [ref=e79] [cursor=pointer]:
+        - /url: https://github.com/NeSyCat/Diagrams/blob/main/public/samples/CSG.json
+        - generic [ref=e81]:
+          - img [ref=e82]
+          - generic [ref=e85]: Loading preview…
+        - generic [ref=e86]:
+          - generic [ref=e87]:
+            - generic [ref=e88]: CSG composition
+            - generic [ref=e89]: CSG.json
+          - generic [ref=e90]: Cube ∩ Sphere, composed via Rotate and Scale morphisms.
+      - link "Loading preview… Entity relations DatabaseVorlesung2.json A Student/Course/attends schema — the classic ER triangle." [ref=e91] [cursor=pointer]:
+        - /url: https://github.com/NeSyCat/Diagrams/blob/main/public/samples/DatabaseVorlesung2.json
+        - generic [ref=e93]:
+          - img [ref=e94]
+          - generic [ref=e97]: Loading preview…
+        - generic [ref=e98]:
+          - generic [ref=e99]:
+            - generic [ref=e100]: Entity relations
+            - generic [ref=e101]: DatabaseVorlesung2.json
+          - generic [ref=e102]: A Student/Course/attends schema — the classic ER triangle.
+      - link "Loading preview… Aristotelian logic aristotLOGIK.json Syllogistic premises P, Q wired through an implication node." [ref=e103] [cursor=pointer]:
+        - /url: https://github.com/NeSyCat/Diagrams/blob/main/public/samples/aristotLOGIK.json
+        - generic [ref=e105]:
+          - img [ref=e106]
+          - generic [ref=e109]: Loading preview…
+        - generic [ref=e110]:
+          - generic [ref=e111]:
+            - generic [ref=e112]: Aristotelian logic
+            - generic [ref=e113]: aristotLOGIK.json
+          - generic [ref=e114]: Syllogistic premises P, Q wired through an implication node.
+    - generic [ref=e115]: Live previews · drag to pan · scroll to zoom
+  - generic [ref=e116]:
+    - generic [ref=e117]: § 4 Roadmap
+    - heading "Where this is going." [level=2] [ref=e118]
+    - generic [ref=e119]:
+      - generic [ref=e120]:
+        - generic [ref=e121]: Now
+        - generic [ref=e122]:
+          - generic [ref=e123]:
+            - generic [ref=e124]: ▸
+            - generic [ref=e125]: Shapes + points + lines
+          - generic [ref=e126]:
+            - generic [ref=e127]: ▸
+            - generic [ref=e128]: JSON round-trip
+          - generic [ref=e129]:
+            - generic [ref=e130]: ▸
+            - generic [ref=e131]: Kinds toggles
+          - generic [ref=e132]:
+            - generic [ref=e133]: ▸
+            - generic [ref=e134]: Selection glow
+      - generic [ref=e135]:
+        - generic [ref=e136]: Next
+        - generic [ref=e137]:
+          - generic [ref=e138]:
+            - generic [ref=e139]: ▸
+            - generic [ref=e140]: Auto-layout (dagre)
+          - generic [ref=e141]:
+            - generic [ref=e142]: ▸
+            - generic [ref=e143]: Copy-dots · Ω-nodes
+          - generic [ref=e144]:
+            - generic [ref=e145]: ▸
+            - generic [ref=e146]: "Logic palette: ∧ ∨ ¬ ⇒ ⊕ ⊗"
+      - generic [ref=e147]:
+        - generic [ref=e148]: Later
+        - generic [ref=e149]:
+          - generic [ref=e150]:
+            - generic [ref=e151]: ▸
+            - generic [ref=e152]: Haskell codegen
+          - generic [ref=e153]:
+            - generic [ref=e154]: ▸
+            - generic [ref=e155]: HaskTorch bindings
+          - generic [ref=e156]:
+            - generic [ref=e157]: ▸
+            - generic [ref=e158]: Presheaf view
+      - generic [ref=e159]:
+        - generic [ref=e160]: Research
+        - generic [ref=e161]:
+          - generic [ref=e162]:
+            - generic [ref=e163]: ▸
+            - generic [ref=e164]: Tarski relations
+          - generic [ref=e165]:
+            - generic [ref=e166]: ▸
+            - generic [ref=e167]: Kleisli monads
+          - generic [ref=e168]:
+            - generic [ref=e169]: ▸
+            - generic [ref=e170]: Grammatical theory
+  - generic [ref=e171]:
+    - generic [ref=e172]:
+      - heading "Ready to wire your first diagram?" [level=2] [ref=e173]
+      - paragraph [ref=e174]: Launches in-browser. Sign in to save your diagrams to your account.
+      - generic [ref=e175]:
+        - button "Sign in with GitHub" [ref=e176] [cursor=pointer]:
+          - img [ref=e177]
+          - text: Sign in with GitHub
+        - link "Read docs" [ref=e179] [cursor=pointer]:
+          - /url: "#motivation"
+    - generic [ref=e180]:
+      - generic [ref=e181]: § 5 Cite
+      - generic [ref=e182]: "// bibtex @software{nesycat2026, title = {NeSyCat Diagrams}, author = {NeSyCat contributors}, year = {2026}, url = {https://github.com/NeSyCat/Diagrams} }"
+  - contentinfo [ref=e183]:
+    - generic [ref=e184]:
+      - img [ref=e185]
+      - generic [ref=e189]: NeSyCat
+    - generic [ref=e190]:
+      - link "github.com/NeSyCat/Diagrams" [ref=e191] [cursor=pointer]:
+        - /url: https://github.com/NeSyCat/Diagrams/Diagrams
+      - link "docs" [ref=e192] [cursor=pointer]:
+        - /url: "#motivation"
+      - link "paper.pdf" [ref=e193] [cursor=pointer]:
+        - /url: "#cite"
+      - generic [ref=e194]: MIT
+    - generic [ref=e195]: v0.x · 2026

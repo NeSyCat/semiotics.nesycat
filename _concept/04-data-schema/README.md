@@ -6,10 +6,10 @@ The **runtime** Supabase clients (browser + server SSR + middleware) live in `/l
 
 ### Note on the Supabase CLI
 
-The `supabase` CLI looks for `supabase/config.toml` relative to its working directory. Since the file now lives at `concept/04-data-schema/config.toml`, run CLI commands from this folder:
+The `supabase` CLI looks for `supabase/config.toml` relative to its working directory. Since the file now lives at `_concept/04-data-schema/config.toml`, run CLI commands from this folder:
 
 ```bash
-cd concept/04-data-schema
+cd _concept/04-data-schema
 supabase start
 supabase db push
 ```

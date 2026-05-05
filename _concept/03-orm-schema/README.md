@@ -13,8 +13,8 @@ The runtime drizzle client (`withRLS()`, `withServiceRole()`, connection setup) 
 Workflow:
 
 ```bash
-# 1. Edit concept/02-diagram/schema.nesycat.json (in the editor)
-npm run db:diagram     # 2. Regenerate concept/03-orm-schema/schema.ts
+# 1. Edit _concept/02-diagram/schema.nesycat.json (in the editor)
+npm run db:diagram     # 2. Regenerate _concept/03-orm-schema/schema.ts
 npm run db:generate    # 3. Generate a new migrations/*.sql delta
 npm run db:migrate     # 4. Apply to Postgres
 ```

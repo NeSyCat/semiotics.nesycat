@@ -3,13 +3,13 @@
 Generic generator that turns a NeSyCat string-diagram (JSON) into a Drizzle `schema.ts`.
 
 ```
-concept/02-diagram/schema.nesycat.json   (conceptual SOT — drawn in NeSyCat editor)
+_concept/02-diagram/schema.nesycat.json   (conceptual SOT — drawn in NeSyCat editor)
         │
-        ▼  concept/03-orm-schema/codegen/diagram-to-drizzle.ts
-concept/03-orm-schema/schema.ts          (generator output — DO NOT EDIT)
+        ▼  _concept/03-orm-schema/codegen/diagram-to-drizzle.ts
+_concept/03-orm-schema/schema.ts          (generator output — DO NOT EDIT)
         │
         ▼  drizzle-kit generate
-concept/03-orm-schema/migrations/*.sql
+_concept/03-orm-schema/migrations/*.sql
         │
         ▼  drizzle-kit migrate (DIRECT_URL)
 Supabase Postgres
@@ -17,7 +17,7 @@ Supabase Postgres
 
 Run: `npm run db:diagram`.
 
-`concept/03-orm-schema/schema.ts` carries a DO-NOT-EDIT banner. Any change flows through the diagram.
+`_concept/03-orm-schema/schema.ts` carries a DO-NOT-EDIT banner. Any change flows through the diagram.
 
 ## Conventions the generator reads
 
@@ -100,7 +100,7 @@ The generator fails loudly on:
 3. Add leaf empties for each scalar column with the right `left.name` (`text` / `jsonb` / `tstz`).
 4. For each scalar: draw a line from a slot on the rectangle to the empty. Line id = `<TotalName>_<column_name>` (e.g. `Module_title`).
 5. For each FK: draw a line from a slot on the rectangle to the target rectangle's `center.center`. Line id = column name (e.g. `owned_by`, `module_id`).
-6. Save the diagram JSON to `concept/02-diagram/schema.nesycat.json`.
+6. Save the diagram JSON to `_concept/02-diagram/schema.nesycat.json`.
 7. `npm run db:diagram && npm run db:generate && npm run db:migrate`.
 
-Never hand-edit `concept/03-orm-schema/schema.ts`. If the generator can't express what you need, extend the generator, not the TS output.
+Never hand-edit `_concept/03-orm-schema/schema.ts`. If the generator can't express what you need, extend the generator, not the TS output.

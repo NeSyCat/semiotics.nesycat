@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db:diagram": "tsx concept/03-orm-schema/codegen/diagram-to-drizzle.ts concept/02-diagram/schema.nesycat.json concept/03-orm-schema/schema.ts",
+    "db:diagram": "tsx _concept/03-orm-schema/codegen/diagram-to-drizzle.ts _concept/02-diagram/schema.nesycat.json _concept/03-orm-schema/schema.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio"

@@ -1,4 +1,4 @@
-# tests/
+# _tests/
 
 Five test buckets, mirroring `01-Tech.00-*` from the project taxonomy:
 

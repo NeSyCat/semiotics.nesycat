@@ -8,7 +8,7 @@ import {
   deleteDiagram,
   renameDiagram,
 } from '@/lib/actions/diagrams'
-import type { Diagram } from '@/concept/03-orm-schema/schema'
+import type { Diagram } from '@/_concept/03-orm-schema/schema'
 
 function relativeTime(d: Date | string): string {
   const then = typeof d === 'string' ? new Date(d).getTime() : d.getTime()
