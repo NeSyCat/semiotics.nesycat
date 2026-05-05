@@ -40,5 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# diagram backups produced by scripts/backup-diagrams.ts (issue #16)
+# diagram backups (legacy migration scripts removed; ignore any future writes)
 /backups
+
+# Claude Code playwright-mcp browser automation logs/screenshots (debug output)
+/.playwright-mcp

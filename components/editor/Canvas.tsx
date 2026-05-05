@@ -154,8 +154,8 @@ function Canvas() {
     reader.onload = () => {
       try {
         const parsed = JSON.parse(reader.result as string)
-        // Accept either a raw Diagram or a backup-wrapper { id, data, … } as
-        // produced by scripts/backup-diagrams.ts (issue #16). Unwrap if needed.
+        // Accept either a raw Diagram or a backup-style wrapper { id, data, … }.
+        // Unwrap if needed.
         const payload =
           parsed && typeof parsed === 'object' && 'data' in parsed && parsed.data && typeof parsed.data === 'object'
             ? parsed.data
