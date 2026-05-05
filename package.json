@@ -7,10 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db:diagram": "tsx codegen/diagram-to-drizzle.ts diagrams/schema.nesycat.json lib/db/schema.ts",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "db:diagram": "tsx _concept/03-orm-schema/codegen/diagram-to-drizzle.ts _concept/02-diagram/schema.nesycat.json _concept/03-orm-schema/schema.ts",
+    "db:generate": "drizzle-kit generate --config _concept/03-orm-schema/drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config _concept/03-orm-schema/drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --config _concept/03-orm-schema/drizzle.config.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.2",

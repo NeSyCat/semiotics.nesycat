@@ -1,0 +1,9 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - application [ref=e4]:
+      - img
+    - generic [ref=e8]:
+      - button "Kinds" [ref=e10] [cursor=pointer]
+      - button "Straight" [ref=e11] [cursor=pointer]
+    - button "JSON" [ref=e13] [cursor=pointer]
+  - alert [ref=e14]

@@ -154,8 +154,8 @@ function Canvas() {
     reader.onload = () => {
       try {
         const parsed = JSON.parse(reader.result as string)
-        // Accept either a raw Diagram or a backup-wrapper { id, data, … } as
-        // produced by scripts/backup-diagrams.ts (issue #16). Unwrap if needed.
+        // Accept either a raw Diagram or a backup-style wrapper { id, data, … }.
+        // Unwrap if needed.
         const payload =
           parsed && typeof parsed === 'object' && 'data' in parsed && parsed.data && typeof parsed.data === 'object'
             ? parsed.data
@@ -628,6 +628,8 @@ function Canvas() {
         deleteKeyCode={['Delete', 'Backspace']}
         panOnScroll
         zoomOnPinch
+        minZoom={0.05}
+        maxZoom={4}
         proOptions={{ hideAttribution: true }}
         style={{ background: theme.canvas.background }}
       >
@@ -652,6 +654,7 @@ function Canvas() {
                 {/* Orthogonal toggles — apply across every kind. */}
                 <KindRow label="Points" on={visibility.points} onToggle={() => toggleVisibility('points')} shortcut={['click +']} />
                 <KindRow label="Lines" on={visibility.lines} onToggle={() => toggleVisibility('lines')} shortcut={['drag ○→○']} />
+                <KindRow label="Outlines" on={visibility.outlines} onToggle={() => toggleVisibility('outlines')} />
               </div>
             </div>
           )}

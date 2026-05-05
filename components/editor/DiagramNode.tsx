@@ -13,7 +13,7 @@ import {
   type CanonicalFrame,
   type SlotAnchor,
 } from './geometry'
-import { enumerateAddable, enumeratePoints, shapeLabel, walkShape } from './points'
+import { enumerateAddable, enumeratePoints, shapeLabel, slotSchema, walkShape } from './points'
 import { handleIdFor } from './handles'
 import { toRgbTriple } from './color'
 import { useStore } from './store'
@@ -338,7 +338,7 @@ function ShapeView({ data, selected }: NodeProps) {
   const frame = useMemo(() => deriveFrame(geom.body), [geom.body])
 
   const accent = useMemo(() => toRgbTriple(shape.color), [shape.color])
-  const pointsVisible = useStore((s) => s.visibility.points)
+  const outlinesVisible = useStore((s) => s.visibility.outlines)
 
   // This node's slice of selectedPoints, joined as a stable string so Object.is
   // keeps the component stable when other nodes' selections change.
@@ -380,9 +380,10 @@ function ShapeView({ data, selected }: NodeProps) {
 
   // Render a label. `pid` is the stable internal id (drives selection state
   // and edit-target identity); `name` is the user-visible text and may collide
-  // across shapes. Editing edits `name`; the id is immutable. ONE styling for
-  // every point — total has no special "self" treatment.
-  function renderLabel(pid: string, name: string, anchor: SlotAnchor) {
+  // across shapes. Editing edits `name`; the id is immutable. `extraClass` is
+  // appended to the span's className so per-slot CSS rules (e.g. exempting
+  // total labels from the .points-hidden rule) can target specific labels.
+  function renderLabel(pid: string, name: string, anchor: SlotAnchor, extraClass?: string) {
     const editing = editingId === pid
     const sel = isSelected(pid)
     const baseStyle: React.CSSProperties = {
@@ -422,7 +423,7 @@ function ShapeView({ data, selected }: NodeProps) {
     return (
       <div key={`lbl-${pid}`} style={containerStyle}>
         <span
-          className="point-label"
+          className={extraClass ? `point-label ${extraClass}` : 'point-label'}
           onClick={(e) => {
             e.stopPropagation()
             const sp = { pointId: pid }
@@ -460,22 +461,43 @@ function ShapeView({ data, selected }: NodeProps) {
   // `total`. The total slot is just another MaybePoint: when set it renders
   // here like any other point; when unset it gets a plus button (below). No
   // per-slot styling — one pipeline governs every point.
+  //
+  // Visibility-dependent override for the `total` slot: when outlines are
+  // hidden, the geometry's NW-of-frame anchor sits in negative space (no
+  // visible frame to anchor to). REUSE the kind's `center` anchor — the
+  // geometry already computes it (e.g. (n/2, n/2) for rectangle/circle/
+  // rhombus; (n/2, triCenterY) for triangle; (n/2, n/2) for empty). Only the
+  // label position is flipped to Bottom so the label renders below the dot
+  // instead of above it. Schema-driven via slotSchema, uniform across kinds.
   const present = enumeratePoints(kind, shape.points)
   const pointVisuals = present.map((e) => {
-    const anchor = geom.pointAnchor(shape.points as never, e.slot, e.subslot, e.index, n)
+    let anchor = geom.pointAnchor(shape.points as never, e.slot, e.subslot, e.index, n)
     if (!anchor) return null
+    if (e.slot === 'total' && !outlinesVisible) {
+      const centerSch = slotSchema(kind, 'center')
+      const centerSub = centerSch.type === 'triad' ? 'center' : undefined
+      const centerAnchor = geom.pointAnchor(shape.points as never, 'center', centerSub, 0, n)
+      if (centerAnchor) {
+        anchor = { x: centerAnchor.x, y: centerAnchor.y, position: Position.Bottom }
+      }
+    }
     const handleId = handleIdFor(e.slot, e.subslot, e.index)
     const pid = e.point.id
     // Label resolves through the total chain — for a labeled leaf returns its
     // own .name; for an intermediate shape, walks down to the terminator. If
     // no shape in the chain has a name, the label is suppressed.
     const label = shapeLabel(e.point)
+    // Tag the total slot's handle and label so the .points-hidden CSS rule
+    // can exempt them — total is the shape's identity anchor, kept visible
+    // when the user toggles Points off so each shape stays addressable.
+    const isTotal = e.slot === 'total'
     return (
       <span key={`pt-${pid}`}>
-        {label !== undefined && renderLabel(pid, label, anchor)}
+        {label !== undefined && renderLabel(pid, label, anchor, isTotal ? 'total-label' : undefined)}
         <BiHandle
           position={anchor.position}
           id={handleId}
+          className={isTotal ? 'total-handle' : undefined}
           style={{
             ...pointDotStyle(accent, isSelected(pid)),
             top: anchor.y,
@@ -518,7 +540,7 @@ function ShapeView({ data, selected }: NodeProps) {
     <div
       style={{ position: 'relative', width: nodeWidth, height: nodeHeight, cursor: 'pointer' }}
     >
-      {pointsVisible && <FrameOutline frame={frame} n={n} accent={accent} />}
+      {outlinesVisible && <FrameOutline frame={frame} n={n} accent={accent} />}
       <NodeBg
         body={geom.body}
         frame={frame}

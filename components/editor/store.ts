@@ -5,10 +5,10 @@ import * as M from './mutations'
 
 const MAX_HISTORY = 100
 
-// One toggle per ShapeKind, plus orthogonal points/lines toggles. The per-kind
-// keys derive from ShapeKind via the geometry registry — adding a new kind
-// extends Visibility automatically.
-export type Visibility = { points: boolean; lines: boolean } & { [K in ShapeKind]: boolean }
+// One toggle per ShapeKind, plus orthogonal points / lines / outlines toggles.
+// The per-kind keys derive from ShapeKind via the geometry registry — adding
+// a new kind extends Visibility automatically.
+export type Visibility = { points: boolean; lines: boolean; outlines: boolean } & { [K in ShapeKind]: boolean }
 
 export interface SelectedPoint {
   // Universal point id; identity is global, no node-context needed.
@@ -76,6 +76,7 @@ const emptyDiagram: Diagram = { schemaVersion: 1, nodes: [], edges: [] }
 const defaultVis: Visibility = {
   points: true,
   lines: true,
+  outlines: true,
   ...(Object.fromEntries(
     (Object.keys(geometryRegistry) as ShapeKind[]).map((k) => [k, true]),
   ) as { [K in ShapeKind]: boolean }),

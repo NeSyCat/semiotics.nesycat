@@ -35,7 +35,6 @@ export default function Nav({ isSignedIn, editorHref, callbackUrl }: Props) {
         }}
       >
         <a href="#motivation" style={linkStyle}>Docs</a>
-        <a href="#examples" style={linkStyle}>Examples</a>
         <a href="#roadmap" style={linkStyle}>Roadmap</a>
         <a href="#cite" style={linkStyle}>Paper</a>
         <a href="https://github.com/NeSyCat/Diagrams" style={linkStyle} target="_blank" rel="noreferrer">GitHub</a>
