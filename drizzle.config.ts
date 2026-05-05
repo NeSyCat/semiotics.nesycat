@@ -4,8 +4,8 @@ import { defineConfig } from 'drizzle-kit'
 config({ path: '.env.local' })
 
 export default defineConfig({
-  schema: './lib/db/schema.ts',
-  out: './drizzle/migrations',
+  schema: './concept/03-orm-schema/schema.ts',
+  out: './concept/03-orm-schema/migrations',
   dialect: 'postgresql',
   dbCredentials: { url: process.env.DIRECT_URL! },
   schemaFilter: ['public'],

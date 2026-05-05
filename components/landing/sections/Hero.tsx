@@ -1,5 +1,4 @@
 import SignInButton, { GitHubIcon } from '../SignInButton'
-import DeferredIframe from '../DeferredIframe'
 
 const ACC = '59, 130, 246'
 
@@ -61,25 +60,6 @@ export default function Hero({ isSignedIn, editorHref, callbackUrl }: Props) {
           style={{ marginTop: 18, fontSize: 13, color: 'var(--color-text-dimmed)' }}
         >
           no install · runs in browser · JSON-in / JSON-out
-        </div>
-      </section>
-
-      <section style={{ padding: '16px 48px 64px', maxWidth: 1300, margin: '0 auto' }}>
-        <div
-          style={{
-            height: 480,
-            borderRadius: 10,
-            overflow: 'hidden',
-            border: '1px solid var(--color-glass-border)',
-            background: 'var(--color-canvas-bg)',
-            boxShadow: `0 30px 80px -20px rgba(${ACC},0.15), 0 0 0 1px rgba(255,255,255,0.04)`,
-          }}
-        >
-          <DeferredIframe
-            src="/embed/sample/hero"
-            title="NeSyCat hero preview"
-            style={{ width: '100%', height: '100%', border: 0, display: 'block' }}
-          />
         </div>
       </section>
     </>
