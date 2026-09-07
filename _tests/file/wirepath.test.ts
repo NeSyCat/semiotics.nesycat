@@ -116,24 +116,44 @@ describe('wirepath.ts', () => {
       }
     })
 
-    it('a free source end (null Dir) with a directed target: source control point lies on the chord toward the target, target control point offsets along its own Dir', () => {
+    it('a free source end (null Dir) borrows the directed target\'s Dir, mirrored', () => {
       // The copy-node fan-out case (Canvas.tsx's sourceFree/geometry-ir.ts's
-      // pointDir): only the SOURCE is a free end — the target still has a
-      // real outward Dir and must still offset normally. dx=250,dy=80
-      // (angle ≈17.7°) clears the 10° straightness guard with margin.
+      // pointDir): only the SOURCE is a free end. It has no edge of its own,
+      // so it takes the target's axis rather than the chord — otherwise both
+      // control points land on the segment and the cubic degenerates to the
+      // straight line. dx=250,dy=80 (angle ≈17.7°) clears the 10° guard.
       const sx = 50, sy = 50, tx = 300, ty = 130
       const { c1, c2 } = wirePath(sx, sy, null, tx, ty, dirFromLegacy('left'), 'bezier')
       expect(c1).toBeDefined()
       expect(c2).toBeDefined()
       if (c1 && c2) {
-        // c1 collinear with the (source -> target) chord: cross product of
-        // (c1-source) and (target-source) is ~0.
+        // Target Dir 'left' == (-1,0), so the free source leaves along its
+        // mirror (+1,0): y unchanged, x toward the target — NOT the chord,
+        // which would have pulled c1 down by 80*(k/dist).
+        expect(approx(c1.y, sy)).toBe(true)
+        expect(c1.x).toBeGreaterThan(sx)
         const cross = (c1.x - sx) * (ty - sy) - (c1.y - sy) * (tx - sx)
-        expect(approx(cross, 0, 1e-6)).toBe(true)
-        expect(c1.x).toBeGreaterThan(sx) // leaves toward the target, not away
+        expect(approx(cross, 0, 1e-6), 'c1 is NOT on the chord any more').toBe(false)
 
         // c2 offsets from the target along 'left' == unit (-1, 0): x moves,
-        // y is unchanged from the target's own y (NOT collinear with the chord).
+        // y is unchanged from the target's own y.
+        expect(approx(c2.y, ty)).toBe(true)
+        expect(c2.x).toBeLessThan(tx)
+      }
+    })
+
+    it('a free TARGET end borrows the directed source\'s Dir, mirrored — the box-to-free-end case', () => {
+      // The common shape in the papers' figures: a box's right edge wired to
+      // a dangling free end. Source Dir 'right' == (1,0); the free target
+      // must come back along (-1,0) so the wire stays horizontal at both
+      // ends instead of rendering as a bare diagonal.
+      const sx = 0, sy = 0, tx = 300, ty = 120
+      const { c1, c2 } = wirePath(sx, sy, dirFromLegacy('right'), tx, ty, null, 'bezier')
+      expect(c1).toBeDefined()
+      expect(c2).toBeDefined()
+      if (c1 && c2) {
+        expect(approx(c1.y, sy)).toBe(true)
+        expect(c1.x).toBeGreaterThan(sx)
         expect(approx(c2.y, ty)).toBe(true)
         expect(c2.x).toBeLessThan(tx)
       }

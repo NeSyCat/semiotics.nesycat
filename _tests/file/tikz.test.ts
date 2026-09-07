@@ -463,7 +463,7 @@ describe('TikZ exporter', () => {
   // fan-out) must leave straight toward the other endpoint (Dir null),
   // NOT dip along its anchor's fixed Position.Bottom (ir/geometry-ir.ts's
   // pointDir / ui/Canvas.tsx's isFreeEnd + ui/LineEdge.tsx's sourceFree).
-  it("edgeStyle: 'bezier' from a free end ('self' point) leaves straight toward the target; the directed end still offsets along its own Dir", () => {
+  it("edgeStyle: 'bezier' from a free end ('self' point) borrows the directed end's Dir, mirrored, on both control points", () => {
     const d = emptyDiagram()
     const emptyForm: Form = { id: 'FEEMPTY', shape: 'empty', position: { x: 0, y: 0 }, edges: { self: ['FESELF'] } }
     const sq = bareSquare('FESQ', { x: 300, y: 0 }, { edges: { top: [], right: [], bottom: [], left: ['FESQP'] } })
@@ -490,16 +490,20 @@ describe('TikZ exporter', () => {
     expect(!!m, 'the bezier draw command has 4 coordinate pairs').toBe(true)
     if (m && expected.c1 && expected.c2) {
       const [, fx, fy, c1x, c1y, c2x, c2y] = m.map(Number) as unknown as number[]
-      // Source-side control point (c1) lies on the CHORD from source to
-      // target (cross product ~0 with the from->to vector) — checked in raw
-      // px deltas via wirePath's own output, which is scale-invariant so the
-      // TikZ page's px->cm normalization/y-flip doesn't affect the result.
+      // Source-side control point (c1): the free end has no edge of its own,
+      // so it borrows the target's Dir ('left', unit (-1,0)) mirrored to
+      // (1,0) — y unchanged from the source's y. It is deliberately NOT on
+      // the chord: that was the old behaviour, and it put both control points
+      // on the segment, collapsing the cubic to a straight line. Checked in
+      // raw px deltas via wirePath's own output, which is scale-invariant so
+      // the TikZ page's px->cm normalization/y-flip doesn't affect it.
       const chordDx = tgt.pos.x - src.pos.x
       const chordDy = tgt.pos.y - src.pos.y
       const c1Dx = expected.c1.x - src.pos.x
       const c1Dy = expected.c1.y - src.pos.y
       const cross = c1Dx * chordDy - c1Dy * chordDx
-      expect(approx(cross, 0, 1e-6), "wirePath's own c1 is collinear with the source->target chord (free end)").toBe(true)
+      expect(approx(expected.c1.y, src.pos.y, 1e-6), "free source's c1 keeps the source's y (borrowed horizontal Dir)").toBe(true)
+      expect(approx(cross, 0, 1e-6), "wirePath's own c1 is NOT on the chord any more").toBe(false)
 
       // And the EMITTED c1 (TikZ output) matches wirePath's c1 exactly, as a
       // px->cm delta off the emitted `from` — same technique as the earlier
