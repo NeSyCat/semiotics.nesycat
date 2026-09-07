@@ -135,13 +135,23 @@ function bezierPath(sx: number, sy: number, sDir: Dir, tx: number, ty: number, t
   const dy = ty - sy
   const dist = Math.hypot(dx, dy) || 1
   const k = clamp(0.5 * dist, BEZIER_K_MIN, BEZIER_K_MAX)
-  // A null Dir leaves along the straight line toward the OTHER endpoint —
-  // source toward target (dx,dy)/dist; target toward source is the inverse.
   // A non-null Dir is used AS-IS — it's already a true (possibly diagonal)
   // unit vector, e.g. a triangle slant edge's own perpendicular, or any
   // edge's normal after the form's own rotation — no further conversion.
-  const su = sDir ?? { x: dx / dist, y: dy / dist }
-  const tu = tDir ?? { x: -dx / dist, y: -dy / dist }
+  //
+  // A null Dir is a FREE END ('empty'/pointIsForm — forms.ts's pointNormal
+  // returns null, there being no edge to take a perpendicular of). It borrows
+  // the OTHER endpoint's Dir, mirrored, so the wire leaves the box and reaches
+  // the free end along the same axis: the string-diagram look, a stub that
+  // stays horizontal out of a left/right edge instead of angling off.
+  // Falling back to the chord instead — as this did before — puts BOTH control
+  // points on the segment, and a cubic with four collinear control points IS
+  // the straight line, so every wire touching a free end rendered straight.
+  // Only when NEITHER end is directed is there no axis to borrow; then the
+  // chord is the honest answer (and such a wire is straight either way).
+  const chordS = { x: dx / dist, y: dy / dist }
+  const su = sDir ?? (tDir ? { x: -tDir.x, y: -tDir.y } : chordS)
+  const tu = tDir ?? (sDir ? { x: -sDir.x, y: -sDir.y } : { x: -chordS.x, y: -chordS.y })
   const c1: Vec = { x: sx + su.x * k, y: sy + su.y * k }
   const c2: Vec = { x: tx + tu.x * k, y: ty + tu.y * k }
   // Cubic Bezier point at t=0.5: B(.5) = P0/8 + 3P1/8 + 3P2/8 + P3/8.
